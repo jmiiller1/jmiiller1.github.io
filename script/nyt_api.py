@@ -3,6 +3,7 @@ import json
 import time
 import csv
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from random import choice
 from pprint import pprint
 
 analyzer = SentimentIntensityAnalyzer()
@@ -21,14 +22,14 @@ analyzer = SentimentIntensityAnalyzer()
 #    output.close()
 #    time.sleep(20)
 
-out = open('NYT_data.csv', mode='w')
+out = open('../data/NYT_data_single_cand.csv', mode='w')
 writer = csv.writer(out, quoting=csv.QUOTE_NONNUMERIC)
 writer.writerow(['Date', 'Candidates', 'NewsDesk', 'Category', 'SentScore(headline)', 'SentScore(abstract)', 'SentScore(lead)', 'SentScore(Avg)'])
 
 #out.write(','.join(['Date', 'Candidates', 'Section', 'SentScore(headline)', 'SentScore(abstract)', 'SentScore(lead)', 'SentScore(Avg)']) + '\n')
 
 for year, month in [(2019, 6), (2019, 7), (2019, 8), (2019, 9), (2019, 10), (2019, 11), (2019, 12), (2020, 1), (2020, 2)]:
-    f = open(f'{year}-{month}.txt', mode='r')
+    f = open(f'../data/{year}-{month}.txt', mode='r')
     articles = json.load(f)
 
     # Joe Biden, Bernie Sanders, Elizabeth Warren, Michael Bloomberg, Pete Buttigieg
@@ -42,7 +43,9 @@ for year, month in [(2019, 6), (2019, 7), (2019, 8), (2019, 9), (2019, 10), (201
         snippet = articles['response']['docs'][i]['snippet']
 
         if any([name in headline for name in ['Biden', 'Sanders', 'Warren', 'Bloomberg', 'Buttigieg']]):
-            names = ','.join([name for name in ['Biden', 'Sanders', 'Warren', 'Bloomberg', 'Buttigieg'] if name in headline])
+            names = choice(
+                [name for name in ['Biden', 'Sanders', 'Warren', 'Bloomberg', 'Buttigieg'] if name in headline])
+            #names = ','.join([name for name in ['Biden', 'Sanders', 'Warren', 'Bloomberg', 'Buttigieg'] if name in headline])
             score_headline = analyzer.polarity_scores(headline)['compound']
             score_abstract = analyzer.polarity_scores(abstract)['compound']
             score_paragraph = analyzer.polarity_scores(lead_paragraph)['compound']
