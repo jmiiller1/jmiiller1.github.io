@@ -2,7 +2,7 @@ const svg = d3.select('svg');
 const height = +svg.attr('height');
 const width = +svg.attr('width');
 
-d3.csv('data/NYT_data.csv')
+d3.csv('data/NYT_data_single_cand.csv')
     .then(data => {
         console.log(data);
         data.forEach(d => {
@@ -28,7 +28,7 @@ d3.csv('data/NYT_data.csv')
         
         const colorValue = d => d.Candidates;
         
-        const margin = { top: 60, right: 160, bottom: 88, left: 105 };
+        const margin = { top: 60, right: 60, bottom: 88, left: 60 };
         const innerWidth = width - margin.left - margin.right;
         const innerHeight = height - margin.top - margin.bottom;
         
