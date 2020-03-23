@@ -1,0 +1,16 @@
+.axis-title {
+    fill: black;
+    font-size: 1.5em;
+}
+
+.chart-title {
+    fill: black;
+    font-size: 2em;
+    text-anchor: middle;
+}
+
+.dem-debate {
+    fill: steelblue;
+    opacity: 0.5;
+    stroke-width: 3px;
+}
