@@ -6,7 +6,7 @@ d3.csv('data/NYT_data_single_cand.csv')
     .then(data => {
         console.log(data);
         data.forEach(d => {
-          d.timestamp = new Date(d.Date);
+          d.Date = new Date (d[`Date`]);
           d[`SentScore(headline)`] = +d[`SentScore(headline)`];
           d[`SentScore(abstract)`] = +d[`SentScore(abstract)`];
           d[`SentScore(lead)`] = +d[`SentScore(lead)`];
@@ -19,11 +19,10 @@ d3.csv('data/NYT_data_single_cand.csv')
     const render = data => {
         const title = 'NYT & The Dem Primaries';
         
-        const xValue = d => d.timestamp;
+        const xValue = d => d[`Date`];
         const xAxisLabel = 'Date';
         
         const yValue = d => d[`SentScore(Avg)`];
-        const circleRadius = 6;
         const yAxisLabel = 'Sentiment Score';
         
         const colorValue = d => d.Candidates;
@@ -40,7 +39,7 @@ d3.csv('data/NYT_data_single_cand.csv')
         const yScale = d3.scaleLinear()
           .domain(d3.extent(data, yValue))
           .range([innerHeight, 0])
-          .nice();
+           .nice();
         
         const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
         
@@ -48,9 +47,10 @@ d3.csv('data/NYT_data_single_cand.csv')
           .attr('transform', `translate(${margin.left},${margin.top})`);
         
         const xAxis = d3.axisBottom(xScale)
+          .tickArguments([d3.timeWeek.every(1)])
           .tickSize(-innerHeight)
-          .tickPadding(15);
-        
+          .tickPadding(5);
+
         const yAxis = d3.axisLeft(yScale)
           .tickSize(-innerWidth)
           .tickPadding(10);
@@ -95,9 +95,9 @@ d3.csv('data/NYT_data_single_cand.csv')
           );
         
         console.log(nested);
-        
+
         colorScale.domain(nested.map(d => d.key));
-        
+        console.log(xScale);
         g.selectAll('.line-path').data(nested)
           .enter().append('path')
             .attr('class', 'line-path')
