@@ -19,7 +19,6 @@ export class TimeAxis {
 
         timeScale.domain(domain);
         timeScale.range([0, vis.config.innerWidth]);
-        timeScale.nice();
 
         return timeScale;
     }
