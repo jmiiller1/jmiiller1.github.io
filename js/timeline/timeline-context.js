@@ -2,10 +2,12 @@
   Timeline Chart of the current state of the Democratic Primary.
  */
 
-class Timeline {
+import { TimelineBrush } from './timeline-brush.js';
+import { TimeAxis } from './time-axis.js';
+
+export class TimelineContext {
 
     constructor(data, _config) {
-        // Instance Variables:
         this.data = data;
         this.config = {
             parentElement: _config.parentElement,
@@ -18,7 +20,7 @@ class Timeline {
         this.config.innerWidth =this.config.containerWidth - this.config.margin.left - this.config.margin.right;
         this.config.innerHeight = this.config.containerHeight - this.config.margin.top - this.config.margin.bottom;
 
-        this.timeScale = this.createTimeScale();
+        this.timeScale = TimeAxis.createTimeScale(this);
 
         this.initVis();
     }
@@ -31,8 +33,10 @@ class Timeline {
         vis.chart = vis.appendChart(vis.svg);
         vis.chartTitle = vis.appendText(vis.chart, "Timeline", 0, vis.config.innerWidth / 2, "chart-title");
 
-        vis.timeAxisGroup = vis.appendTimeAxis(vis.chart);
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis, vis.chart);
         vis.timeAxisTitle = vis.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
+
+        vis.brush = TimelineBrush.appendBrushX(vis, vis.chart)
     }
 
     update() {
@@ -46,20 +50,27 @@ class Timeline {
         const dataGroup = vis.chart.append('g');
 
         const updateSelection = dataGroup.selectAll('circle').data(vis.data);
-
         const enterSelection = updateSelection.enter();
+        const exitSelection = updateSelection.exit();
+
         enterSelection.append('circle')
             .attr('class', 'dem-debate')
             .attr('cx', d => vis.timeScale(d['Date']))
             .attr('cy', vis.config.innerHeight / 2)
             .attr('r', vis.config.radius);
+
+        updateSelection
+            .attr('cx', d => vis.timeScale(d['Date']))
+            .attr('cy', vis.config.innerHeight / 2);
+
+        exitSelection.remove();
     }
 
     initializeSVG() {
         const vis = this;
 
-        const svg = d3.select('svg');
-
+        const body = d3.select('#timeline');
+        const svg = body.append('svg');
         svg.attr('height', vis.config.containerHeight)
            .attr('width', vis.config.containerWidth);
 
@@ -70,24 +81,12 @@ class Timeline {
         const vis = this;
 
         const chart = svg.append('g');
-        chart.attr('transform', `translate(${vis.config.margin.left}, ${vis.config.margin.top})`);
-
-        chart.attr('height', vis.config.innerHeight)
+        chart.attr('class', 'timeline-chart')
+             .attr('transform', `translate(${vis.config.margin.left}, ${vis.config.margin.top})`)
+             .attr('height', vis.config.innerHeight)
              .attr('width', vis.config.innerWidth);
 
         return chart;
-    }
-
-    appendTimeAxis(chart) {
-        const vis = this;
-
-        const timeAxis = Timeline.createTimeAxis(vis.timeScale);
-
-        const timeAxisGroup = chart.append('g');
-        timeAxisGroup.attr('transform', `translate(0, ${vis.config.innerHeight})`);
-        timeAxisGroup.call(timeAxis);
-
-        return timeAxisGroup;
     }
 
     appendText(group, titleName, height, width, className) {
@@ -98,20 +97,6 @@ class Timeline {
         text.text(titleName);
 
         return group;
-    }
-
-    createTimeScale() {
-        const vis = this;
-        const timeScale = d3.scaleTime();
-        timeScale.domain([new Date(2019, 6, 1), new Date(2020, 3, 30)]);
-        timeScale.range([0, vis.config.innerWidth]);
-        timeScale.nice();
-
-        return timeScale;
-    }
-
-    static createTimeAxis(timeScale) {
-        return d3.axisBottom(timeScale);
     }
 }
 
