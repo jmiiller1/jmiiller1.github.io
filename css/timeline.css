@@ -1,0 +1,34 @@
+#timeline {
+    text-align: center;
+}
+
+#timeline .axis-title {
+    fill: black;
+    font-size: 1.5em;
+}
+
+#timeline .chart-title {
+    fill: black;
+    font-size: 2em;
+    text-anchor: middle;
+}
+
+#timeline .dem-debate {
+    fill: steelblue;
+    stroke-width: 1px;
+    stroke: lightgrey;
+    opacity: 0.7;
+}
+
+#timeline .domain {
+    stroke: black;
+    stroke-width: 3px;
+    border-radius: 4px;
+}
+
+#timeline .tick line {
+    stroke: black;
+    stroke-width: 2px;
+    border-radius: 4px;
+}
+
