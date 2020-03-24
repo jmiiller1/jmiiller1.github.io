@@ -32,7 +32,11 @@ export class TimelineData {
             const smallest = extent[0] < extent[1] ? extent[0] : extent[1];
             const largest = extent[0] < extent[1] ? extent[1] : extent[0];
 
-            return d['Date'] > smallest && d['Date'] < largest;
+            if (d['Date'] > smallest && d['Date'] < largest) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 

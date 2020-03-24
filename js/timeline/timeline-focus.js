@@ -80,7 +80,7 @@ export class TimelineFocus {
 
         vis.config.dispatcher.on('focus.timeline', function(extent) {
             vis.timeScale = TimeAxis.createTimeScale(vis, extent);
-            vis.data = vis.copy.filter(TimelineData.dateInRange);
+            vis.data = vis.copy.filter(TimelineData.dateInRange(extent));
             console.log(vis.data);
 
             vis.update();
