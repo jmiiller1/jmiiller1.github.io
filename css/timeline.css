@@ -2,6 +2,23 @@
     text-align: center;
 }
 
+#timeline .time-axis {
+    pointer-events: none;
+}
+
+body .timeline-tooltip {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 33px;
+    padding: 2px;
+    font-size: 12px;
+    background-color: burlywood;
+    border: 1px;
+    border-radius: 6px;
+    pointer-events: none;
+}
+
 #timeline .axis-title {
     fill: black;
     font-size: 1.5em;

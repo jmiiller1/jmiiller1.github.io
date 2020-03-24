@@ -5,6 +5,7 @@
 import { TimeAxis } from './time-axis.js';
 import { TimelineUtilities } from './timeline-utilities.js';
 import { TimelineData } from "./timeline-data.js";
+import { TimelineTooltip } from "./timeline-tooltip.js";
 
 export class TimelineFocus {
 
@@ -35,6 +36,7 @@ export class TimelineFocus {
     initVis() {
         const vis = this;
 
+        vis.body = TimelineUtilities.retrieveBody();
         vis.svg = TimelineUtilities.initializeSVG(vis, 'timeline-focus');
 
         vis.chart = TimelineUtilities.appendChart(vis, vis.svg);
@@ -42,6 +44,8 @@ export class TimelineFocus {
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
+
+        vis.tooltip = TimelineTooltip.appendTooltip(vis.body);
 
         vis.dataGroup = vis.chart.append('g');
     }
@@ -66,7 +70,9 @@ export class TimelineFocus {
             .attr('class', 'dem-debate')
             .attr('cx', d => vis.timeScale(d['Date']))
             .attr('cy', vis.config.innerHeight / 2)
-            .attr('r', vis.config.radius);
+            .attr('r', vis.config.radius)
+            .on('mouseover', TimelineTooltip.mouseOver(vis))
+            .on('mouseout', TimelineTooltip.mouseOut(vis));
 
         updateSelection
             .attr('cx', d => vis.timeScale(d['Date']))

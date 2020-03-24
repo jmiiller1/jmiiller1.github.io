@@ -30,4 +30,9 @@ export class TimeAxis {
 
         return timeAxis;
     }
+
+    static formatTime(date) {
+        const formatter = d3.timeFormat('%B %e, %Y');
+        return formatter(date);
+    }
 }

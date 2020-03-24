@@ -23,6 +23,7 @@ export class TimelineUtilities {
     }
 
     static appendText(group, titleName, height, width, className) {
+
         const text = group.append('text');
         text.attr('class', className);
         text.attr('x', width);
@@ -30,5 +31,9 @@ export class TimelineUtilities {
         text.text(titleName);
 
         return group;
+    }
+
+    static retrieveBody() {
+        return d3.select('body');
     }
 }

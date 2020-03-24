@@ -5,6 +5,7 @@
 import { TimelineBrush } from './timeline-brush.js';
 import { TimelineUtilities } from './timeline-utilities.js';
 import { TimeAxis } from './time-axis.js';
+import { TimelineTooltip } from "./timeline-tooltip.js";
 
 export class TimelineContext {
 
@@ -30,13 +31,16 @@ export class TimelineContext {
     initVis() {
         const vis = this;
 
+        vis.body = TimelineUtilities.retrieveBody();
         vis.svg = TimelineUtilities.initializeSVG(vis, 'timeline-context');
 
         vis.chart = TimelineUtilities.appendChart(vis, vis.svg);
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis);
 
-        vis.brush = TimelineBrush.appendBrushX(vis, vis.chart, vis.timeScale)
+        vis.brush = TimelineBrush.appendBrushX(vis, vis.chart, vis.timeScale);
+
+        vis.tooltip = TimelineTooltip.appendTooltip(vis.body);
     }
 
     update() {
@@ -57,11 +61,13 @@ export class TimelineContext {
             .attr('class', 'dem-debate')
             .attr('cx', d => vis.timeScale(d['Date']))
             .attr('cy', vis.config.innerHeight / 2)
-            .attr('r', vis.config.radius);
+            .attr('r', vis.config.radius)
+            .on('mouseover', TimelineTooltip.mouseOver(vis))
+            .on('mouseout', TimelineTooltip.mouseOut(vis));
 
         updateSelection
             .attr('cx', d => vis.timeScale(d['Date']))
-            .attr('cy', vis.config.innerHeight / 2)
+            .attr('cy', vis.config.innerHeight / 2);
 
         exitSelection.remove();
     }
