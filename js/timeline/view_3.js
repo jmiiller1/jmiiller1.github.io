@@ -9,7 +9,7 @@ d3.csv('data/timeline/DemocraticPrimaryDebateSchedule.csv', d3.autotype).then(da
 
     const timelineContext = new TimelineContext(data, {
         parentElement: '#timeline',
-        containerHeight: 700,
+        containerHeight: 200,
         containerWidth: 1000
     });
 

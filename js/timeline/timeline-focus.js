@@ -3,6 +3,7 @@
  */
 
 import { TimeAxis } from './time-axis.js';
+import { TimelineUtilities } from './timeline-utilities.js';
 
 export class TimelineFocus {
 
@@ -27,13 +28,13 @@ export class TimelineFocus {
     initVis() {
         const vis = this;
 
-        vis.svg = vis.initializeSVG();
+        vis.svg = TimelineUtilities.initializeSVG(vis);
 
-        vis.chart = vis.appendChart(vis.svg);
-        vis.chartTitle = vis.appendText(vis.chart, "Timeline", 0, vis.config.innerWidth / 2, "chart-title");
+        vis.chart = TimelineUtilities.appendChart(vis, vis.svg);
+        vis.chartTitle = TimelineUtilities.appendText(vis.chart, "Timeline", 0, vis.config.innerWidth / 2, "chart-title");
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis, vis.chart);
-        vis.timeAxisTitle = vis.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
+        vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
     }
 
     update() {
@@ -61,39 +62,6 @@ export class TimelineFocus {
             .attr('cy', vis.config.innerHeight / 2);
 
         exitSelection.remove();
-    }
-
-    initializeSVG() {
-        const vis = this;
-
-        const body = d3.select('#timeline');
-        const svg = body.append('svg');
-        svg.attr('height', vis.config.containerHeight)
-           .attr('width', vis.config.containerWidth);
-
-        return svg;
-    }
-
-    appendChart(svg) {
-        const vis = this;
-
-        const chart = svg.append('g');
-        chart.attr('class', 'timeline-chart')
-             .attr('transform', `translate(${vis.config.margin.left}, ${vis.config.margin.top})`)
-             .attr('height', vis.config.innerHeight)
-             .attr('width', vis.config.innerWidth);
-
-        return chart;
-    }
-
-    appendText(group, titleName, height, width, className) {
-        const text = group.append('text');
-        text.attr('class', className);
-        text.attr('x', width);
-        text.attr('y', height);
-        text.text(titleName);
-
-        return group;
     }
 }
 
