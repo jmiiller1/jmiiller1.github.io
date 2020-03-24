@@ -1,7 +1,7 @@
 
 class Beeswarm {
 
-    constructor(_config, data) {//, onClick, onMouseOver) {
+    constructor(_config, data, candidates) {//, onClick, onMouseOver) {
         this.config = {
             parentElement: _config.parentElement,
             containerWidth: _config.containerWidth || 600,
@@ -10,6 +10,13 @@ class Beeswarm {
         this.config.margin = _config.margin || { top: 25, bottom: 50, right: 25, left: 75 };
 
         this.data = data;
+        this.candidates = new Set();
+
+        candidates.forEach((cand) => {
+           this.candidates.add(cand);
+        });
+
+        //console.log(candidates)
         //this.onClick = onClick;
         //this.onMouseOver = onMouseOver;
         //this.clickedId = null;
@@ -55,6 +62,20 @@ class Beeswarm {
         vis.colorScale = d3.scaleOrdinal()
             .domain(vis.data.map(d => d.Candidates))
             .range(d3.schemeTableau10);
+
+        vis.categoryScale = d3.scaleBand()
+            .domain(vis.data.map(d => d.Category))
+            .range([0, vis.height])
+            .paddingInner(1);
+
+        vis.yAxis = d3.axisLeft(vis.categoryScale).tickSize(0);
+
+        vis.yAxisG = vis.chart.append('g').call(vis.yAxis);
+
+        vis.yAxisG.select('.domain').remove();
+
+        vis.t = vis.chart.transition()
+            .duration(750);
 
         //vis.yScale = d3.scaleLinear()
         //    .domain([lifeMin, lifeMax])
@@ -118,29 +139,43 @@ class Beeswarm {
                 else tail = tail.next = b;
             }
 
+            console.log(circles)
+
             return circles;
         };
     }
 
     update() {
         let vis = this;
+
+        vis.filtered = vis.data.filter(d => vis.candidates.has(d.Candidates));
         vis.render();
     }
 
     render() {
         let vis = this;
 
-        vis.chart.append('g')
+        const processed = vis.dodge(vis.filtered, vis.radius*2 + vis.padding);git
+
+        vis.chart//.append('g')
             .selectAll('circle')
-            .data(vis.dodge(vis.data, vis.radius*2 + vis.padding))
-            .join('circle')
-                .attr('cx', d => d.x)
-                .attr('cy', d => vis.height - vis.radius - vis.padding - d.y)
-                //.attr('cy', d => d.y)
-                .attr('r', vis.radius)
-                .attr('fill', d => vis.colorScale(d.data.Candidates))
-            .append('title')
-                .text(d => d.data.Candidates);
+            .data(processed)
+            .join(
+                enter => enter.append('circle')
+                    .attr('r', vis.radius)
+                    .attr('fill', d => vis.colorScale(d.data.Candidates))
+                    //.call(enter => enter.transition(vis.t)
+                            .attr('cx', d => d.x)
+                            .attr('cy', d => vis.height - vis.radius - vis.padding - d.y),//),
+                    //.append('title')
+                    //.text(d => d.data.Candidates),
+                update => update
+                    .attr('fill', d => vis.colorScale(d.data.Candidates))
+                    .call(update => update.transition(vis.t)
+                        .attr('cx', d => d.x)
+                        .attr('cy', d => vis.height - vis.radius - vis.padding - d.y)),
+                exit => exit
+                    .remove())
 
         /*
         const yearText = vis.chart.selectAll('.yearText').data([null]);
