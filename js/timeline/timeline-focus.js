@@ -4,50 +4,61 @@
 
 import { TimeAxis } from './time-axis.js';
 import { TimelineUtilities } from './timeline-utilities.js';
+import { TimelineData } from "./timeline-data.js";
 
 export class TimelineFocus {
 
     constructor(data, _config) {
-        this.data = data;
-        this.config = {
+        const vis = this;
+
+        vis.data = data;
+        vis.copy = data;
+        vis.config = {
             parentElement: _config.parentElement,
             containerHeight: _config.containerHeight,
             containerWidth: _config.containerWidth,
             margin: { top: 50, right: 50, bottom: 50, left: 50 },
-            radius: 5
+            dispatcher: _config.dispatcher,
+            radius: 8
         };
 
-        this.config.innerWidth =this.config.containerWidth - this.config.margin.left - this.config.margin.right;
-        this.config.innerHeight = this.config.containerHeight - this.config.margin.top - this.config.margin.bottom;
+        vis.config.innerWidth = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
+        vis.config.innerHeight = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
 
-        this.timeScale = TimeAxis.createTimeScale(this);
+        vis.timeScale = TimeAxis.createTimeScale(vis, [new Date(2019, 6, 1), new Date(2020, 3, 30)]);
 
-        this.initVis();
+        vis.initializeListener();
+
+        vis.initVis();
     }
 
     initVis() {
         const vis = this;
 
-        vis.svg = TimelineUtilities.initializeSVG(vis);
+        vis.svg = TimelineUtilities.initializeSVG(vis, 'timeline-focus');
 
         vis.chart = TimelineUtilities.appendChart(vis, vis.svg);
         vis.chartTitle = TimelineUtilities.appendText(vis.chart, "Timeline", 0, vis.config.innerWidth / 2, "chart-title");
 
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis, vis.chart);
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
+
+        vis.dataGroup = vis.chart.append('g');
     }
 
     update() {
         const vis = this;
+
+        vis.timeAxisGroup.remove();
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis, vis.chart);
+
         vis.render();
     }
 
     render() {
         const vis = this;
 
-        const dataGroup = vis.chart.append('g');
-
-        const updateSelection = dataGroup.selectAll('circle').data(vis.data);
+        let updateSelection = vis.dataGroup.selectAll('circle').data(vis.data);
         const enterSelection = updateSelection.enter();
         const exitSelection = updateSelection.exit();
 
@@ -62,6 +73,18 @@ export class TimelineFocus {
             .attr('cy', vis.config.innerHeight / 2);
 
         exitSelection.remove();
+    }
+
+    initializeListener() {
+        const vis = this;
+
+        vis.config.dispatcher.on('focus.timeline', function(extent) {
+            vis.timeScale = TimeAxis.createTimeScale(vis, extent);
+            vis.data = vis.copy.filter(TimelineData.dateInRange);
+            console.log(vis.data);
+
+            vis.update();
+        });
     }
 }
 

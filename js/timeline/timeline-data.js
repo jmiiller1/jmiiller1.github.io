@@ -27,6 +27,15 @@ export class TimelineData {
         return new Date(year, month, day);
     };
 
+    static dateInRange(extent) {
+        return function(d) {
+            const smallest = extent[0] < extent[1] ? extent[0] : extent[1];
+            const largest = extent[0] < extent[1] ? extent[1] : extent[0];
+
+            return d['Date'] > smallest && d['Date'] < largest;
+        }
+    }
+
     /*
     const timePeriods = [
         [new Date(2019, 6, 1), new Date(2019, 6, 30)],

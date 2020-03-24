@@ -14,14 +14,15 @@ export class TimelineContext {
             parentElement: _config.parentElement,
             containerHeight: _config.containerHeight,
             containerWidth: _config.containerWidth,
+            dispatcher: _config.dispatcher,
             margin: { top: 50, right: 50, bottom: 50, left: 50 },
             radius: 5
         };
 
-        this.config.innerWidth =this.config.containerWidth - this.config.margin.left - this.config.margin.right;
+        this.config.innerWidth = this.config.containerWidth - this.config.margin.left - this.config.margin.right;
         this.config.innerHeight = this.config.containerHeight - this.config.margin.top - this.config.margin.bottom;
 
-        this.timeScale = TimeAxis.createTimeScale(this);
+        this.timeScale = TimeAxis.createTimeScale(this, [new Date(2019, 6, 1), new Date(2020, 3, 30)]);
 
         this.initVis();
     }
@@ -29,13 +30,13 @@ export class TimelineContext {
     initVis() {
         const vis = this;
 
-        vis.svg = TimelineUtilities.initializeSVG(vis);
+        vis.svg = TimelineUtilities.initializeSVG(vis, 'timeline-context');
 
         vis.chart = TimelineUtilities.appendChart(vis, vis.svg);
 
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis, vis.chart);
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis);
 
-        vis.brush = TimelineBrush.appendBrushX(vis, vis.chart)
+        vis.brush = TimelineBrush.appendBrushX(vis, vis.chart, vis.timeScale)
     }
 
     update() {
@@ -60,7 +61,7 @@ export class TimelineContext {
 
         updateSelection
             .attr('cx', d => vis.timeScale(d['Date']))
-            .attr('cy', vis.config.innerHeight / 2);
+            .attr('cy', vis.config.innerHeight / 2)
 
         exitSelection.remove();
     }

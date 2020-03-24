@@ -1,26 +1,30 @@
 export class TimelineBrush {
 
-    static appendBrushX(self, chart) {
-        const brushX = TimelineBrush.createBrushX(self);
+    static appendBrushX(vis, chart) {
+        const brushX = TimelineBrush.createBrushX(vis);
         const brushGroup = chart.append('g');
         brushGroup.attr('class', 'timeline-brush');
         brushGroup.call(brushX);
     }
 
-    static createBrushX(self) {
-        const vis = self;
+    static createBrushX(vis) {
+
+        const moveBrush = TimelineBrush.moveBrush(vis);
 
         const brushX = d3.brushX();
-        brushX.extent([[0, vis.config.innerHeight / 2 - 20], [vis.config.innerWidth, vis.config.innerHeight / 2 + 20]])
-        brushX.on('brush', vis.moveBrush);
+        brushX.extent([[0, vis.config.innerHeight / 2 - 20], [vis.config.innerWidth, vis.config.innerHeight / 2 + 20]]);
+        brushX.on('brush', moveBrush);
 
         return brushX
     }
 
-    static moveBrush() {
-        if (d3.event.selection) {
-            //svg.property("value", d3.event.selection.map(x.invert, x).map(d3.utcDay.round));
-            //svg.dispatch("input");
+    static moveBrush(vis) {
+
+        return function() {
+            if (d3.event.selection) {
+                const highlightedArea = d3.event.selection.map(vis.timeScale.invert);
+                vis.config.dispatcher.call('focus', this, highlightedArea);
+            }
         }
     }
 }

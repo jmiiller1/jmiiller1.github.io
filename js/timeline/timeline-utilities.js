@@ -1,18 +1,17 @@
 export class TimelineUtilities {
 
-    static initializeSVG(self) {
-        const vis = self;
+    static initializeSVG(vis, id) {
 
         const body = d3.select('#timeline');
         const svg = body.append('svg');
-        svg.attr('height', vis.config.containerHeight)
+        svg.attr('class', id)
+            .attr('height', vis.config.containerHeight)
             .attr('width', vis.config.containerWidth);
 
         return svg;
     }
 
-    static appendChart(self, svg) {
-        const vis = self;
+    static appendChart(vis, svg) {
 
         const chart = svg.append('g');
         chart.attr('class', 'timeline-chart')
