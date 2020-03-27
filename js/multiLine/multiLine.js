@@ -1,6 +1,7 @@
 
 import { MultiLineUtilities } from './multiLineUtilities.js';
 import { MultiLineTimeAxis } from './multiLineTimeAxis.js';
+import { multiLineColorLegend } from './multiLineColorLegend.js';
 
 export class MultiLine {
 
@@ -11,7 +12,7 @@ export class MultiLine {
         parentElement: _config.parentElement,
         containerHeight: _config.containerHeight || 600,
         containerWidth: _config.containerWidth || 500,
-        margin: { top: 100, bottom: 75, right: 50, left: 80 }
+        margin: { top: 100, bottom: 75, right: 200, left: 80}
         };
 
         this.config.innerWidth = this.config.containerWidth - this.config.margin.left - this.config.margin.right;
@@ -25,12 +26,10 @@ export class MultiLine {
        
         initVis() {
             const vis = this;
-            console.log(vis);
             vis.svg = MultiLineUtilities.initializeSVG(vis, 'multiLine');
-            //TODO: retrieve body ???
+            //TODO: ask team re: necessity of retrieve body ???
             vis.chart = MultiLineUtilities.appendChart(vis, vis.svg);
-            vis.chartTitle = MultiLineUtilities.appendText(vis.chart, "NYT & The Dem Primaries", -20, vis.config.innerWidth / 2, "chart-title");
-            //TODO: adjust - axis labels not visible
+            vis.chartTitle = MultiLineUtilities.appendText(vis.chart, "Sentiment Analysis of NYT Articles", -20, vis.config.innerWidth / 2, "chart-title");
             vis.XAxisGroup = MultiLineTimeAxis.appendXAxis(vis);
             vis.XAxisTitle = MultiLineUtilities.appendTextXAxis(vis.XAxisGroup, "Date", 60, vis.config.innerWidth / 2, "axis-title");
             vis.yAxisGroup = MultiLineTimeAxis.appendYAxis(vis);
@@ -47,7 +46,9 @@ export class MultiLine {
           const dataGroup = vis.chart.append('g');
           vis.colorValue = d => d.Candidates;
           vis.colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-            
+
+          const colorScale = vis.colorScale;
+
           const lineGenerator = d3.line()
                   .x(d => vis.xScale(vis.xValue(d)))
                   .y(d => vis.yScale(vis.yValue(d)))
@@ -64,9 +65,20 @@ export class MultiLine {
             );
   
           vis.colorScale.domain(vis.nested.map(d => d.key));
+          colorScale.domain(vis.nested.map(d => d.key));
+          
+          // MultiLine Color Legend
+          // TODO: ask TEAM re: why can't vis.colorScale be placed in call below ??
+          vis.svg.append('g')
+              .attr('transform', `translate(850,180)`)
+              .call(multiLineColorLegend, {
+                colorScale,
+                circleRadius: 10,
+                spacing: 40,
+                textOffset: 20
+              });
 
           const updateSelection = dataGroup.selectAll('line-path').data(vis.nested);
-          console.log(updateSelection);
           const enterSelection = updateSelection.enter();
           const exitSelection = updateSelection.exit();
           // const lineGenerator = MultiLineUtilities.createLineGenerator(vis);
