@@ -17,7 +17,7 @@ export class TimelineContext {
             containerWidth: _config.containerWidth,
             dispatcher: _config.dispatcher,
             margin: { top: 50, right: 50, bottom: 50, left: 50 },
-            radius: 5,
+            radius: _config.radius,
             colorScale: _config.colorScale
         };
 

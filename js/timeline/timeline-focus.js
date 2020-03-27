@@ -6,7 +6,6 @@ import { TimeAxis } from './time-axis.js';
 import { TimelineUtilities } from './timeline-utilities.js';
 import { TimelineData } from "./timeline-data.js";
 import { TimelineTooltip } from "./timeline-tooltip.js";
-import {TimelineHover} from "./timeline-hover.js";
 import {TimelineLegend} from "./timeline-legend.js";
 import {TimelineHoverline} from "./timeline-hoverline.js";
 
@@ -23,7 +22,7 @@ export class TimelineFocus {
             containerWidth: _config.containerWidth,
             margin: { top: 50, right: 50, bottom: 50, left: 50 },
             dispatcher: _config.dispatcher,
-            radius: 8,
+            radius: _config.radius,
             colorScale: _config.colorScale
         };
 
