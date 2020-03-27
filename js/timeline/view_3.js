@@ -30,6 +30,14 @@ d3.csv('data/timeline/DemocraticPrimaryDebateSchedule.csv', d3.autotype).then(da
         radius: 10
     });
 
+    const timelineLegend = new TimelineLegend({
+        parentElement: '#timeline',
+        containerHeight: 600,
+        containerWidth: 1200,
+        colorScale: colorScale,
+        radius: 10
+    });
+
     timelineContext.update();
     timelineFocus.update();
 });
