@@ -5,7 +5,6 @@ body {
   
   .line-path {
     fill: none;
-    
     stroke-width: 2;
     stroke-linejoin: round;
     stroke-linecap: round;
@@ -17,7 +16,7 @@ body {
   }
   
   .tick text {
-    font-size: 0.3rem;
+    font-size: 1.0rem;
     fill: #635F5D;
   }
   
@@ -26,7 +25,7 @@ body {
   }
   
   .axis-label {
-    font-size: 1.5em;
+    font-size: 1.25em;
     fill: #8E8883;
   }
   

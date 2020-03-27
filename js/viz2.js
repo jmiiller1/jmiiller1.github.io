@@ -2,7 +2,7 @@ const svg = d3.select('svg');
 const height = +svg.attr('height');
 const width = +svg.attr('width');
 
-d3.csv('data/NYT_data_single_cand.csv')
+d3.csv('data/NYT_data.csv')
     .then(data => {
         console.log(data);
         data.forEach(d => {
@@ -27,12 +27,15 @@ d3.csv('data/NYT_data_single_cand.csv')
         
         const colorValue = d => d.Candidates;
         
-        const margin = { top: 60, right: 60, bottom: 88, left: 60 };
+        const margin = { top: 100, right: 75, bottom: 100, left: 80 };
         const innerWidth = width - margin.left - margin.right;
         const innerHeight = height - margin.top - margin.bottom;
-        
+        const dateRange = d3.extent(data,xValue);
+        console.log(dateRange);
         const xScale = d3.scaleTime()
-          .domain(d3.extent(data, xValue))
+          // TODO: fix time scale
+          .domain(dateRange)
+          // .domain(d3.extent(data, xValue))
           .range([0, innerWidth])
           .nice();
         
@@ -47,9 +50,8 @@ d3.csv('data/NYT_data_single_cand.csv')
           .attr('transform', `translate(${margin.left},${margin.top})`);
         
         const xAxis = d3.axisBottom(xScale)
-          .tickArguments([d3.timeWeek.every(1)])
           .tickSize(-innerHeight)
-          .tickPadding(5);
+          .tickPadding(10);
 
         const yAxis = d3.axisLeft(yScale)
           .tickSize(-innerWidth)
@@ -74,7 +76,7 @@ d3.csv('data/NYT_data_single_cand.csv')
         
         xAxisG.append('text')
             .attr('class', 'axis-label')
-            .attr('y', 80)
+            .attr('y', 60)
             .attr('x', innerWidth / 2)
             .attr('fill', 'black')
             .text(xAxisLabel);

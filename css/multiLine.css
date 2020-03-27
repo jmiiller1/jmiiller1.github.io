@@ -1,0 +1,49 @@
+#multiLine {
+    text-align: center;
+}
+
+#multiLine .axis-title {
+    fill: black;
+    font-size: 1.0em;
+    text-anchor: middle;
+}
+
+#multiLine .chart-title {
+    fill: black;
+    font-size: 4.0em;
+    text-anchor: middle;
+}
+
+#multiLine .domain {
+    stroke: black;
+    stroke-width: 2px;
+    border-radius: 2px;
+}
+
+#multiLine .tick line {
+    stroke: black;
+    stroke-width: 1.5px;
+    border-radius: 4px;
+}
+
+#multiLine .line-path {
+    fill: none;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    mix-blend-mode: multiply;
+  }
+  
+#multiLine .text {
+    font-family: sans-serif;
+  }
+  
+#multiLine .tick text {
+    font-size: 1.0rem;
+    fill: #635F5D;
+  }
+  
+#multiLine .axis-label {
+    font-size: 1.25em;
+    fill: #8E8883;
+  }
