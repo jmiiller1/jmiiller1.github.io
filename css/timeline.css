@@ -1,34 +1,61 @@
-#timeline {
+#timeline-context, #timeline-focus {
     text-align: center;
+    box-sizing: border-box;
 }
 
-#timeline .axis-title {
+.timeline-container {
+    display: block;
+}
+
+.timeline .time-axis {
+    pointer-events: none;
+}
+
+body .timeline-tooltip {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 33px;
+    padding: 2px;
+    font-size: 12px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+.timeline .axis-title {
     fill: black;
     font-size: 1.5em;
 }
 
-#timeline .chart-title {
+.timeline .chart-title {
     fill: black;
     font-size: 2em;
     text-anchor: middle;
 }
 
-#timeline .dem-debate {
-    fill: steelblue;
+.timeline .event {
     stroke-width: 1px;
     stroke: lightgrey;
     opacity: 0.7;
 }
 
-#timeline .domain {
+.timeline .domain {
     stroke: black;
     stroke-width: 3px;
     border-radius: 4px;
 }
 
-#timeline .tick line {
+.timeline .tick line {
     stroke: black;
     stroke-width: 2px;
     border-radius: 4px;
+}
+
+.timeline .timeline-hoverline line {
+    stroke-width: 2px;
+    stroke: lightgrey;
+    pointer-events: none;
 }
 

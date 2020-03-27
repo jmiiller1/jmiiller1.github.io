@@ -13,11 +13,23 @@ body{
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
 }
+
+h1, h2, h3, h4, h5, p {
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+}
+
 h2{
     line-height: 1.25;
     padding-top: 45px;
     font-weight: 300;
 }
+
+h5, p {
+    font-weight: 200
+}
+
 svg{
     padding: 20px;
 }
@@ -27,6 +39,7 @@ text{
 strong{
     font-weight: 600;
 }
+
 #graphic {
     max-width:  1440px;
     width: 100%;

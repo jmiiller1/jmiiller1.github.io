@@ -1,10 +1,10 @@
 export class TimelineUtilities {
 
-    static initializeSVG(vis, id) {
+    static initializeSVG(vis, parentid, className) {
 
-        const body = d3.select('#timeline');
+        const body = d3.select(parentid);
         const svg = body.append('svg');
-        svg.attr('class', id)
+        svg.attr('class', className)
             .attr('height', vis.config.containerHeight)
             .attr('width', vis.config.containerWidth);
 
@@ -22,13 +22,18 @@ export class TimelineUtilities {
         return chart;
     }
 
-    static appendText(group, titleName, height, width, className) {
-        const text = group.append('text');
-        text.attr('class', className);
-        text.attr('x', width);
-        text.attr('y', height);
-        text.text(titleName);
+    static appendText(group, text, height, width, className) {
+
+        const textElem = group.append('text');
+        textElem.attr('class', className);
+        textElem.attr('x', width);
+        textElem.attr('y', height);
+        textElem.text(text);
 
         return group;
+    }
+
+    static retrieveBody() {
+        return d3.select('body');
     }
 }

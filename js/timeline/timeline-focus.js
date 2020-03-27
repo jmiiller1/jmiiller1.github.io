@@ -5,6 +5,9 @@
 import { TimeAxis } from './time-axis.js';
 import { TimelineUtilities } from './timeline-utilities.js';
 import { TimelineData } from "./timeline-data.js";
+import { TimelineTooltip } from "./timeline-tooltip.js";
+import {TimelineLegend} from "./timeline-legend.js";
+import {TimelineHoverline} from "./timeline-hoverline.js";
 
 export class TimelineFocus {
 
@@ -19,7 +22,8 @@ export class TimelineFocus {
             containerWidth: _config.containerWidth,
             margin: { top: 50, right: 50, bottom: 50, left: 50 },
             dispatcher: _config.dispatcher,
-            radius: 8
+            radius: _config.radius,
+            colorScale: _config.colorScale
         };
 
         vis.config.innerWidth = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
@@ -27,7 +31,7 @@ export class TimelineFocus {
 
         vis.timeScale = TimeAxis.createTimeScale(vis, [new Date(2019, 6, 1), new Date(2020, 3, 30)]);
 
-        vis.initializeListener();
+        vis.initializeFocusListener();
 
         vis.initVis();
     }
@@ -35,15 +39,22 @@ export class TimelineFocus {
     initVis() {
         const vis = this;
 
-        vis.svg = TimelineUtilities.initializeSVG(vis, 'timeline-focus');
+        vis.body = TimelineUtilities.retrieveBody();
+        vis.svg = TimelineUtilities.initializeSVG(vis, '#timeline-focus', 'timeline');
 
         vis.chart = TimelineUtilities.appendChart(vis, vis.svg);
-        vis.chartTitle = TimelineUtilities.appendText(vis.chart, "Timeline", 0, vis.config.innerWidth / 2, "chart-title");
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
 
+        vis.tooltip = TimelineTooltip.appendTooltip(vis.body);
+
         vis.dataGroup = vis.chart.append('g');
+
+        vis.hoverLine = TimelineHoverline.appendHoverline(vis);
+        vis.svg.on('mousemove', TimelineHoverline.mouseMove(vis, '#timeline-focus .timeline'));
+        vis.svg.on('mouseout', TimelineHoverline.mouseOut(vis));
+
     }
 
     update() {
@@ -58,15 +69,19 @@ export class TimelineFocus {
     render() {
         const vis = this;
 
-        let updateSelection = vis.dataGroup.selectAll('circle').data(vis.data);
+        const updateSelection = vis.dataGroup.selectAll('circle').data(vis.data);
         const enterSelection = updateSelection.enter();
         const exitSelection = updateSelection.exit();
 
         enterSelection.append('circle')
-            .attr('class', 'dem-debate')
+            .attr('class', 'event')
             .attr('cx', d => vis.timeScale(d['Date']))
             .attr('cy', vis.config.innerHeight / 2)
-            .attr('r', vis.config.radius);
+            .attr('r', vis.config.radius)
+            .attr('fill', d => vis.config.colorScale(d['type']))
+            .attr('z-index', 20)
+            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis, '#timeline-focus .timeline'))
+            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis));
 
         updateSelection
             .attr('cx', d => vis.timeScale(d['Date']))
@@ -75,13 +90,12 @@ export class TimelineFocus {
         exitSelection.remove();
     }
 
-    initializeListener() {
+    initializeFocusListener() {
         const vis = this;
 
         vis.config.dispatcher.on('focus.timeline', function(extent) {
             vis.timeScale = TimeAxis.createTimeScale(vis, extent);
             vis.data = vis.copy.filter(TimelineData.dateInRange(extent));
-            console.log(vis.data);
 
             vis.update();
         });
