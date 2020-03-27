@@ -12,12 +12,16 @@ export class TimelineTooltip {
 
     }
 
-    static mouseOver(vis) {
+    static mouseMove(vis, parentSelector) {
         return function(d) {
+            const x = d3.mouse(this)[0];
+            const y = d3.mouse(this)[1];
+            const parentx = d3.select(parentSelector).node().getBoundingClientRect().x;
+            const parenty = d3.select(parentSelector).node().getBoundingClientRect().y;
 
             const html = vis.tooltip.html(TimeAxis.formatTime(d['Date']));
-            html.style('left', (d3.event.pageX - 30) + "px");
-            html.style('top', (d3.event.pageY - 50) + "px");
+            html.style('left', (x + parentx + 35) + "px");
+            html.style('top', (y + parenty + 10) + "px");
 
             vis.tooltip.transition().duration(200).style('opacity', 0.9);
         }

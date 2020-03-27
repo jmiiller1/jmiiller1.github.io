@@ -17,7 +17,8 @@ export class TimelineContext {
             containerWidth: _config.containerWidth,
             dispatcher: _config.dispatcher,
             margin: { top: 50, right: 50, bottom: 50, left: 50 },
-            radius: 5
+            radius: 5,
+            colorScale: _config.colorScale
         };
 
         this.config.innerWidth = this.config.containerWidth - this.config.margin.left - this.config.margin.right;
@@ -32,11 +33,12 @@ export class TimelineContext {
         const vis = this;
 
         vis.body = TimelineUtilities.retrieveBody();
-        vis.svg = TimelineUtilities.initializeSVG(vis, 'timeline-context');
+        vis.svg = TimelineUtilities.initializeSVG(vis, '#timeline-context', 'timeline');
 
         vis.chart = TimelineUtilities.appendChart(vis, vis.svg);
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis);
+        vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
 
         vis.brush = TimelineBrush.appendBrushX(vis, vis.chart, vis.timeScale);
 
@@ -58,12 +60,13 @@ export class TimelineContext {
         const exitSelection = updateSelection.exit();
 
         enterSelection.append('circle')
-            .attr('class', 'dem-debate')
+            .attr('class', 'event')
             .attr('cx', d => vis.timeScale(d['Date']))
             .attr('cy', vis.config.innerHeight / 2)
             .attr('r', vis.config.radius)
-            .on('mouseover', TimelineTooltip.mouseOver(vis))
-            .on('mouseout', TimelineTooltip.mouseOut(vis));
+            .attr('fill', d => vis.config.colorScale(d['type']))
+            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis, '#timeline-context .timeline'))
+            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis));
 
         updateSelection
             .attr('cx', d => vis.timeScale(d['Date']))
