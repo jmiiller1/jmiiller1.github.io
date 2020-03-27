@@ -41,7 +41,6 @@ export class TimelineFocus {
 
         vis.body = TimelineUtilities.retrieveBody();
         vis.svg = TimelineUtilities.initializeSVG(vis, '#timeline-focus', 'timeline');
-        vis.svg.on('mousemove', TimelineHoverline.mouseOver(vis, '#timeline-focus .timeline'));
 
         vis.chart = TimelineUtilities.appendChart(vis, vis.svg);
 
@@ -52,9 +51,10 @@ export class TimelineFocus {
 
         vis.dataGroup = vis.chart.append('g');
 
-        vis.legend = TimelineLegend.appendLegend(vis, vis.config.colorScale);
-
         vis.hoverLine = TimelineHoverline.appendHoverline(vis);
+        vis.svg.on('mousemove', TimelineHoverline.mouseMove(vis, '#timeline-focus .timeline'));
+        vis.svg.on('mouseout', TimelineHoverline.mouseOut(vis));
+
     }
 
     update() {

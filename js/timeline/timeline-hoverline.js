@@ -14,13 +14,19 @@ export class TimelineHoverline {
 
     }
 
-    static mouseOver(vis, parentSelector) {
+    static mouseMove(vis, parentSelector) {
         return function(d) {
             let x = d3.mouse(this)[0];
             const parentx = d3.select(parentSelector).node().getBoundingClientRect().x;
 
             vis.hoverLine.attr('x1', x - parentx + 50).attr('x2', x - parentx + 50);
-            vis.hoverLine.attr('opacity', 0.7);
+            vis.hoverLine.transition().duration(100).attr('opacity', 0.7);
+        }
+    }
+
+    static mouseOut(vis) {
+        return function(d) {
+            vis.hoverLine.transition().duration(500).attr('opacity', 0);
         }
     }
 }

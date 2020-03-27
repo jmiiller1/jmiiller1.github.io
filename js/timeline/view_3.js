@@ -14,18 +14,20 @@ d3.csv('data/timeline/DemocraticPrimaryDebateSchedule.csv', d3.autotype).then(da
 
     const timelineContext = new TimelineContext(data, {
         parentElement: '#timeline',
-        containerHeight: 100,
+        containerHeight: 150,
         containerWidth: 800,
         dispatcher: dispatcher,
         colorScale: colorScale,
+        radius: 5
     });
 
     const timelineFocus = new TimelineFocus(data, {
         parentElement: '#timeline',
-        containerHeight: 300,
+        containerHeight: 350,
         containerWidth: 1200,
         dispatcher: dispatcher,
         colorScale: colorScale,
+        radius: 10
     });
 
     timelineContext.update();
