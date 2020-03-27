@@ -7,7 +7,7 @@ export class TimelineHoverline {
 
         const hoverLine = hoverLineGroup.append('line');
         hoverLine.attr('x1', 0).attr('x2', 0);
-        hoverLine.attr('y1', vis.config.innerHeight / 2 - 30).attr('y2', vis.config.innerHeight / 2 + 30);
+        hoverLine.attr('y1', vis.config.innerHeight / 2 - 20).attr('y2', vis.config.innerHeight / 2 + 20);
         hoverLine.attr('opacity', 0);
 
         return hoverLine;
