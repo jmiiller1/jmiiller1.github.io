@@ -4,13 +4,13 @@
 
 #multiLine .axis-title {
     fill: black;
-    font-size: 1.0em;
+    font-size: 2.0em;
     text-anchor: middle;
 }
 
 #multiLine .chart-title {
     fill: black;
-    font-size: 4.0em;
+    font-size: 3.0em;
     text-anchor: middle;
 }
 

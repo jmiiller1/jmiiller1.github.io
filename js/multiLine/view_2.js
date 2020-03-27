@@ -1,7 +1,4 @@
 import { MultiLine } from "./multiLine.js";
-import { MultiLineData } from "./multiLineData.js";
-
-
 
 d3.csv('data/NYT_data_single_cand.csv', d3.autotype).then(data => {
     data.forEach((row) => {
@@ -12,13 +9,10 @@ d3.csv('data/NYT_data_single_cand.csv', d3.autotype).then(data => {
         row[`SentScore(Avg)`] = +row[`SentScore(Avg)`];
     });
 
-    console.log(data);
-
     const multiLine = new MultiLine(data, {
         parentElement: '#multiLine',
         containerHeight: 500,
         containerWidth: 1000,
     });
-
     multiLine.update();
 });

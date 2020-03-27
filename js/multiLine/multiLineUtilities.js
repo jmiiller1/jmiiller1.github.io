@@ -1,13 +1,11 @@
 export class MultiLineUtilities {
 
     static initializeSVG(vis, id){
-
         const body = d3.select('#multiLine');
         const svg = body.append('svg');
         svg.attr('class', id)
             .attr('height', vis.config.containerHeight)
             .attr('width', vis.config.containerWidth);
-            
         return svg;
     }
 
@@ -17,7 +15,6 @@ export class MultiLineUtilities {
             .attr('transform', `translate(${vis.config.margin.left}, ${vis.config.margin.top})`)
             .attr('height', vis.config.innerHeight)
             .attr('width', vis.config.innerWidth);
-
         return chart;
     }
 
@@ -27,7 +24,6 @@ export class MultiLineUtilities {
         text.attr('x', width);
         text.attr('y', height);
         text.text(titleName);
-
         return group;
     }
 
@@ -38,8 +34,6 @@ export class MultiLineUtilities {
         text.attr('y', height);
         text.attr('fill', 'black');
         text.text(titleName);
-        console.log(text);
-        console.log(group);
         return group;
     }
 
@@ -52,7 +46,6 @@ export class MultiLineUtilities {
         text.attr('transform', `rotate(-90)`);
         text.attr('text-anchor', 'middle');
         text.text(titleName);
-
         return group;
     }
 
@@ -77,7 +70,6 @@ export class MultiLineUtilities {
                         d3.descending(vis.lastYValue(a), vis.lastYValue(b))
                         );
         this.createColorScale(vis).domain(vis.nested.map(d => d.key));
-
         return nested;
     }
 
@@ -88,6 +80,4 @@ export class MultiLineUtilities {
             .curve(d3.curveBasis);
         return lineGenerator;
     }
-
-
 }

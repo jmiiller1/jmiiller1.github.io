@@ -11,28 +11,6 @@ export class MultiLineTimeAxis {
 
         return timeAxisGroup;
     }
-    
-    static appendXAxis(vis) {
-        const XAxis = MultiLineTimeAxis.createXAxis(vis);
-        const XAxisGroup = vis.chart.append('g');
-        XAxisGroup.call(XAxis)
-            .attr('transform', `translate(0, ${vis.config.innerHeight})`);
-            //.attr('class', 'x-axis')
-            
-        XAxisGroup.call(XAxis);
-        return XAxisGroup; 
-        
-          
-    }
-
-    static appendYAxis(vis){
-        const yAxis = MultiLineTimeAxis.createYAxis(vis);
-        const yAxisGroup = vis.chart.append('g');
-        // yAxisGroup
-        //     .attr('class', 'time-axis');
-        yAxisGroup.call(yAxis);
-        return yAxisGroup;
-    }
 
     static createTimeScale(vis, domain) {
         const timeScale = d3.scaleTime();
@@ -49,7 +27,17 @@ export class MultiLineTimeAxis {
         return timeAxis;
     }
 
-    // Above = TIMELINE timeAxis template
+    static appendXAxis(vis) {
+        const XAxis = MultiLineTimeAxis.createXAxis(vis);
+        const XAxisGroup = vis.chart.append('g');
+        XAxisGroup.call(XAxis)
+            .attr('transform', `translate(0, ${vis.config.innerHeight})`);
+            //.attr('class', 'x-axis')
+            
+        XAxisGroup.call(XAxis);
+        return XAxisGroup; 
+    }
+
     static createXScale(vis){
         vis.xValue = d => d[`Date`];
         vis.dateRange = d3.extent(vis.data,vis.xValue);
@@ -68,6 +56,15 @@ export class MultiLineTimeAxis {
           return xAxis;
     }
 
+    static appendYAxis(vis){
+        const yAxis = MultiLineTimeAxis.createYAxis(vis);
+        const yAxisGroup = vis.chart.append('g');
+        // yAxisGroup
+        //     .attr('class', 'time-axis');
+        yAxisGroup.call(yAxis);
+        return yAxisGroup;
+    }
+
     static createYScale(vis){
         vis.yValue = d => d[`SentScore(Avg)`];
         vis.yAxisLabel = 'Sentiment Score';
@@ -78,12 +75,11 @@ export class MultiLineTimeAxis {
             .nice();
         return yScale;
     }
+
     static createYAxis(vis){
         const yAxis = d3.axisLeft(vis.yScale)
             .tickSize(-vis.config.innerWidth)
             .tickPadding(10);
         return yAxis;
     }
-
-
 }
