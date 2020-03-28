@@ -87,7 +87,9 @@ export class MultiLine {
               // .attr('cx', d => vis.xScale(d[`Date`]))
               // .attr('cy', vis.config.innerHeight / 2)
               .attr('d', d => lineGenerator(d.values))
-              .attr('stroke', d => vis.colorScale(d.key));        
+              .attr('stroke', d => vis.colorScale(d.key))
+            .append('title')
+              .text(d => d.key);        
             
             updateSelection
                 // .attr('cx', d => vis.xScale(d[`Date`]))

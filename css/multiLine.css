@@ -47,3 +47,7 @@
     font-size: 1.25em;
     fill: #8E8883;
   }
+
+#multiLine .line-path:hover{
+  stroke-width: 8;
+}
