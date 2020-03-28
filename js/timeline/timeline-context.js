@@ -26,7 +26,7 @@ export class TimelineContext {
         vis.config.innerWidth = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
         vis.config.innerHeight = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
 
-        vis.timeScale = TimeAxis.createTimeScale([new Date(2019, 6, 1), new Date(2020, 3, 30)], vis.config.innerWidth);
+        vis.timeScale = TimeAxis.createTimeScale([new Date(2019, 6, 1), new Date(2020, 4, 1)], vis.config.innerWidth);
 
         vis.initVis();
     }
