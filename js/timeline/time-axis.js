@@ -1,32 +1,34 @@
 export class TimeAxis {
 
-    static appendTimeAxis(vis) {
+    static appendTimeAxis(chart, timeScale, height, width) {
+        console.log('appendTimeAxis');
+        console.log(timeScale);
 
-        const timeAxis = TimeAxis.createTimeAxis(vis);
+        const timeAxis = TimeAxis.createTimeAxis(timeScale, width);
 
-        const timeAxisGroup = vis.chart.append('g');
+        const timeAxisGroup = chart.append('g');
         timeAxisGroup
             .attr('class', 'time-axis')
-            .attr('transform', `translate(0, ${vis.config.innerHeight / 2})`);
+            .attr('transform', `translate(0, ${height / 2})`);
         timeAxisGroup.call(timeAxis);
 
         return timeAxisGroup;
     }
 
-    static createTimeScale(vis, domain) {
+    static createTimeScale(domain, width) {
 
         const timeScale = d3.scaleTime();
 
         timeScale.domain(domain);
-        timeScale.range([0, vis.config.innerWidth]);
+        timeScale.range([0, width]);
 
         return timeScale;
     }
 
-    static createTimeAxis(vis) {
-        const timeAxis = d3.axisBottom(vis.timeScale)
+    static createTimeAxis(timeScale, width) {
+        const timeAxis = d3.axisBottom(timeScale)
             .tickSizeOuter(0)
-            .ticks(vis.config.innerWidth / 80);
+            .ticks(width / 80);
 
         return timeAxis;
     }

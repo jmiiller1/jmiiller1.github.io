@@ -29,7 +29,7 @@ export class TimelineFocus {
         vis.config.innerWidth = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
         vis.config.innerHeight = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
 
-        vis.timeScale = TimeAxis.createTimeScale(vis, [new Date(2019, 6, 1), new Date(2020, 3, 30)]);
+        vis.timeScale = TimeAxis.createTimeScale([new Date(2019, 6, 1), new Date(2020, 3, 30)], vis.config.innerWidth);
 
         vis.initializeFocusListener();
 
@@ -44,7 +44,7 @@ export class TimelineFocus {
 
         vis.chart = TimelineUtilities.appendChart(vis.config.innerHeight, vis.config.innerWidth, vis.config.margin, vis.svg);
 
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis);
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.svg, "Time", vis.config.innerHeight, vis.config.innerWidth / 2, "axis-title");
 
         vis.tooltip = TimelineTooltip.appendTooltip(vis.body);
@@ -62,7 +62,7 @@ export class TimelineFocus {
         const vis = this;
 
         vis.timeAxisGroup.remove();
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis, vis.chart);
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth);
 
         vis.render();
     }
@@ -95,7 +95,7 @@ export class TimelineFocus {
         const vis = this;
 
         vis.config.dispatcher.on('focus.timeline', function(extent) {
-            vis.timeScale = TimeAxis.createTimeScale(vis, extent);
+            vis.timeScale = TimeAxis.createTimeScale(extent, vis.config.innerWidth);
             vis.data = vis.copy.filter(TimelineData.dateInRange(extent));
 
             vis.update();
