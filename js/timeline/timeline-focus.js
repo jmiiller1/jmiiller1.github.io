@@ -105,9 +105,9 @@ export class TimelineFocus {
     initializeHoverLine() {
         const vis = this;
 
-        vis.hoverLine = TimelineHoverline.appendHoverline(vis);
-        vis.svg.on('mousemove', TimelineHoverline.mouseMove(vis, '#timeline-focus .timeline'));
-        vis.svg.on('mouseout', TimelineHoverline.mouseOut(vis));
+        vis.hoverLine = TimelineHoverline.appendHoverline(vis.chart, vis.config.innerHeight);
+        vis.svg.on('mousemove', TimelineHoverline.mouseMove(vis.hoverLine, '#timeline-focus .timeline'));
+        vis.svg.on('mouseout', TimelineHoverline.mouseOut(vis.hoverLine));
     }
 }
 
