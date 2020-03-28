@@ -1,23 +1,23 @@
 export class TimelineUtilities {
 
-    static initializeSVG(vis, parentid, className) {
+    static initializeSVG(height, width, parentid, className) {
 
-        const body = d3.select(parentid);
-        const svg = body.append('svg');
+        const parentElem = d3.select(parentid);
+        const svg = parentElem.append('svg');
         svg.attr('class', className)
-            .attr('height', vis.config.containerHeight)
-            .attr('width', vis.config.containerWidth);
+            .attr('height', height)
+            .attr('width', width);
 
         return svg;
     }
 
-    static appendChart(vis, svg) {
+    static appendChart(height, width, margin, svg) {
 
         const chart = svg.append('g');
         chart.attr('class', 'timeline-chart')
-            .attr('transform', `translate(${vis.config.margin.left}, ${vis.config.margin.top})`)
-            .attr('height', vis.config.innerHeight)
-            .attr('width', vis.config.innerWidth);
+            .attr('transform', `translate(${margin.left}, ${margin.top})`)
+            .attr('height', height)
+            .attr('width', width);
 
         return chart;
     }

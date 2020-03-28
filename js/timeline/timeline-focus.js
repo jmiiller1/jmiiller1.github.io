@@ -40,9 +40,9 @@ export class TimelineFocus {
         const vis = this;
 
         vis.body = TimelineUtilities.retrieveBody();
-        vis.svg = TimelineUtilities.initializeSVG(vis, '#timeline-focus', 'timeline');
+        vis.svg = TimelineUtilities.initializeSVG(vis.config.containerHeight, vis.config.containerWidth, '#timeline-focus', 'timeline');
 
-        vis.chart = TimelineUtilities.appendChart(vis, vis.svg);
+        vis.chart = TimelineUtilities.appendChart(vis.config.innerHeight, vis.config.innerWidth, vis.config.margin, vis.svg);
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.svg, "Time", vis.config.innerHeight, vis.config.innerWidth / 2, "axis-title");

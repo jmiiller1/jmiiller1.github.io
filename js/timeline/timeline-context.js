@@ -33,9 +33,9 @@ export class TimelineContext {
         const vis = this;
 
         vis.body = TimelineUtilities.retrieveBody();
-        vis.svg = TimelineUtilities.initializeSVG(vis, '#timeline-context', 'timeline');
+        vis.svg = TimelineUtilities.initializeSVG(vis.config.containerHeight, vis.config.containerWidth, '#timeline-context', 'timeline');
 
-        vis.chart = TimelineUtilities.appendChart(vis, vis.svg);
+        vis.chart = TimelineUtilities.appendChart(vis.config.innerHeight, vis.config.innerWidth, vis.config.margin, vis.svg);
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
