@@ -1,8 +1,6 @@
 export class TimeAxis {
 
     static appendTimeAxis(chart, timeScale, height, width) {
-        console.log('appendTimeAxis');
-        console.log(timeScale);
 
         const timeAxis = TimeAxis.createTimeAxis(timeScale, width);
 
