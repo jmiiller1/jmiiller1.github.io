@@ -11,8 +11,7 @@ class Bubble {
 
         this.data = data;
         this.categories = new Set(this.data.map(d => d.Category));
-
-        this.radius = 3;
+        this.candidates = new Set(this.data.map(d => d.Candidates));
 
         this.initVis();
     }
@@ -56,7 +55,11 @@ class Bubble {
             .range([0, vis.height]);
 
         vis.yAxis = d3.axisLeft(vis.candidateScale).tickSize(0);
-        vis.yAxisG = vis.chart.append('g').attr('class', 'candidate_name')
+        vis.yAxisG = vis.chart.append('g').attr('class', 'candidate_name');
+
+        vis.radiusScale = d3.scaleSqrt()
+            .domain([0, d3.max(vis.data, d => d.Count)])
+            .range([0, 10]);
 
         const colorLegend = (selection, props) => {
             const {
@@ -69,8 +72,7 @@ class Bubble {
             const groups = selection.selectAll('g')
                 .data(colorScale.domain());
 
-            const groupsEnter = groups.enter().append('g')
-                .attr('class', 'tick');
+            const groupsEnter = groups.enter().append('g');
 
             groupsEnter
                 .merge(groups)
@@ -80,8 +82,8 @@ class Bubble {
             groups.exit().remove();
 
             groupsEnter.append('circle')
-                //.attr('class', 'legend')
-                .merge(groups.select('circle'))
+                .attr('class', 'color-legend')
+                .merge(groups.select('.color-legend'))
                 .attr('r', circleRadius)
                 .attr('fill', colorScale);
 
@@ -90,6 +92,43 @@ class Bubble {
                 .text(d => d)
                 .attr('dy', '0.32em')
                 .attr('x', textOffset);
+        };
+
+        const sizeLegend = (selection, props) => {
+            const {
+                sizeScale,
+                spacing,
+                textOffset,
+                numTicks,
+                circleFill
+            } = props;
+
+            const ticks = sizeScale.ticks(numTicks)
+                .filter(d => d !== 0)
+                .reverse();
+
+            const groups = selection.selectAll('g').data(ticks);
+
+            const groupsEnter = groups.enter().append('g');
+
+            groupsEnter
+                .merge(groups)
+                .attr('transform', (d, i) =>
+                    `translate(0, ${i*spacing})`);
+
+            groups.exit().remove();
+
+            groupsEnter.append('circle')
+                .attr('class', 'size-legend')
+                .merge(groups.select('.size-legend'))
+                .attr('r', sizeScale)
+                .attr('fill', circleFill);
+
+            groupsEnter.append('text')
+                .merge(groups.select('text'))
+                .text(d => d)
+                .attr('dy', '0.32em')
+                .attr('x', d => sizeScale(d) + textOffset);
         };
 
         vis.chart.append('g')
@@ -101,13 +140,21 @@ class Bubble {
                 textOffset: 10
             });
 
+        vis.chart.append('g')
+            .attr('transform', `translate(${vis.width - 75}, ${vis.height - 175})`)
+            .call(sizeLegend, {
+                sizeScale: vis.radiusScale,
+                spacing: 20,
+                textOffset: 10,
+                numTicks: 5,
+                circleFill: 'rgba(0, 0, 0, 0.5)'
+            });
     }
 
     update() {
         let vis = this;
 
         vis.filtered = vis.data.filter(d => vis.categories.has(d.Category));
-        console.log(vis.filtered)
 
         const manyBody = d3.forceManyBody().strength(1);
 
@@ -120,32 +167,43 @@ class Bubble {
         vis.force = d3.forceSimulation(vis.filtered)
             //.force('charge', manyBody)
             .force('x', d3.forceX(d => vis.xScale(d['SentScore(Avg)'])).strength(1))
-            .force('collision', d3.forceCollide(vis.radius))
-            .velocityDecay(0.5)
+            .force('collision', d3.forceCollide().radius(d => vis.radiusScale(d.Count) + 0.5))
+            //.velocityDecay(0.5)
             .on('tick', changeNetwork)
             .stop();
 
-        //force.stop()
 
-        if (vis.group == 'separate') {
+        if (vis.group === 'separate') {
             vis.yAxisG.call(vis.yAxis);
             vis.yAxisG.select('.domain').remove();
 
+            vis.averages = d3.nest()
+                .key(d => d.Candidates)
+                .entries(vis.filtered);
+
+            vis.averages.forEach((d, i) => {
+                d.mean = d3.mean(d.values.map(d => d['SentScore(Avg)']));
+                d.id = d.key;
+            });
+
             vis.force
-                .force('y', d3.forceY(d => vis.candidateScale(d.Candidates) + vis.candidateScale.bandwidth()/2).strength(5))
+                .force('y', d3.forceY(d => vis.candidateScale(d.Candidates) + vis.candidateScale.bandwidth()/2).strength(1))
 
             //force.alpha(1).restart();
 
-        } else if (vis.group == 'all') {
-
+        } else if (vis.group === 'all') {
             vis.yAxisG.selectAll('.tick').remove();
 
+            vis.averages = [{
+                mean: d3.mean(vis.filtered.map(d => d['SentScore(Avg)'])),
+                id: 9999
+            }];
+
             vis.force
-                .force('y', d3.forceY(vis.height/2).strength(5));
+                .force('y', d3.forceY(vis.height/2).strength(1));
 
             //force.alpha(1).restart();
         }
-
         vis.render();
     }
 
@@ -156,11 +214,32 @@ class Bubble {
         const bubbleEnter = bubble.enter().append('circle').attr('class', 'marker');
         bubble.exit().remove();
         bubble.merge(bubbleEnter)
-            //.transition().duration(1000)
+            .transition().duration(1000)
             .style('fill', d => vis.colorScale(d.Category))
-            .attr('r', vis.radius)
+            .attr('r', d => vis.radiusScale(d.Count))
             .attr('stroke', 'black')
             .attr('stroke-width', .1);
+
+        const average = vis.chart.selectAll('.mean').data(vis.averages, d => d.id);
+        const averageEnter = average.enter().append('rect').attr('class', 'mean');
+        average.exit().remove();
+        averageEnter
+            .attr('width', 0)
+            .attr('height', 0)
+            .attr('transform', `translate(${-5/2}, ${-50/2})`)
+            .attr('x', vis.width/2)
+            .attr('y', vis.height/2)
+            .merge(average)
+            .transition().duration(1000)
+            .attr('width', 5)
+            .attr('height', 50)
+            .attr('x', d => vis.xScale(d.mean))
+            .attr('y', d => {
+                if (vis.group === 'all') {
+                    return vis.height/2
+                } else if (vis.group === 'separate')
+                    return vis.candidateScale(d.key) + vis.candidateScale.bandwidth()/2
+            });
 
         vis.force.alpha(1).restart();
     }

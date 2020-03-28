@@ -2,18 +2,19 @@
 let bubble;
 
 // load data
-d3.csv('data/NYT_data_single_cand.csv').then(data => {
+d3.csv('data/NYT_data_single_cand_only_count.csv').then(data => {
     data.forEach(d => {
         d['SentScore(Avg)'] = +d['SentScore(Avg)'];
         d['SentScore(abstract)'] = +d['SentScore(abstract)'];
         d['SentScore(headline)'] = +d['SentScore(headline)'];
         d['SentScore(lead)'] = +d['SentScore(lead)'];
         d['Date'] = new Date(d['Date']);
+        d['Count'] = +d['Count'];
         d['id'] = Math.random();
     });
 
     bubble = new Bubble({
-        parentElement: '#beeswarm',
+        parentElement: '#bubble',
         containerWidth: 1270,
         containerHeight: 600
     }, data);

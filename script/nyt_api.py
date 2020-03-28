@@ -22,15 +22,16 @@ analyzer = SentimentIntensityAnalyzer()
 #    output.close()
 #    time.sleep(20)
 
-out = open('../data/NYT_data_single_cand.csv', mode='w')
+out = open('../data/NYT_data_single_cand_only_count.csv', mode='w')
 writer = csv.writer(out, quoting=csv.QUOTE_NONNUMERIC)
 writer.writerow(['Date', 'Candidates', 'NewsDesk', 'Category', 'SentScore(headline)', 'SentScore(abstract)', 'SentScore(lead)', 'SentScore(Avg)'])
 
-#out.write(','.join(['Date', 'Candidates', 'Section', 'SentScore(headline)', 'SentScore(abstract)', 'SentScore(lead)', 'SentScore(Avg)']) + '\n')
+#out.write(','.join(['Date', 'Candidates', 'Section', 'SentScore(headline)', 'SentScore(abstract)', 'SentScore(lead)', 'SentScore(Avg)', 'Count']) + '\n')
 
 for year, month in [(2019, 6), (2019, 7), (2019, 8), (2019, 9), (2019, 10), (2019, 11), (2019, 12), (2020, 1), (2020, 2)]:
     f = open(f'../data/{year}-{month}.txt', mode='r')
     articles = json.load(f)
+    #print(json.dumps(articles, indent=4, sort_keys=True))
 
     # Joe Biden, Bernie Sanders, Elizabeth Warren, Michael Bloomberg, Pete Buttigieg
     for i in range(len(articles['response']['docs'])):
@@ -41,8 +42,9 @@ for year, month in [(2019, 6), (2019, 7), (2019, 8), (2019, 9), (2019, 10), (201
         section_name = articles['response']['docs'][i]['news_desk'].lower()
         date = articles['response']['docs'][i]['pub_date'][:10]
         snippet = articles['response']['docs'][i]['snippet']
+        count = articles['response']['docs'][i]['word_count']
 
-        if any([name in headline for name in ['Biden', 'Sanders', 'Warren', 'Bloomberg', 'Buttigieg']]):
+        if sum([name in headline for name in ['Biden', 'Sanders', 'Warren', 'Bloomberg', 'Buttigieg']]) == 1 and int(count) > 0:
             names = choice(
                 [name for name in ['Biden', 'Sanders', 'Warren', 'Bloomberg', 'Buttigieg'] if name in headline])
             #names = ','.join([name for name in ['Biden', 'Sanders', 'Warren', 'Bloomberg', 'Buttigieg'] if name in headline])
@@ -58,6 +60,6 @@ for year, month in [(2019, 6), (2019, 7), (2019, 8), (2019, 9), (2019, 10), (201
                 category = 'politics'
             else:
                 category = 'other'
-            writer.writerow([date, names, section_name, category, round(score_headline, 2), round(score_abstract, 2), round(score_paragraph, 2), round(avg, 2)])
+            writer.writerow([date, names, section_name, category, round(score_headline, 2), round(score_abstract, 2), round(score_paragraph, 2), round(avg, 2), count])
 
 out.close()
