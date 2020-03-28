@@ -45,15 +45,16 @@ export class TimelineFocus {
         vis.chart = TimelineUtilities.appendChart(vis, vis.svg);
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis);
-        vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
+        vis.timeAxisTitle = TimelineUtilities.appendText(vis.svg, "Time", vis.config.innerHeight, vis.config.innerWidth / 2, "axis-title");
 
         vis.tooltip = TimelineTooltip.appendTooltip(vis.body);
 
         vis.dataGroup = vis.chart.append('g');
 
-        vis.hoverLine = TimelineHoverline.appendHoverline(vis);
-        vis.svg.on('mousemove', TimelineHoverline.mouseMove(vis, '#timeline-focus .timeline'));
-        vis.svg.on('mouseout', TimelineHoverline.mouseOut(vis));
+        vis.initializeHoverLine();
+
+        vis.legend = TimelineLegend.appendLegend(vis, vis.config.innerHeight / 4, (9 * vis.config.innerWidth) / 10);
+        vis.legendTitle = TimelineUtilities.appendText(vis.legend, 'Legend', vis.config.innerHeight / 4 - 20, (9 * vis.config.innerWidth) / 10 + 60, '');
 
     }
 
@@ -99,6 +100,14 @@ export class TimelineFocus {
 
             vis.update();
         });
+    }
+
+    initializeHoverLine() {
+        const vis = this;
+
+        vis.hoverLine = TimelineHoverline.appendHoverline(vis);
+        vis.svg.on('mousemove', TimelineHoverline.mouseMove(vis, '#timeline-focus .timeline'));
+        vis.svg.on('mouseout', TimelineHoverline.mouseOut(vis));
     }
 }
 

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,600');
+
 #timeline-context, #timeline-focus {
     text-align: center;
     box-sizing: border-box;
@@ -35,10 +37,11 @@ body .timeline-tooltip {
     text-anchor: middle;
 }
 
-.timeline .event {
+.timeline .event, .timeline .legend-event {
     stroke-width: 1px;
-    stroke: lightgrey;
+    stroke: black;
     opacity: 0.7;
+    overflow: visible;
 }
 
 .timeline .domain {
@@ -55,7 +58,7 @@ body .timeline-tooltip {
 
 .timeline .timeline-hoverline line {
     stroke-width: 2px;
-    stroke: lightgrey;
+    stroke: black;
     pointer-events: none;
 }
 
