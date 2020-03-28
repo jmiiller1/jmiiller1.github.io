@@ -42,8 +42,9 @@ class Bubble {
 
         xAxisG.append('text')
             .attr('class', 'axis-label')
-            .attr('y', 40)
+            .attr('y', 30)
             .attr('x', vis.width / 2)
+            .attr('fill', 'black')
             .text(xAxisLabel);
 
         vis.colorScale = d3.scaleOrdinal()

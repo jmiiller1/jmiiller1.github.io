@@ -8,7 +8,7 @@ d3.csv('data/NYT_data.csv', d3.autotype).then(data => {
         row[`SentScore(lead)`] = +row[`SentScore(lead)`];
         row[`SentScore(Avg)`] = +row[`SentScore(Avg)`];
     });
-    console.log(data);
+    //console.log(data);
     const multiLine = new MultiLine(data, {
         parentElement: '#multiLine',
         containerHeight: 500,
