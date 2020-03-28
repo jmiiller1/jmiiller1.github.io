@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bubble chart</title>
+</head>
+<body>
+<span>
+    <input type="checkbox" id="politics" name="politics" autocomplete="off" checked>
+    <label for="politics">Politics</label>
+</span>
+<span>
+    <input type="checkbox" id="opinion" name="opinion" autocomplete="off" checked>
+    <label for="opinion">Opinion</label>
+</span>
+<span>
+    <input type="checkbox" id="business" name="business" autocomplete="off" checked>
+    <label for="business">Business</label>
+</span>
+<span>
+    <input type="checkbox" id="other" name="other" autocomplete="off" checked>
+    <label for="other">Other</label>
+</span>
+<span>
+    <input type="radio" id="all" name="category" autocomplete="off" value="all" checked>
+    <label for="all">All</label>
+</span>
+<span>
+    <input type="radio" id="separate" name="category" autocomplete="off" value="separate">
+    <label for="all">Separate for candidate</label>
+</span>
+<svg id="beeswarm"></svg>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.12.0/d3.js"></script>
+<script src="js/bubble/view_bubble.js"></script>
+<script src="js/bubble/bubble.js"></script>
+</body>
+</html>
