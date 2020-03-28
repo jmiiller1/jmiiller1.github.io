@@ -10,6 +10,11 @@
 ### View #1
 ![](img/view1.png)
 
+- **Task abstraction:** This visualization is based on a bubble chart, with the goal of helping the reader **explore** and **compare** the trends in sentiment scores associated with each candidate across the four categories.
+- **Data abstraction:** The attributes visualized in the current view include `Candidates` (categorical; 5 levels, with each level corresponding to one candidate), `Category` (categorical; 4 levels: business, politics, opinion, and other), `SentScore(Avg)` (quantitative; theoretical range: [-1, 1], actual range in the data: []), and `(word) Count` (quantitative; range: []).
+- **Encoding:** Each entry is marked with a point, with the horizontal position encoding the sentiment score (`SentScore(Avg)`), the vertical position encoding (if the reader chooses *Separate for candidates*) the candidate associated with the entry in question, the size of the marker representing `(word) Count`, and color hues standing for `Category`. Bars (point marker) are also added, whose horizontal position reflect the means of the sentiment scores of visible data entries.
+- **Interactivity:** In the current stage only two widgets are implemented: one for controlling which categories are depicted in the view, and the other for whether the data points for different candidates should be split vertically. We opted to checkbox different categories as there are only four categories, and using checkboxes allows the reader to choose which combinations of categories to visualize. The other widget we implemented is a pair of radio buttons that allow the reader to choose whether to split the data according to candidates.
+
 ### View #2
 ![](img/view2.png)
 
@@ -17,6 +22,14 @@
 ![](img/view3.png)
 
 ## Changes in vision
+
+Most elements in our visualizations are implemented as described in the proposal. However, the patterns revealed in the visualizations are not as clear-cut as expected. In particular, the sentiment scores among candidates are rather similar. While this does not impact our visualizations, it does undermine the claims we can infer from the data.
+
+Some potential causes for this lack of distinct patterns are:
+
+- As described in the data preprocessing section, we only consider articles whose headline mentioned one and only one candidates. We excluded articles that mentioned multiple candidates because there is no straightforward way to assign sentiment score for each candidate in such cases.
+- We only calculated sentiment scores based on the headline, abstract, or lead paragraph of an article, as the entire text was not available using the NYT API. It is reasonable to assume that doing sentiment analysis on the entire text can potentially provide a more clear picture.
+- In some cases, the sentiment scores estimated using the three text chunks (i.e., headline, abstract, and lead paragraph) are not consistently — with one score being negative and another one positive. This is why we used the average over the three scores, in an attempt to mitigate the effect of this inconsistency. However, this might also hide the underlying patterns.
 
 ## Data preprocessing
 
@@ -172,7 +185,7 @@ The data View #1 and View #2 are based on were scraped from the NYT, using the a
             }
 ```
 
-- The values from the following fields — `main headline`, `abstract`, `lead_paragraph`, `news_desk`, `pub_date`, `snippet`, `word_count` — were extracted from each article. However, only the articles whose main headline mentioned one of the five candidates (i.e., Joe Biden, Michael Bloomberg, Pete Buttigieg, Bernie Sanders, and Elizabeth Warren) were included in the final dataset. Note also that in the current project we focus only on the articles of which the headline only contained one and only one candidate. That is, articles whose headline contained the names of two or more candidates were excluded from the dataset. We did this to simplify our analysis, as we do not have a good way to associate a single sentiment score of an article with multiple candidates. In total, this procedure resulted in 1287 entries in the final dataset.
+- The values from the following fields — `main headline`, `abstract`, `lead_paragraph`, `news_desk`, `pub_date`, `snippet`, `word_count` — were extracted from each article. However, only the articles whose main headline mentioned one of the five candidates (i.e., Joe Biden, Michael Bloomberg, Pete Buttigieg, Bernie Sanders, and Elizabeth Warren) were included in the final dataset. Note also that in the current project we focus only on the articles of which the headline only contained one and only one candidate. That is, articles whose headline contained the names of two or more candidates were excluded from the dataset. We did this to simplify our analysis, as we do not have a good way to associate a single sentiment score of an article with multiple candidates. We also excluded articles that had a `word_count` of 0. In total, this procedure resulted in 1287 entries in the final dataset.
 - We then calculated the sentiment score for each article using the polarity sentiment analyzer from the Python library `vaderSentiment`. For each article, we calculated four [compound polarity scores](https://medium.com/analytics-vidhya/simplifying-social-media-sentiment-analysis-using-vader-in-python-f9e6ec6fc52f), on the basis of `main headline`, `abstract`, `lead_paragraph`, and the average of them respectively. That is, each article has four sentiment scores: `score_headline`, `score_abstract`, `score_paragraph`, and `average` (from the three scores).
 - For each article, we also classified it into one of the four categories — `business`, `politics`, `opinion`, and `other`, based on the `news_desk` field of the article. The category `business` has articles from the news desks of business, business day, and sunday business; `politics` has those from politics, national, U.S., and Washington; `opinion` contains those from editorial, opinion, oped, and upshot; finally, `other` consists of the articles that do not fall into one of the aforementioned categories.
 - The final dataset is stored in the CSV format, the first few lines of which are shown below:
@@ -187,7 +200,46 @@ The data View #1 and View #2 are based on were scraped from the NYT, using the a
 
 ### Status update
 
+| **Tasks**                     | **Est. time** | **Actual time** | **Implementer** |
+|-------------------------------|----------:|-----------:|-------------|
+| **Data collection/preprocessing** |           |             |             |
+| Scrape data with NYT API      |         3 |           2 | RL          |
+| Sent. analysis/preprocess     |         4 |           4 | RL          |
+| **Visualization**                 |           |             |             |
+| Layout/placement of widgets   |         4 |           1 | RL          |
+| **View #1**                       |           |             |             |
+| Static bubble chart           |         2 |           3 | RL          |
+| Legends                       |         1 |           1 | RL          |
+| `d3` force implementation     |         2 |           5 | RL          |
+| Add interactibility           |         3 |           4 | RL          |
+| Add candidate filter widget   |         3 |           2 | RL          |
+| **View #2**                       |           |             |             |
+| Static line chart             |        10 |             | MP          |
+| Add interactability           |        10 |             | MP          |
+| Month selection widget        |       6.5 |             | MP          |
+| **View #3**                       |           |             |             |
+| Political context data        |         3 |             | MP, JM      |
+| Legends                       |         8 |             | JM          |
+| Add View #3                   |        16 |             | JM          |
+| Link all views                |         8 |             | MP, JM      |
+| **Project write-up**              |           |             |             |
+| **M1**                            |         6 |           6 | RL, MP, JM  |
+| **M2**                            |           |             |             |
+| Write-up                      |         4 |             | RL, MP, JM  |
+| Proj. manage & assess         |         3 |             | RL, MP, JM  |
+| Submission                    |         3 |             | RL          |
+| **M3**                            |           |             |             |
+| Write-up                      |         6 |           - | RL, MP, JM  |
+| Demo prep                     |         5 |           - | RL, MP, JM  |
+| Submission                    |       1.5 |           - | RL          |
+
 ### Contributions breakdown
+
+| Name               | Contributions |
+|--------------------|-----------|
+| Roger Yu-Hsiang Lo | Data collection and preprocessing. Implementation of View #1.|
+| Jeff Miiller       | |
+| Mike Powar         | |
 
 ### Team assessment
 
