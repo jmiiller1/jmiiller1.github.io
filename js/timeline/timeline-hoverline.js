@@ -14,12 +14,12 @@ export class TimelineHoverline {
 
     }
 
-    static mouseMove(hoverLine, parentSelector) {
+    static mouseMove(hoverLine, parentSelector, marginLeft) {
         return function(d) {
             let x = d3.mouse(this)[0];
             const parentx = d3.select(parentSelector).node().getBoundingClientRect().x;
 
-            hoverLine.attr('x1', x - parentx + 50).attr('x2', x - parentx + 50);
+            hoverLine.attr('x1', x - parentx - marginLeft).attr('x2', x - parentx - marginLeft);
             hoverLine.transition().duration(100).attr('opacity', 0.7);
         }
     }
