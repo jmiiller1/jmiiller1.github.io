@@ -65,8 +65,8 @@ export class TimelineContext {
             .attr('cy', vis.config.innerHeight / 2)
             .attr('r', vis.config.radius)
             .attr('fill', d => vis.config.colorScale(d['type']))
-            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis, '#timeline-context .timeline'))
-            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis));
+            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.tooltip, '#timeline-context .timeline'))
+            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.tooltip));
 
         updateSelection
             .attr('cx', d => vis.timeScale(d['Date']))

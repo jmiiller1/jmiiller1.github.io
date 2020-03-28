@@ -81,8 +81,8 @@ export class TimelineFocus {
             .attr('r', vis.config.radius)
             .attr('fill', d => vis.config.colorScale(d['type']))
             .attr('z-index', 20)
-            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis, '#timeline-focus .timeline'))
-            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis));
+            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.tooltip, '#timeline-focus .timeline'))
+            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.tooltip));
 
         updateSelection
             .attr('cx', d => vis.timeScale(d['Date']))
