@@ -22,7 +22,7 @@ analyzer = SentimentIntensityAnalyzer()
 #    output.close()
 #    time.sleep(20)
 
-out = open('../data/NYT_data_single_cand_only_count.csv', mode='w')
+out = open('../data/NYT_data.csv', mode='w')
 writer = csv.writer(out, quoting=csv.QUOTE_NONNUMERIC)
 writer.writerow(['Date', 'Candidates', 'NewsDesk', 'Category', 'SentScore(headline)', 'SentScore(abstract)', 'SentScore(lead)', 'SentScore(Avg)'])
 
