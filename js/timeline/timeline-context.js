@@ -40,7 +40,7 @@ export class TimelineContext {
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
 
-        vis.brush = TimelineBrush.appendBrushX(vis, vis.chart, vis.timeScale);
+        vis.brush = TimelineBrush.appendBrushX(vis.chart, vis.config.innerHeight, vis.config.innerWidth, vis.timeScale, vis.config.dispatcher);
 
         vis.tooltip = TimelineTooltip.appendTooltip(vis.body);
     }
