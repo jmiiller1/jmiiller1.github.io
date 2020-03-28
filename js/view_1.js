@@ -9,13 +9,14 @@ d3.csv('data/NYT_data_single_cand.csv').then(data => {
        d['SentScore(headline)'] = +d['SentScore(headline)'];
        d['SentScore(lead)'] = +d['SentScore(lead)'];
        d['Date'] = new Date(d['Date']);
+       d['id'] = Math.random();
     });
 
     beeswarm = new Beeswarm({
         parentElement: '#beeswarm',
         containerWidth: 1270,
         containerHeight: 600
-    }, data, ['Biden', 'Bloomberg', 'Buttigieg', 'Sanders', 'Warren']);
+    }, data, ['Biden', 'Bloomberg', 'Buttigieg', 'Sanders', 'Warren'], 'all');
 
     beeswarm.update();
     //console.log(data);
@@ -63,5 +64,12 @@ $('#warren').click(() => {
     } else {
         beeswarm.candidates.delete('Warren')
     }
+    beeswarm.update();
+});
+
+$('input[type=radio]').click(() => {
+    const radioValue = $('input[name=category]:checked').val();
+    beeswarm.group = radioValue;
+    console.log(beeswarm.group)
     beeswarm.update();
 });

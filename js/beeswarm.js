@@ -1,7 +1,7 @@
 
 class Beeswarm {
 
-    constructor(_config, data, candidates) {//, onClick, onMouseOver) {
+    constructor(_config, data, candidates, group) {//, onClick, onMouseOver) {
         this.config = {
             parentElement: _config.parentElement,
             containerWidth: _config.containerWidth || 600,
@@ -10,6 +10,7 @@ class Beeswarm {
         this.config.margin = _config.margin || { top: 25, bottom: 50, right: 25, left: 75 };
 
         this.data = data;
+        this.group = group;
         this.candidates = new Set();
 
         candidates.forEach((cand) => {
@@ -139,8 +140,6 @@ class Beeswarm {
                 else tail = tail.next = b;
             }
 
-            console.log(circles)
-
             return circles;
         };
     }
@@ -149,17 +148,57 @@ class Beeswarm {
         let vis = this;
 
         vis.filtered = vis.data.filter(d => vis.candidates.has(d.Candidates));
+
+        if (vis.group == 'separate') {
+
+            const category_data = {politics: [], opinion: [], other: [], business: []};
+
+            for (let i = 0; i < vis.filtered.length; i++) {
+                const category = vis.filtered[i].Category;
+                category_data[category].push(vis.filtered[i])
+            }
+
+            vis.processed_data = [];
+            vis.processed_data.push(...vis.dodge(category_data.politics, vis.radius * 2 + vis.padding));
+            vis.processed_data.push(...vis.dodge(category_data.opinion, vis.radius * 2 + vis.padding));
+            vis.processed_data.push(...vis.dodge(category_data.other, vis.radius * 2 + vis.padding));
+            vis.processed_data.push(...vis.dodge(category_data.business, vis.radius * 2 + vis.padding));
+        } else if (vis.group == 'all') {
+            vis.processed_data = vis.dodge(vis.filtered, vis.radius * 2 + vis.padding);
+        }
+
         vis.render();
     }
 
     render() {
         let vis = this;
 
-        const processed = vis.dodge(vis.filtered, vis.radius*2 + vis.padding);git
+        const group = vis.chart.selectAll('.circleGroup').data(vis.processed_data, d => d.data.id);
+        const groupEnter = group.enter().append('g').attr('class', 'circleGroup');
+        group.exit().remove();
+        group.merge(groupEnter)
+            .transition().duration(1000)
+            .attr('transform', d => {
+                if (vis.group == 'separate') {
+                    return `translate(0, ${vis.categoryScale(d.data.Category) - vis.height})`;
+                } else if (vis.group == 'all') {
+                    return `translate(0, 0)`;
+                }
+            });
 
-        vis.chart//.append('g')
-            .selectAll('circle')
-            .data(processed)
+        groupEnter.append('circle')
+            .attr('r', vis.radius)
+            .merge(group.select('circle'))
+            .attr('fill', d => vis.colorScale(d.data.Candidates))
+            .transition().duration(1000)
+            .attr('cx', d => d.x)
+            .attr('cy', d => vis.height - vis.radius - vis.padding - d.y);
+
+
+        /*
+        groupEnter//.append('g')
+            .select('circle')
+            //.data(processed)
             .join(
                 enter => enter.append('circle')
                     .attr('r', vis.radius)
@@ -175,7 +214,10 @@ class Beeswarm {
                         .attr('cx', d => d.x)
                         .attr('cy', d => vis.height - vis.radius - vis.padding - d.y)),
                 exit => exit
-                    .remove())
+                    .remove()
+            );
+            
+         */
 
         /*
         const yearText = vis.chart.selectAll('.yearText').data([null]);
