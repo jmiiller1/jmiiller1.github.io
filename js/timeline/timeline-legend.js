@@ -27,26 +27,40 @@ export class TimelineLegend {
 
         vis.svg = TimelineUtilities.initializeSVG(vis, '#timeline-legend', 'timeline');
 
-        vis.legend = TimelineLegend.appendLegend(vis);
+        vis.title = TimelineUtilities.appendText(vis.svg, 'Legend', 60, 100, '');
+        vis.legend = TimelineLegend.appendLegend(vis, 0, 0);
     }
 
-    static appendLegend(vis) {
+    static appendLegend(vis, height, width) {
 
         const legendGroup = vis.svg.append('g');
         legendGroup.attr('class', 'timeline-legend');
 
-        const updateSelection = legendGroup.selectAll('circle').data(vis.config.colorScale.domain());
-        const enterSelection = updateSelection.enter();
+        const updateSelection = legendGroup.selectAll('g').data(vis.config.colorScale.domain());
+        const enterSelection = updateSelection.enter().append('g');
         const exitSelection = updateSelection.exit();
 
-        enterSelection.append('circle')
-            .attr('class', 'event')
-            .attr('r', vis.config.radius)
-            .attr('cx', 100)
-            .attr('cy', (d, i) => { return i * 50 + 20 })
-            .attr('fill', vis.config.colorScale);
+        const separation = 50;
+
+        enterSelection
+            .append('circle')
+                .attr('class', 'legend-event')
+                .attr('r', vis.config.radius)
+                .attr('cx', (d, i) => { return i * separation + width })
+                .attr('cy', height + 20)
+                .attr('fill', vis.config.colorScale);
+
+        enterSelection
+            .append('text')
+                .attr('class', 'legend-text')
+                .attr('x', (d, i) => { return i * separation + width  - 20})
+                .attr('y', height)
+                .text(d => d);
 
         exitSelection.remove();
 
+        return legendGroup;
     }
+
+
 }

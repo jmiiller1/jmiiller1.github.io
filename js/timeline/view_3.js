@@ -4,7 +4,7 @@ import { TimelineData } from "./timeline-data.js";
 import {TimelineLegend} from "./timeline-legend.js";
 
 const dispatcher = d3.dispatch("focus");
-const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(['debate', 'enter', 'exit', 'poll-change']);
+const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(['debate', 'enter', 'exit', 'key-event']);
 
 d3.csv('data/timeline/DemocraticPrimaryDebateSchedule.csv', d3.autotype).then(data => {
     data.forEach((row) => {
