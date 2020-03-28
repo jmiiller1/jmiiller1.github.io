@@ -2,7 +2,7 @@
 let bubble;
 
 // load data
-d3.csv('data/NYT_data_single_cand_only_count.csv').then(data => {
+d3.csv('data/NYT_data.csv').then(data => {
     data.forEach(d => {
         d['SentScore(Avg)'] = +d['SentScore(Avg)'];
         d['SentScore(abstract)'] = +d['SentScore(abstract)'];

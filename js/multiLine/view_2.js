@@ -1,6 +1,6 @@
 import { MultiLine } from "./multiLine.js";
 
-d3.csv('data/NYT_data_single_cand_only.csv', d3.autotype).then(data => {
+d3.csv('data/NYT_data.csv', d3.autotype).then(data => {
     data.forEach((row) => {
         row[`Date`] = new Date (row[`Date`]);
         row[`SentScore(headline)`] = +row[`SentScore(headline)`];
