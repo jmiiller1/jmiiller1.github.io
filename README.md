@@ -40,6 +40,8 @@ Some potential causes for this lack of distinct patterns are:
 
 All the datasets used in the current project can be found in [data](./data/) folder.
 
+### View #1 & #2 data
+
 The data View #1 and View #2 are based on were scraped from the NYT, using the application programming interface (API) service of the NYT ([https://developer.nytimes.com/apis](https://developer.nytimes.com/apis)). The Python script that did the scraping and handled data preprocessing is included in [script](./script/) folder. In what follows, we provide a detailed data preprocessing pipeline.
 
 - This dataset contains information about articles published between June 2019 and February 2020 in the JavaScript Object Notation (JSON) format, with a snippet of the raw data shown below:
@@ -202,7 +204,7 @@ The data View #1 and View #2 are based on were scraped from the NYT, using the a
 "2019-06-02","Warren","society","other",0.0,0.0,0.53,0.18,200
 ```
 
-View #3 Data: 
+### View #3 data 
 
 - The data currently plotted in View #3 comes from https://en.wikipedia.org/wiki/2020_Democratic_Party_presidential_debates. It is a schedule of the democratic debates, which have been scraped into the following form:
 ```csv
