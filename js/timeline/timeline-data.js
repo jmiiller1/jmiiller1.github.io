@@ -39,44 +39,4 @@ export class TimelineData {
             }
         }
     }
-
-    /*
-    const timePeriods = [
-        [new Date(2019, 6, 1), new Date(2019, 6, 30)],
-        [new Date(2019, 7, 1), new Date(2019, 7, 31)],
-        [new Date(2019, 8, 1), new Date(2019, 8, 31)],
-        [new Date(2019, 9, 1), new Date(2019, 9, 30)],
-        [new Date(2019, 10, 1), new Date(2019, 10, 31)],
-        [new Date(2019, 11, 1), new Date(2019, 11, 30)],
-        [new Date(2019, 12, 1), new Date(2019, 12, 31)],
-        [new Date(2020, 1, 1), new Date(2020, 1, 31)],
-        [new Date(2020, 2, 1), new Date(2020, 2, 29)]
-    ];
-
-
-
-//https://stackoverflow.com/questions/563406/add-days-to-javascript-date
-    Date.prototype.addDays = function(days) {
-        var date = new Date(this.valueOf());
-        date.setDate(date.getDate() + days);
-        return date;
-    };
-
-    const computeMonthDomain = function(startDate) {
-        const result = [startDate];
-
-        console.log(startDate);
-
-        const month = startDate.getMonth();
-        let endDate = new Date(startDate.valueOf());
-        while (endDate.getMonth() === month) {
-            endDate.addDays(1);
-        }
-
-        result.push(endDate);
-
-        return result;
-    };
-    */
-
 }

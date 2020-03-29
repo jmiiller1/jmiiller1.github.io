@@ -1,32 +1,32 @@
 export class TimelineHoverline {
 
-    static appendHoverline(vis) {
+    static appendHoverline(chart, height) {
 
-        const hoverLineGroup = vis.chart.append('g');
+        const hoverLineGroup = chart.append('g');
         hoverLineGroup.attr('class', 'timeline-hoverline');
 
         const hoverLine = hoverLineGroup.append('line');
         hoverLine.attr('x1', 0).attr('x2', 0);
-        hoverLine.attr('y1', vis.config.innerHeight / 2 - 20).attr('y2', vis.config.innerHeight / 2 + 20);
+        hoverLine.attr('y1', height / 2 - 20).attr('y2', height / 2 + 20);
         hoverLine.attr('opacity', 0);
 
         return hoverLine;
 
     }
 
-    static mouseMove(vis, parentSelector) {
+    static mouseMove(hoverLine, parentSelector, marginLeft) {
         return function(d) {
             let x = d3.mouse(this)[0];
             const parentx = d3.select(parentSelector).node().getBoundingClientRect().x;
 
-            vis.hoverLine.attr('x1', x - parentx + 50).attr('x2', x - parentx + 50);
-            vis.hoverLine.transition().duration(100).attr('opacity', 0.7);
+            hoverLine.attr('x1', x - parentx - marginLeft).attr('x2', x - parentx - marginLeft);
+            hoverLine.transition().duration(100).attr('opacity', 0.7);
         }
     }
 
-    static mouseOut(vis) {
+    static mouseOut(hoverLine) {
         return function(d) {
-            vis.hoverLine.transition().duration(500).attr('opacity', 0);
+            hoverLine.transition().duration(500).attr('opacity', 0);
         }
     }
 }

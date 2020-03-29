@@ -12,24 +12,20 @@ export class TimelineTooltip {
 
     }
 
-    static mouseMove(vis, parentSelector) {
+    static mouseMove(tooltip, parentSelector) {
         return function(d) {
-            const x = d3.mouse(this)[0];
-            const y = d3.mouse(this)[1];
-            const parentx = d3.select(parentSelector).node().getBoundingClientRect().x;
-            const parenty = d3.select(parentSelector).node().getBoundingClientRect().y;
 
-            const html = vis.tooltip.html(TimeAxis.formatTime(d['Date']));
-            html.style('left', (x + parentx + 35) + "px");
-            html.style('top', (y + parenty + 10) + "px");
+            const html = tooltip.html(TimeAxis.formatTime(d['Date']));
+            html.style('left', (d3.event.pageX - 35) + "px");
+            html.style('top', (d3.event.pageY - 60) + "px");
 
-            vis.tooltip.transition().duration(200).style('opacity', 0.9);
+            tooltip.transition().duration(200).style('opacity', 0.9);
         }
     }
 
-    static mouseOut(vis) {
+    static mouseOut(tooltip) {
         return function(d) {
-            vis.tooltip.transition().duration(500).style('opacity', 0);
+            tooltip.transition().duration(500).style('opacity', 0);
         }
     }
 }

@@ -29,7 +29,7 @@ export class TimelineFocus {
         vis.config.innerWidth = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
         vis.config.innerHeight = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
 
-        vis.timeScale = TimeAxis.createTimeScale(vis, [new Date(2019, 6, 1), new Date(2020, 3, 30)]);
+        vis.timeScale = TimeAxis.createTimeScale([new Date(2019, 6, 1), new Date(2020, 4, 1)], vis.config.innerWidth);
 
         vis.initializeFocusListener();
 
@@ -40,11 +40,11 @@ export class TimelineFocus {
         const vis = this;
 
         vis.body = TimelineUtilities.retrieveBody();
-        vis.svg = TimelineUtilities.initializeSVG(vis, '#timeline-focus', 'timeline');
+        vis.svg = TimelineUtilities.initializeSVG(vis.config.containerHeight, vis.config.containerWidth, '#timeline-focus', 'timeline');
 
-        vis.chart = TimelineUtilities.appendChart(vis, vis.svg);
+        vis.chart = TimelineUtilities.appendChart(vis.config.innerHeight, vis.config.innerWidth, vis.config.margin, vis.svg);
 
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis);
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.svg, "Time", vis.config.innerHeight, vis.config.innerWidth / 2, "axis-title");
 
         vis.tooltip = TimelineTooltip.appendTooltip(vis.body);
@@ -62,7 +62,7 @@ export class TimelineFocus {
         const vis = this;
 
         vis.timeAxisGroup.remove();
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis, vis.chart);
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth);
 
         vis.render();
     }
@@ -81,8 +81,8 @@ export class TimelineFocus {
             .attr('r', vis.config.radius)
             .attr('fill', d => vis.config.colorScale(d['type']))
             .attr('z-index', 20)
-            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis, '#timeline-focus .timeline'))
-            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis));
+            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.tooltip))
+            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.tooltip));
 
         updateSelection
             .attr('cx', d => vis.timeScale(d['Date']))
@@ -95,7 +95,7 @@ export class TimelineFocus {
         const vis = this;
 
         vis.config.dispatcher.on('focus.timeline', function(extent) {
-            vis.timeScale = TimeAxis.createTimeScale(vis, extent);
+            vis.timeScale = TimeAxis.createTimeScale(extent, vis.config.innerWidth);
             vis.data = vis.copy.filter(TimelineData.dateInRange(extent));
 
             vis.update();
@@ -105,9 +105,9 @@ export class TimelineFocus {
     initializeHoverLine() {
         const vis = this;
 
-        vis.hoverLine = TimelineHoverline.appendHoverline(vis);
-        vis.svg.on('mousemove', TimelineHoverline.mouseMove(vis, '#timeline-focus .timeline'));
-        vis.svg.on('mouseout', TimelineHoverline.mouseOut(vis));
+        vis.hoverLine = TimelineHoverline.appendHoverline(vis.chart, vis.config.innerHeight);
+        vis.svg.on('mousemove', TimelineHoverline.mouseMove(vis.hoverLine, '#timeline-focus', vis.config.margin.left));
+        vis.svg.on('mouseout', TimelineHoverline.mouseOut(vis.hoverLine));
     }
 }
 
