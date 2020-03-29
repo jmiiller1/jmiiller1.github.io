@@ -11,34 +11,35 @@
 ![](img/view1a.png)
 ![](img/view1b.png)
 
-- **Task abstraction:** This visualization is based on a bubble chart, with the goal of helping the user **explore** and **compare** the trends in sentiment scores associated with each candidate across the four categories.
+- **Task abstraction:** This visualization is based on a bubble chart, with the goal of helping the reader **explore** and **compare** the trends in sentiment scores associated with each candidate across the four categories.
 - **Data abstraction:** The attributes visualized in the current view include `Candidates` (categorical; 5 levels, with each level corresponding to one candidate), `Category` (categorical; 4 levels: business, politics, opinion, and other), `SentScore(Avg)` (quantitative; theoretical range: [-1, 1], actual range in the data: [-0.78, 0.83]), and `(word) Count` (quantitative; range: [56, 8179]).
-- **Encoding:** Each entry is marked with a point, with the horizontal position encoding the sentiment score (`SentScore(Avg)`), the vertical position encoding (if the user chooses *Separate for candidates*) the candidate associated with the entry in question, the size of the marker representing `(word) Count`, and color hues standing for `Category`. Bars (point marker) are also added, whose horizontal position reflect the means of the sentiment scores of visible data entries.
-- **Interactivity:** In the current stage only two widgets are implemented: one for controlling which categories are depicted in the view, and the other for whether the data points for different candidates should be split vertically. We opted to checkbox different categories as there are only four categories, and using checkboxes allows the user to choose which combinations of categories to visualize. The other widget we implemented is a pair of radio buttons that allow the user to choose whether to split the data according to candidates. When hovering over a circle, the user can access relevant information shown in the tooltip.
+- **Encoding:** Each entry is marked with a point, with the horizontal position encoding the sentiment score (`SentScore(Avg)`), the vertical position encoding (if the reader chooses *Separate for candidates*) the candidate associated with the entry in question, the size of the marker representing `(word) Count`, and color hues standing for `Category`. Bars (point marker) are also added, whose horizontal position reflect the means of the sentiment scores of visible data entries.
+- **Interactivity:** In the current stage only two widgets are implemented: one for controlling which categories are depicted in the view, and the other for whether the data points for different candidates should be split vertically. We opted to checkbox different categories as there are only four categories, and using checkboxes allows the reader to choose which combinations of categories to visualize. The other widget we implemented is a pair of radio buttons that allow the reader to choose whether to split the data according to candidates.
 
 ### View #2
 ![](img/view2.png)
-- **Task abstraction:** This multi-line chart allows the user to explore and compare the changes in sentiment analysis scores for NYT article about each US democratic candidate over the course of the primary process.
+- **Task abstraction:** This multi-line chart allows users to explore and compare the changes in sentiment analysis scores for New York Times article about each US democratic candidate over the course of the primary process.
 - **Data Abstraction:** 
     *  Average sentiment analysis score is the core attribute visualized in this chart.
-    *  Each Row represents a NYT articles written about a particular candidate.
+    *  Each Row represents a New York Times articles written about a particular candidate.
         *  They are ordered chronologically as we are trying to track sentiment scores of articles and show how they changed over time.
-    *  The attributes visualized for the multi-line chart include:
-        *  `Candidates` (categorical; 5 levels, with each level corresponding to one candidate)
+    *  The attributes visualized for the Multi-Line chart include:
+        *   `Candidates` (categorical; 5 levels, with each level corresponding to one candidate)
         *  `SentScore(Avg)` (quantitative; theoretical range: [-1, 1], actual range in the data: [-0.78, 0.83])
+        * `Date` (ordinal; 305 levels/days (July 1st, 2019 - May 1st, 2020))
 
 - **Encoding:** Each entry forms a point on one of five lines on the chart.  Horizontal position encodes date, Vertical position encodes sentiment analysis score, color(hue) encodes candidate, and lines encode connection links between articles(although at this point the nodes for each article need to be implemented) for a particular candidate.
 
-- **Interactivity:** Currently, interactivity for this visualization is limited to selection activated by the user hovering over a particular candidate's line.
+- **Interactivity:** Currently, interactivty for this visualization is limited to selection activated by the user hovering over a particular candidate's line.
     *  For the third milestone:
         *  a reduction by article type will be implemented via a selection menu.  This will give another layer of nuance to the analysis of bias vis-a-vis sentiment analysis in that users could select and compare opinion articles with regular coverage.
         *   and the overview-detail pattern in visualization three (timeline), will be applied to this visualization and then linked to the timeline view.  Given the amount of articles analyzed and the length of the primary campaign, giving the user the ability to chose their date range empowers them to analyze what they choose (especially when juxtaposed with the events shown in the timeline). 
 
 ### View #3
 ![](img/view3.png)
-- **Task abstraction:** This visualization is an overview-detail timeline that, crucially, will also be linked with the average sentiment line chart view (i.e., View #2) in M3.  The linking will be such that the user can select different time periods of the time axis to view, and the data/axis will dynamically change according to the selected time period. These two views are linked in such a manner that we must consider them in unison for particular tasks that we wish to allow the user to accomplish. On its own, the focus + context timeline will allow the user to explore and identify a timeline of key events from the Democratic primary, such as primary debates, and when politicians exit/enter the race. Combined with the average sentiment line chart view, the two views will allow the user to discover, locate, and compare trends and outliers in the NYT media coverage of candidates (as measured by the sentiment analysis) in relation to key events in the primary. For example, a trend a user might discover is the following: whenever a new front-runner emerges in the Democratic primary, the NYT runs a flurry of negative articles on the candidate the following week. Furthermore, the linked views will allow users to explore and compare the coverage of candidates over different time periods of the primary
-- **Data abstraction:** The attributes visualized in the current view include Date (ordinal; 305 levels \[July 1st, 2019 to May 1st, 2020\], with each level corresponding to one day), Event-Type (categorical; 4 levels: debate, politician-enters-race, politician-exits-race, and a generic 'key-events' for remaining events).
-- **Encoding:** Each entry is marked with a point, with the horizontal position encoding Date and color hues standing for Event-Type. Bars (point marker) are also added, whose horizontal position reflect the means of the sentiment scores of visible data entries. We used horizontal position on a common scale to visually encode Date, since it is the most effective magnitude channel for ordered attributes. We used color hue to encode Event-Type, since it is the second most effective identity channel for nominal attributes (and it would not make sense to use spatial position in this view).
+- **Task abstraction:** This visualization is an overview-detail timeline that, crucially, will also be linked with the Average Sentiment line chart view in M3.  The linking will be such that you can select different time periods of the time axis to view, and the data/axis will dynamically change according to the selected time period. These two views are linked in such a manner that we must consider them in unison for particular tasks that we wish to allow the user to accomplish. On its own, the focus + context timeline will allow the user to explore and identify a timeline of key events from the Democratic primary, such as primary debates, and when politicians exit/enter the race. Combined with the Average Sentiment line chart view, the two views will allow the user to discover, locate, and compare trends and outliers in the NYT media coverage of candidates (as measured by the sentiment analysis) in relation to key events in the primary. For example, a trend a user might discover is the following: whenever a new front-runner emerges in the Democratic primary, the NYT runs a flurry of negative articles on the candidate the following week. Furthermore, the linked views will allow users to explore and compare the coverage of candidates over different time periods of the primary
+- **Data abstraction:** The attributes visualized in the current view include Date (ordinal; 305 levels (July 1st, 2019 - May 1st, 2020), with each level corresponding to one day), Event-Type (categorical; 4 levels: debate, politician-enters-race, politician-exits-race, and a generic ‘key-events’ for remaining events).
+- **Encoding:** Each entry is marked with a point, with the horizontal position encoding Date and color hues standing for Event-Type. Bars (point marker) are also added, whose horizontal position reflect the means of the sentiment scores of visible data entries. I used horizontal position on a common scale to visually encode Date, since it is the most effective magnitude channel for ordered attributes. I used color hue to encode Event-Type, since it is the second most effective identity channel for nominal attributes (and it wouldn’t make sense to use spatial position in this view).
 - **Interactivity:** The central interactivity feature of the timeline is that we facet the date by juxtaposing two timelines, with the same encoding, in an overview-detail pattern. In particular, we have a overview timeline of the entire democratic primary, which, using an interactive brush, can allow the user to navigate/select a particular time period. By selecting a particular time period, the user selects a subset of the timeline data to display in the detail timeline view. In M3, this overview timeline will be linked to the Average Sentiment line chart view. 
 
 ## Changes in vision
@@ -219,13 +220,13 @@ The data View #1 and View #2 are based on were scraped from the NYT, using the a
 
 View #3 Data: 
 
-- The data currently plotted in View #3 comes from 2020 Democratic Party presidential debates on [Wikipedia](https://en.wikipedia.org/wiki/2020_Democratic_Party_presidential_debates). It is a schedule of the democratic debates, which have been scraped into the following form:
+- The data currently plotted in View #3 comes from https://en.wikipedia.org/wiki/2020_Democratic_Party_presidential_debates. It is a schedule of the democratic debates, which have been scraped into the following form:
 ```csv
 Debate,Date,Time(ET),Viewers,Location,Sponsor(s),Moderator(s)
 1A,"June 26 2019",9–11 p.m.,"~24.3 million (15.3m live TV; 9m streaming)","Arsht Center,Miami, Florida","NBC News MSNBC Telemundo","Jose Diaz-Balart Savannah Guthrie Lester Holt Rachel Maddow Chuck Todd"
 1B,"June 27 2019",9–11 p.m.,"~27.1 million (18.1m live TV; 9m streaming)","Arsht Center,Miami, Florida","NBC News MSNBC Telemundo","Jose Diaz-Balart Savannah Guthrie Lester Holt Rachel Maddow Chuck Todd"
 ```
-- The data processing pipeline required me to remove some artifacts from the scraping, which is done in `js/timeline/data-cleaning.js`. Furthermore, we were required to parse their date format into JavaScript Date objects.
+- The data processing pipeline required me to remove some artifacts from the scraping, which is done in js/timeline/data-cleaning.js. Furthermore, I was required to parse their date format into JavaScript Date objects. 
 
 ## Project management & team assessment
 
