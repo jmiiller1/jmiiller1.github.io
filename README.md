@@ -18,6 +18,21 @@
 
 ### View #2
 ![](img/view2.png)
+- **Task abstraction:** This multi-line chart allows users to explore and compare the changes in sentiment analysis scores for New York Times article about each US democratic candidate over the course of the primary process.
+- **Data Abstraction:** 
+    *  Average sentiment analysis score is the core attribute visualized in this chart.
+    *  Each Row represents a New York Times articles written about a particular candidate.
+        *  They are ordered chronologically as we are trying to track sentiment scores of articles and show how they changed over time.
+    *  The attributes visualized for the Multi-Line chart include:
+        *   `Candidates` (categorical; 5 levels, with each level corresponding to one candidate)
+        *  `SentScore(Avg)` (quantitative; theoretical range: [-1, 1], actual range in the data: [-0.78, 0.83])
+
+- **Encoding:** Each entry forms a point on one of five lines on the chart.  Horizontal position encodes date, Vertical position encodes sentiment analysis score, color(hue) encodes candidate, and lines encode connection links between articles(although at this point the nodes for each article need to be implemented) for a particular candidate.
+
+- **Interactivity:** Currently, interactivty for this visualization is limited to selection activated by the user hovering over a particular candidate's line.
+    *  For the third milestone:
+        *  a reduction by article type will be implemented via a selection menu.  This will give another layer of nuance to the analysis of bias vis-a-vis sentiment analysis in that users could select and compare opinion articles with regular coverage.
+        *   and the overview-detail pattern in visualization three (timeline), will be applied to this visualization and then linked to the timeline view.  Given the amount of articles analyzed and the length of the primary campaign, giving the user the ability to chose their date range empowers them to analyze what they choose (especially when juxtaposed with the events shown in the timeline). 
 
 ### View #3
 ![](img/view3.png)
@@ -39,8 +54,6 @@ Some potential causes for this lack of distinct patterns are:
 ## Data preprocessing
 
 All the datasets used in the current project can be found in [data](./data/) folder.
-
-### View #1 & #2 data
 
 The data View #1 and View #2 are based on were scraped from the NYT, using the application programming interface (API) service of the NYT ([https://developer.nytimes.com/apis](https://developer.nytimes.com/apis)). The Python script that did the scraping and handled data preprocessing is included in [script](./script/) folder. In what follows, we provide a detailed data preprocessing pipeline.
 
@@ -204,7 +217,7 @@ The data View #1 and View #2 are based on were scraped from the NYT, using the a
 "2019-06-02","Warren","society","other",0.0,0.0,0.53,0.18,200
 ```
 
-### View #3 data 
+View #3 Data: 
 
 - The data currently plotted in View #3 comes from https://en.wikipedia.org/wiki/2020_Democratic_Party_presidential_debates. It is a schedule of the democratic debates, which have been scraped into the following form:
 ```csv
@@ -232,8 +245,8 @@ Debate,Date,Time(ET),Viewers,Location,Sponsor(s),Moderator(s)
 | Add interactibility           |         3 |           4 | RL          |
 | Add candidate filter widget   |         3 |           2 | RL          |
 | **View #2**                       |           |             |             |
-| Static line chart             |        10 |             | MP          |
-| Add interactability           |        10 |             | MP          |
+| Static line chart             |        10 |   22        | MP          |
+| Add interactability           |        10 |    6         | MP          |
 | Month selection widget        |       6.5 |             | MP          |
 | **View #3**                       |           |             |             |
 | Political context data        |         3 |   3          | MP, JM      |
@@ -245,7 +258,7 @@ Debate,Date,Time(ET),Viewers,Location,Sponsor(s),Moderator(s)
 | **M2**                            |           |             |             |
 | Write-up                      |         4 |  4           | RL, MP, JM  |
 | Proj. manage & assess         |         3 |  3           | RL, MP, JM  |
-| Submission                    |         3 |             | RL          |
+| Submission                    |         3 |  3           | RL          |
 | **M3**                            |           |             |             |
 | Write-up                      |         6 |           - | RL, MP, JM  |
 | Demo prep                     |         5 |           - | RL, MP, JM  |
@@ -257,7 +270,7 @@ Debate,Date,Time(ET),Viewers,Location,Sponsor(s),Moderator(s)
 |--------------------|-----------|
 | Roger Yu-Hsiang Lo | Data collection and preprocessing. Implementation of View #1.|
 | Jeff Miiller       | Implementation of View #3. Data collection of polling data for M3. Data processing of democratic debate data for View #3.|
-| Mike Powar         | |
+| Mike Powar         | Implementation of View #2. Data collection for primary timeline|
 
 ### Team assessment
 
