@@ -5,6 +5,7 @@ import csv
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from random import choice
 from pprint import pprint
+from collections import Counter
 
 analyzer = SentimentIntensityAnalyzer()
 
@@ -25,8 +26,9 @@ analyzer = SentimentIntensityAnalyzer()
 out = open('../data/NYT_data.csv', mode='w')
 writer = csv.writer(out, quoting=csv.QUOTE_NONNUMERIC)
 writer.writerow(['Date', 'Candidates', 'NewsDesk', 'Category', 'Headline', 'SentScore(headline)', 'SentScore(abstract)', 'SentScore(lead)', 'SentScore(Avg)', 'Count'])
-
 #out.write(','.join(['Date', 'Candidates', 'Section', 'SentScore(headline)', 'SentScore(abstract)', 'SentScore(lead)', 'SentScore(Avg)', 'Count']) + '\n')
+
+ids = set()
 
 for year, month in [(2019, 6), (2019, 7), (2019, 8), (2019, 9), (2019, 10), (2019, 11), (2019, 12), (2020, 1), (2020, 2)]:
     f = open(f'../data/{year}-{month}.txt', mode='r')
@@ -44,10 +46,13 @@ for year, month in [(2019, 6), (2019, 7), (2019, 8), (2019, 9), (2019, 10), (201
         snippet = articles['response']['docs'][i]['snippet']
         count = articles['response']['docs'][i]['word_count']
 
-        if sum([name in headline for name in ['Biden', 'Sanders', 'Warren', 'Bloomberg', 'Buttigieg']]) == 1 and int(count) > 0:
+        id = articles['response']['docs'][i]['_id']
+
+        if sum([name in headline for name in ['Biden', 'Sanders', 'Warren', 'Bloomberg', 'Buttigieg']]) == 1 and int(count) > 0 and id not in ids:
             names = choice(
                 [name for name in ['Biden', 'Sanders', 'Warren', 'Bloomberg', 'Buttigieg'] if name in headline])
             #names = ','.join([name for name in ['Biden', 'Sanders', 'Warren', 'Bloomberg', 'Buttigieg'] if name in headline])
+            ids.add(id)
             score_headline = analyzer.polarity_scores(headline)['compound']
             score_abstract = analyzer.polarity_scores(abstract)['compound']
             score_paragraph = analyzer.polarity_scores(lead_paragraph)['compound']
