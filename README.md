@@ -234,7 +234,7 @@ Debate,Date,Time(ET),Viewers,Location,Sponsor(s),Moderator(s)
 | **View #3**                       |           |             |             |
 | Political context data        |         3 |   3          | MP, JM      |
 | Legends                       |         8 |   4          | JM          |
-| Add View #3                   |        16 |   16          | JM          |
+| Add View #3                   |        16 |   20          | JM          |
 | Link all views                |         8 |  8           | MP, JM      |
 | **Project write-up**              |           |             |             |
 | **M1**                            |         6 |           6 | RL, MP, JM  |
