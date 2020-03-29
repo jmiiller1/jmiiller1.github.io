@@ -202,6 +202,8 @@ The data View #1 and View #2 are based on were scraped from the NYT, using the a
 "2019-06-02","Warren","society","other",0.0,0.0,0.53,0.18,200
 ```
 
+View #3 Data: 
+
 - The data currently plotted in View #3 comes from https://en.wikipedia.org/wiki/2020_Democratic_Party_presidential_debates. It is a schedule of the democratic debates, which have been scraped into the following form:
 ```csv
 Debate,Date,Time(ET),Viewers,Location,Sponsor(s),Moderator(s)
