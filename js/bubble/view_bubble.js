@@ -8,6 +8,7 @@ d3.csv('data/NYT_data.csv').then(data => {
         d['SentScore(abstract)'] = +d['SentScore(abstract)'];
         d['SentScore(headline)'] = +d['SentScore(headline)'];
         d['SentScore(lead)'] = +d['SentScore(lead)'];
+        d['Pub_date'] = d['Date'];
         d['Date'] = new Date(d['Date']);
         d['Count'] = +d['Count'];
         d['id'] = Math.random();

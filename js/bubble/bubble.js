@@ -62,6 +62,39 @@ class Bubble {
             .domain([0, d3.max(vis.data, d => d.Count)])
             .range([0, 10]);
 
+        //tooltips
+        //reference: http://jsfiddle.net/VTJ5G/
+        d3.select('body').append('div')
+            .attr('id', 'tooltip')
+            .attr('class', 'hidden');
+
+        d3.select('#tooltip').append('div')
+            .style('font-weight', 'bold')
+            .text('Headline:');
+
+        d3.select('#tooltip').append('div')
+            .attr('class', 'headline')
+            .style('font-weight', 'normal')
+            .text('#headline');
+
+        d3.select('#tooltip').append('div')
+            .style('font-weight', 'bold')
+            .text('Publication date:');
+
+        d3.select('#tooltip').append('div')
+            .attr('class', 'date')
+            .style('font-weight', 'normal')
+            .text('#date');
+
+        d3.select('#tooltip').append('div')
+            .style('font-weight', 'bold')
+            .text('Sentiment:');
+
+        d3.select('#tooltip').append('div')
+            .attr('class', 'sentiment')
+            .style('font-weight', 'normal')
+            .text('#sentiment');
+
         const colorLegend = (selection, props) => {
             const {
                 colorScale,
@@ -150,6 +183,21 @@ class Bubble {
                 numTicks: 5,
                 circleFill: 'rgba(0, 0, 0, 0.5)'
             });
+
+        vis.chart.append('g')
+            .attr('class', 'mean-legend')
+            .attr('transform', `translate(${vis.width - 75}, ${vis.height - 275})`)
+            .append('rect')
+            .attr('width', 5)
+            .attr('height', 50);
+            //.attr('x', vis.width/2)
+            //.attr('y', vis.height/2)
+
+        d3.select('.mean-legend')
+            .append('text')
+            .attr('dy', '1.75em')
+            .attr('x', 10)
+            .text('mean');
     }
 
     update() {
@@ -219,7 +267,23 @@ class Bubble {
             .style('fill', d => vis.colorScale(d.Category))
             .attr('r', d => vis.radiusScale(d.Count))
             .attr('stroke', 'black')
-            .attr('stroke-width', .1);
+            .attr('stroke-width', .1)
+
+        bubble.merge(bubbleEnter)
+            .on('mouseover', d => {
+                //update tooltip info
+                d3.select('#tooltip')
+                    .style('left', d3.event.pageX - 20 + 'px')
+                    .style('top', d3.event.pageY + 20 + 'px');
+                d3.select('#tooltip').classed('hidden', false);
+                d3.select('.headline').text(d.Headline);
+                d3.select('.date').text(d.Pub_date);
+                d3.select('.sentiment').text(d['SentScore(Avg)']);
+            })
+            .on('mouseout', d => {
+                d3.select('#tooltip').classed('hidden', true);
+            });
+
 
         const average = vis.chart.selectAll('.mean').data(vis.averages, d => d.id);
         const averageEnter = average.enter().append('rect').attr('class', 'mean');

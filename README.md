@@ -8,7 +8,8 @@
 ## Design rationale
 
 ### View #1
-![](img/view1.png)
+![](img/view1a.png)
+![](img/view1b.png)
 
 - **Task abstraction:** This visualization is based on a bubble chart, with the goal of helping the reader **explore** and **compare** the trends in sentiment scores associated with each candidate across the four categories.
 - **Data abstraction:** The attributes visualized in the current view include `Candidates` (categorical; 5 levels, with each level corresponding to one candidate), `Category` (categorical; 4 levels: business, politics, opinion, and other), `SentScore(Avg)` (quantitative; theoretical range: [-1, 1], actual range in the data: []), and `(word) Count` (quantitative; range: []).

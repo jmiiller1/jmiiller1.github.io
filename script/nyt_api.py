@@ -24,7 +24,7 @@ analyzer = SentimentIntensityAnalyzer()
 
 out = open('../data/NYT_data.csv', mode='w')
 writer = csv.writer(out, quoting=csv.QUOTE_NONNUMERIC)
-writer.writerow(['Date', 'Candidates', 'NewsDesk', 'Category', 'SentScore(headline)', 'SentScore(abstract)', 'SentScore(lead)', 'SentScore(Avg)'])
+writer.writerow(['Date', 'Candidates', 'NewsDesk', 'Category', 'Headline', 'SentScore(headline)', 'SentScore(abstract)', 'SentScore(lead)', 'SentScore(Avg)', 'Count'])
 
 #out.write(','.join(['Date', 'Candidates', 'Section', 'SentScore(headline)', 'SentScore(abstract)', 'SentScore(lead)', 'SentScore(Avg)', 'Count']) + '\n')
 
@@ -60,6 +60,6 @@ for year, month in [(2019, 6), (2019, 7), (2019, 8), (2019, 9), (2019, 10), (201
                 category = 'politics'
             else:
                 category = 'other'
-            writer.writerow([date, names, section_name, category, round(score_headline, 2), round(score_abstract, 2), round(score_paragraph, 2), round(avg, 2), count])
+            writer.writerow([date, names, section_name, category, headline, round(score_headline, 2), round(score_abstract, 2), round(score_paragraph, 2), round(avg, 2), count])
 
 out.close()
