@@ -246,7 +246,7 @@ The data View #1 and View #2 are based on were scraped from the NYT, using the a
 
 |                                                                 | Weak | Satisfactory | Good | Excellent | Actions taken |
 |-----------------------------------------------------------------|------|--------------|------|-----------|---------------|
-| Team has a clear vision of the problem(s)                       |      |              |      |:heavy_check_mark:|               |
+| Team has a clear vision of the problem(s)                       |      |              |      |:heavy_check_mark:| One of the problems that we encountered is the animation of the bubble chart: with force simulation running on the background, the circles are not animated to the desired positions. We will consult TAs with regard to this problem.|
 | Team is properly organized to complete task and cooperates well |      |              |      |:heavy_check_mark:|               |
 | Team managed time wisely                                        |      |              |      |:heavy_check_mark:|               |
 | Team acquired needed knowledge base                             |      |              |      |:heavy_check_mark:|               |
