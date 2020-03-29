@@ -19,6 +19,11 @@
 ### View #2
 ![](img/view2.png)
 
+- **Task abstraction:** This visualization is an overview-detail timeline that, crucially, will also be linked with the Average Sentiment line chart view in M3.  The linking will be such that you can select different time periods of the time axis to view, and the data/axis will dynamically change according to the selected time period. These two views are linked in such a manner that we must consider them in unison for particular tasks that we wish to allow the user to accomplish. On its own, the focus + context timeline will allow the user to explore and identify a timeline of key events from the Democratic primary, such as primary debates, and when politicians exit/enter the race. Combined with the Average Sentiment line chart view, the two views will allow the user to discover, locate, and compare trends and outliers in the NYT media coverage of candidates (as measured by the sentiment analysis) in relation to key events in the primary. For example, a trend a user might discover is the following: whenever a new front-runner emerges in the Democratic primary, the NYT runs a flurry of negative articles on the candidate the following week. Furthermore, the linked views will allow users to explore and compare the coverage of candidates over different time periods of the primary
+- **Data abstraction:** The attributes visualized in the current view include Date (ordinal; 305 levels (July 1st, 2019 - May 1st, 2020), with each level corresponding to one day), Event-Type (categorical; 4 levels: debate, politician-enters-race, politician-exits-race, and a generic ‘key-events’ for remaining events).
+- **Encoding:** Each entry is marked with a point, with the horizontal position encoding Date and color hues standing for Event-Type. Bars (point marker) are also added, whose horizontal position reflect the means of the sentiment scores of visible data entries. I used horizontal position on a common scale to visually encode Date, since it is the most effective magnitude channel for ordered attributes. I used color hue to encode Event-Type, since it is the second most effective identity channel for nominal attributes (and it wouldn’t make sense to use spatial position in this view).
+- **Interactivity:** The central interactivity feature of the timeline is that we facet the date by juxtaposing two timelines, with the same encoding, in an overview-detail pattern. In particular, we have a overview timeline of the entire democratic primary, which, using an interactive brush, can allow the user to navigate/select a particular time period. By selecting a particular time period, the user selects a subset of the timeline data to display in the detail timeline view. In M3, this overview timeline will be linked to the Average Sentiment line chart view. 
+
 ### View #3
 ![](img/view3.png)
 
@@ -34,7 +39,7 @@ Some potential causes for this lack of distinct patterns are:
 
 ## Data preprocessing
 
-All the datasets used in the current project can be found in [data](./data/) foler.
+All the datasets used in the current project can be found in [data](./data/) folder.
 
 The data View #1 and View #2 are based on were scraped from the NYT, using the application programming interface (API) service of the NYT ([https://developer.nytimes.com/apis](https://developer.nytimes.com/apis)). The Python script that did the scraping and handled data preprocessing is included in [script](./script/) folder. In what follows, we provide a detailed data preprocessing pipeline.
 
@@ -197,6 +202,15 @@ The data View #1 and View #2 are based on were scraped from the NYT, using the a
 "2019-06-02","Sanders","oped","opinion",0.0,-0.42,0.13,-0.1,904
 "2019-06-02","Warren","society","other",0.0,0.0,0.53,0.18,200
 ```
+
+- The data currently plotted in View #3 comes from https://en.wikipedia.org/wiki/2020_Democratic_Party_presidential_debates. It is a schedule of the democratic debates, which have been scraped into the following form:
+```csv
+Debate,Date,Time(ET),Viewers,Location,Sponsor(s),Moderator(s)
+1A,"June 26 2019",9–11 p.m.,"~24.3 million (15.3m live TV; 9m streaming)","Arsht Center,Miami, Florida","NBC News MSNBC Telemundo","Jose Diaz-Balart Savannah Guthrie Lester Holt Rachel Maddow Chuck Todd"
+1B,"June 27 2019",9–11 p.m.,"~27.1 million (18.1m live TV; 9m streaming)","Arsht Center,Miami, Florida","NBC News MSNBC Telemundo","Jose Diaz-Balart Savannah Guthrie Lester Holt Rachel Maddow Chuck Todd"
+```
+- The data processing pipeline required me to remove some artifacts from the scraping, which is done in js/timeline/data-cleaning.js. Furthermore, I was required to parse their date format into JavaScript Date objects. 
+
 ## Project management & team assessment
 
 ### Status update
@@ -219,15 +233,15 @@ The data View #1 and View #2 are based on were scraped from the NYT, using the a
 | Add interactability           |        10 |             | MP          |
 | Month selection widget        |       6.5 |             | MP          |
 | **View #3**                       |           |             |             |
-| Political context data        |         3 |             | MP, JM      |
-| Legends                       |         8 |             | JM          |
-| Add View #3                   |        16 |             | JM          |
-| Link all views                |         8 |             | MP, JM      |
+| Political context data        |         3 |   3          | MP, JM      |
+| Legends                       |         8 |   4          | JM          |
+| Add View #3                   |        16 |   16          | JM          |
+| Link all views                |         8 |  8           | MP, JM      |
 | **Project write-up**              |           |             |             |
 | **M1**                            |         6 |           6 | RL, MP, JM  |
 | **M2**                            |           |             |             |
-| Write-up                      |         4 |             | RL, MP, JM  |
-| Proj. manage & assess         |         3 |             | RL, MP, JM  |
+| Write-up                      |         4 |  4           | RL, MP, JM  |
+| Proj. manage & assess         |         3 |  3           | RL, MP, JM  |
 | Submission                    |         3 |             | RL          |
 | **M3**                            |           |             |             |
 | Write-up                      |         6 |           - | RL, MP, JM  |
@@ -239,7 +253,7 @@ The data View #1 and View #2 are based on were scraped from the NYT, using the a
 | Name               | Contributions |
 |--------------------|-----------|
 | Roger Yu-Hsiang Lo | Data collection and preprocessing. Implementation of View #1.|
-| Jeff Miiller       | |
+| Jeff Miiller       | Implementation of View #3. Data collection of polling data for M3. Data processing of democratic debate data for View #3.|
 | Mike Powar         | |
 
 ### Team assessment
