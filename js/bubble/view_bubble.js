@@ -16,7 +16,7 @@ d3.csv('data/NYT_data.csv').then(data => {
 
     bubble = new Bubble({
         parentElement: '#bubble',
-        containerWidth: 1270,
+        containerWidth: 840,
         containerHeight: 600
     }, data);
 
