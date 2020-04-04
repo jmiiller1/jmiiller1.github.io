@@ -1,57 +1,51 @@
 //svg
-let svg = d3.select("svg");
-
+const svg = d3.select('svg');
 
 //svg width and height
-svg.attr('width',500)
-    .attr('height',500)
-
+svg
+    .attr('width', 840)
+    .attr('height', 625)
 
 //set up grid spacing
-let spacing = 40;
-let rows = 10;
-let column = 10;
-let randnum = (min,max) => Math.round( Math.random() * (max-min) + min );
-
-
+const spacing = 40;
+const rows = 10;
+const column = 10;
+const randnum = (min, max) => Math.round(Math.random() * (max - min) + min);
 
 //Create an array of objects
-let our_data = d3.range(20).map(i =>
-    ({ 'device': i < 5 ? 'ios' : 'android',
+const our_data = d3.range(20).map(i => {
+    return {
+        'device': i < 5 ? 'ios' : 'android',
         'city': i < 3 ? 'San Diegan' : 'Out of towners',
         'age': randnum(25, 65)
-    }));
-
+    }
+});
 
 //create group and join our data to that group
-let group = svg.selectAll('g')
+const group = svg.selectAll('g')
     .data(our_data)
     .enter()
-    .append("g")
-
+    .append('g');
 
 //create rectangles
-let rects = group.append("rect")
+const rects = group.append('rect');
 
 
 //city data
 d3.selectAll('g')
     .append("text")
-    .text( (d) => d["city"])
+    .text(d => d["city"])
     .attr("fill", "gray")
     .attr("class", "city")
-    .attr("dx", -500)
-
-
+    .attr("dx", -500);
 
 //age data
 d3.selectAll('g')
     .append("text")
-    .text( (d) => d["age"] )
+    .text(d => d["age"])
     .attr("fill", "#fff")
     .attr("class", "age")
-    .attr("dx", -500)
-
+    .attr("dx", -500);
 
 // square grid
 let grid = () =>{
@@ -59,7 +53,7 @@ let grid = () =>{
         .transition()
         .delay((d, i) => 10 * i)
         .duration(600)
-        .ease("elastic")
+        .ease(d3.easeElastic)
         .attr("width", 20)
         .attr("height", 20)
         .attr("rx", 5)
@@ -68,7 +62,7 @@ let grid = () =>{
         .attr("y", (d, i) => Math.floor(i / 10) % rows * spacing)
         .attr("fill", (d, i) => (i < 40 ? "#394147" : "#99c125"))
         .attr("opacity", "1")
-}
+};
 
 
 
@@ -78,11 +72,11 @@ let grid2 = () =>{
         .transition()
         .delay((d, i) => 10 * i)
         .duration(600)
-        .ease("elastic")
+        //.ease("elastic")
         .attr("width", 20)
         .attr("height", 20)
-        .attr("rx", "50%")
-        .attr("ry", "50%")
+        //.attr("rx", "50%")
+        //.attr("ry", "50%")
         .attr("x", (d, i) => i % column * spacing)
         .attr("y", (d, i) => Math.floor(i / 10) % rows * spacing)
         .attr("fill", (d, i) => (i < 8 ? "none" : "#99c125"))
@@ -95,7 +89,7 @@ let divide = () =>{
         .transition()
         .delay((d, i) => 10 * i)
         .duration(600)
-        .ease("elastic")
+        //.ease("elastic")
         .attr("width", 10)
         .attr("height", 10)
         .attr("rx", 0)
@@ -112,7 +106,7 @@ let divide = () =>{
         .transition()
         .delay( (d,i) => 40*i )
         .duration(900)
-        .ease('elastic')
+        //.ease('elastic')
         .attr("dx", -500)
 
 
@@ -121,7 +115,7 @@ let divide = () =>{
         .transition()
         .delay( (d,i) => 40*i )
         .duration(900)
-        .ease('elastic')
+        //.ease('elastic')
         .attr("dx", -500)
 }
 
@@ -137,7 +131,7 @@ let barChart = () => {
         .transition()
         .delay( (d,i) => 20*i )
         .duration(900)
-        .ease('elastic')//linear, quad, cubic, sin, exp, circle, elastic, back, bounce
+        //.ease('elastic')//linear, quad, cubic, sin, exp, circle, elastic, back, bounce
         .attr("x", (d,i) => 150 )
         .attr("y", (d,i) => i * 17 )
         .attr("width", (d,i) => d["age"])
@@ -153,7 +147,7 @@ let barChart = () => {
         .transition()
         .delay( (d,i) => 20*i )
         .duration(900)
-        .ease('elastic')
+        //.ease('elastic')
         //align text right
         .attr("text-anchor", "start")
         .attr("dx", 160)
@@ -167,7 +161,7 @@ let barChart = () => {
         .transition()
         .delay( (d,i) => 20*i )
         .duration(900)
-        .ease('elastic')
+        //.ease('elastic')
         //align text left
         .attr("text-anchor", "end")
         .attr("dx", 140)
