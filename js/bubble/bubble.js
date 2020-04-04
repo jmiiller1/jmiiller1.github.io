@@ -10,6 +10,8 @@ class Bubble {
         this.config.margin = _config.margin || { top: 25, bottom: 50, right: 25, left: 75 };
 
         this.data = data;
+
+        // it's useful to give pull out the sets for categories and candidates
         this.categories = new Set(this.data.map(d => d.Category));
         this.candidates = new Set(this.data.map(d => d.Candidates));
 
@@ -24,6 +26,7 @@ class Bubble {
 
         const xAxisLabel = 'Sentiment';
 
+        // canvas-related stuff
         vis.svg = d3.select(vis.config.parentElement)
             .attr('width', vis.config.containerWidth)
             .attr('height', vis.config.containerHeight);
@@ -31,8 +34,10 @@ class Bubble {
         vis.chart = vis.svg.append('g')
             .attr('transform', `translate(${vis.config.margin.left}, ${vis.config.margin.top})`);
 
+        // the following part deals with scales
+        // scale for sentiment
         vis.xScale = d3.scaleLinear()
-            .domain([-1, 1])
+            .domain([-1, 1])  // sentiment scores range from -1 to 1
             .range([0, vis.width]);
 
         const xAxis = d3.axisBottom(vis.xScale);
@@ -47,17 +52,21 @@ class Bubble {
             .attr('fill', 'black')
             .text(xAxisLabel);
 
+        // scale for category color
         vis.colorScale = d3.scaleOrdinal()
             .domain(vis.data.map(d => d.Category))
             .range(d3.schemeTableau10);
 
+        // scale for vertical position for candidate
         vis.candidateScale = d3.scaleBand()
             .domain(vis.data.map(d => d.Candidates))
             .range([0, vis.height]);
 
         vis.yAxis = d3.axisLeft(vis.candidateScale).tickSize(0);
-        vis.yAxisG = vis.chart.append('g').attr('class', 'candidate_name');
+        vis.yAxisG = vis.chart.append('g')
+            .attr('class', 'candidate_name');
 
+        // scale for word count
         vis.radiusScale = d3.scaleSqrt()
             .domain([0, d3.max(vis.data, d => d.Count)])
             .range([0, 10]);
@@ -95,6 +104,7 @@ class Bubble {
             .style('font-weight', 'normal')
             .text('#sentiment');
 
+        // helper function for color legend
         const colorLegend = (selection, props) => {
             const {
                 colorScale,
@@ -110,8 +120,7 @@ class Bubble {
 
             groupsEnter
                 .merge(groups)
-                .attr('transform', (d, i) =>
-                    `translate(0, ${i*spacing})`);
+                .attr('transform', (d, i) => `translate(0, ${i*spacing})`);
 
             groups.exit().remove();
 
@@ -128,6 +137,7 @@ class Bubble {
                 .attr('x', textOffset);
         };
 
+        // helper function for size legend
         const sizeLegend = (selection, props) => {
             const {
                 sizeScale,
@@ -147,8 +157,7 @@ class Bubble {
 
             groupsEnter
                 .merge(groups)
-                .attr('transform', (d, i) =>
-                    `translate(0, ${i*spacing})`);
+                .attr('transform', (d, i) => `translate(0, ${i*spacing})`);
 
             groups.exit().remove();
 
@@ -165,17 +174,37 @@ class Bubble {
                 .attr('x', d => sizeScale(d) + textOffset);
         };
 
+        // create mean score legend
         vis.chart.append('g')
-            .attr('transform', `translate(${vis.width - 75}, ${vis.height - 75})`)
-            .call(colorLegend, {
-                colorScale: vis.colorScale,
-                circleRadius: 5,
-                spacing: 20,
-                textOffset: 10
-            });
+            .attr('class', 'mean-legend')
+            .attr('transform', `translate(${vis.width - 50}, ${vis.height - 275})`)
+            .append('rect')
+            .attr('width', 5)
+            .attr('height', 50);
 
-        vis.chart.append('g')
-            .attr('transform', `translate(${vis.width - 75}, ${vis.height - 175})`)
+        d3.select('.mean-legend')
+            .append('text')
+            .attr('dy', '1.75em')
+            .attr('x', 10)
+            .text('mean');
+        d3.select('.mean-legend')
+            .append('text')
+            .attr('dy', '2.5em')
+            .attr('x', 10)
+            .text('sentiment');
+
+        // create size legend
+        const countLegend = vis.chart.append('g')
+            .attr('transform', `translate(${vis.width - 50}, ${vis.height - 175})`);
+
+        countLegend
+            .append('text')
+            .attr('class', 'legend-title')
+            .attr('x', -5)
+            .attr('y', -20)
+            .text('Word count');
+
+        countLegend
             .call(sizeLegend, {
                 sizeScale: vis.radiusScale,
                 spacing: 20,
@@ -184,43 +213,53 @@ class Bubble {
                 circleFill: 'rgba(0, 0, 0, 0.5)'
             });
 
-        vis.chart.append('g')
-            .attr('class', 'mean-legend')
-            .attr('transform', `translate(${vis.width - 75}, ${vis.height - 275})`)
-            .append('rect')
-            .attr('width', 5)
-            .attr('height', 50);
-            //.attr('x', vis.width/2)
-            //.attr('y', vis.height/2)
+        // create color legend
+        const categoryLegend = vis.chart.append('g')
+            .attr('transform', `translate(${vis.width - 50}, ${vis.height - 75})`);
 
-        d3.select('.mean-legend')
+        categoryLegend
             .append('text')
-            .attr('dy', '1.75em')
-            .attr('x', 10)
-            .text('mean');
-    }
+            .attr('class', 'legend-title')
+            .attr('x', -5)
+            .attr('y', -15)
+            .text('Category');
 
-    update() {
-        let vis = this;
-
-        vis.filtered = vis.data.filter(d => vis.categories.has(d.Category));
+        categoryLegend
+            .call(colorLegend, {
+                colorScale: vis.colorScale,
+                circleRadius: 5,
+                spacing: 20,
+                textOffset: 10
+            });
 
         const manyBody = d3.forceManyBody().strength(1);
 
-        function changeNetwork() {
+        function changePosition() {
             d3.selectAll('.marker')
                 .attr('cx', d => d.x)
                 .attr('cy', d => d.y);
         }
 
-        vis.force = d3.forceSimulation(vis.filtered)
-            //.force('charge', manyBody)
+        vis.force = d3.forceSimulation()
+            .force('charge', manyBody)
+            //.velocityDecay(0.5)
+            .on('tick', changePosition)
+            .stop();
+    }
+
+    update() {
+        let vis = this;
+
+        // only keep articles from selected categories
+        vis.filtered = vis.data.filter(d => vis.categories.has(d.Category));
+
+        vis.force.stop();  // stop the force simulation
+
+        // update data in vis.force
+        vis.force
+            .nodes(vis.filtered)
             .force('x', d3.forceX(d => vis.xScale(d['SentScore(Avg)'])).strength(1))
             .force('collision', d3.forceCollide().radius(d => vis.radiusScale(d.Count) + 0.5))
-            //.velocityDecay(0.5)
-            .on('tick', changeNetwork)
-            .stop();
-
 
         if (vis.group === 'separate') {
             vis.yAxisG.call(vis.yAxis);
@@ -238,8 +277,6 @@ class Bubble {
             vis.force
                 .force('y', d3.forceY(d => vis.candidateScale(d.Candidates) + vis.candidateScale.bandwidth()/2).strength(1))
 
-            //force.alpha(1).restart();
-
         } else if (vis.group === 'all') {
             vis.yAxisG.selectAll('.tick').remove();
 
@@ -250,24 +287,25 @@ class Bubble {
 
             vis.force
                 .force('y', d3.forceY(vis.height/2).strength(1));
-
-            //force.alpha(1).restart();
         }
+
         vis.render();
     }
 
     render() {
         let vis = this;
 
+        // the following part deals with bubbles
         const bubble = vis.chart.selectAll('.marker').data(vis.filtered, d => d.id);
         const bubbleEnter = bubble.enter().append('circle').attr('class', 'marker');
         bubble.exit().remove();
+
         bubble.merge(bubbleEnter)
             .transition().duration(1000)
-            .style('fill', d => vis.colorScale(d.Category))
+            .attr('fill', d => vis.colorScale(d.Category))
             .attr('r', d => vis.radiusScale(d.Count))
             .attr('stroke', 'black')
-            .attr('stroke-width', .1)
+            .attr('stroke-width', .1);
 
         bubble.merge(bubbleEnter)
             .on('mouseover', d => {
@@ -284,10 +322,11 @@ class Bubble {
                 d3.select('#tooltip').classed('hidden', true);
             });
 
-
+        // the following part deals with the mean bar
         const average = vis.chart.selectAll('.mean').data(vis.averages, d => d.id);
         const averageEnter = average.enter().append('rect').attr('class', 'mean');
         average.exit().remove();
+
         averageEnter
             .attr('width', 0)
             .attr('height', 0)
@@ -306,7 +345,6 @@ class Bubble {
                     return vis.candidateScale(d.key) + vis.candidateScale.bandwidth()/2
             });
 
-        vis.force.alpha(1).restart();
+        vis.force.alpha(1).restart();  //restart force algorithm
     }
 }
-

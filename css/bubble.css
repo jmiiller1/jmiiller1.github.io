@@ -11,3 +11,7 @@
 .hidden {
     display: none;
 }
+
+.legend-title {
+    font-weight: bold;
+}

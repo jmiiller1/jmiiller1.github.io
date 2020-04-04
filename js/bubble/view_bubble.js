@@ -11,7 +11,7 @@ d3.csv('data/NYT_data.csv').then(data => {
         d['Pub_date'] = d['Date'];
         d['Date'] = new Date(d['Date']);
         d['Count'] = +d['Count'];
-        d['id'] = Math.random();
+        d['id'] = Math.random();  // create a random id for each data point
     });
 
     bubble = new Bubble({
@@ -20,11 +20,12 @@ d3.csv('data/NYT_data.csv').then(data => {
         containerHeight: 600
     }, data);
 
-    bubble.group = 'all';
+    bubble.group = 'all';  // don't separate each candidate at the beginning
 
     bubble.update();
 });
 
+// the following code deals with interaction with widgets
 $('#politics').click(() => {
     if($('input[id=politics]').is(':checked')) {
         bubble.categories.add('politics');
