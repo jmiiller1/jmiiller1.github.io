@@ -11,8 +11,8 @@ d3.csv('data/NYT_data_average.csv', d3.autotype).then(data => {
     //console.log(data);
     const multiLine = new MultiLine(data, {
         parentElement: '#multiLine',
-        containerHeight: 500,
-        containerWidth: 1000,
+        containerHeight: 600,
+        containerWidth: 840,
     });
     multiLine.update();
 });

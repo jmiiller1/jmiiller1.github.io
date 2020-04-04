@@ -1,30 +1,23 @@
 export class MultiLineTimeAxis {
 
-    static appendTimeAxis(vis) {
-        const timeAxis = MultiLineTimeAxis.createTimeAxis(vis);
-        const timeAxisGroup = vis.chart.append('g');
-        timeAxisGroup
-            .attr('class', 'time-axis')
-            .attr('transform', `translate(0, ${vis.config.innerHeight})`);
-        timeAxisGroup.call(timeAxis);
-        console.log(timeAxisGroup);
+    static createXScale(vis){
+        //vis.dateRange = d3.extent(vis.data, vis.xValue);
+        //console.log(vis.dateRange)
+        //console.log(new Date(2019, 5, 1));
 
-        return timeAxisGroup;
+        const xScale = d3.scaleTime()
+            //.domain(vis.dateRange)
+            .domain([new Date(2019, 5, 1), new Date(2020, 2, 1)])
+            .range([0, vis.config.innerWidth]);
+
+        return xScale;
     }
 
-    static createTimeScale(vis, domain) {
-        const timeScale = d3.scaleTime();
-        timeScale.domain(domain);
-        timeScale.range([0, vis.config.innerWidth]);
-        console.log(timeScale);
-        return timeScale;
-    }
+    static createXAxis(vis) {
+        const xAxis = d3.axisBottom(vis.xScale)
+            .tickPadding(5);
 
-    static createTimeAxis(vis) {
-        const timeAxis = d3.axisBottom(vis.timeScale)
-            .tickSizeOuter(0)
-            .ticks(vis.config.innerWidth / 80);
-        return timeAxis;
+        return xAxis;
     }
 
     static appendXAxis(vis) {
@@ -32,54 +25,31 @@ export class MultiLineTimeAxis {
         const XAxisGroup = vis.chart.append('g');
         XAxisGroup.call(XAxis)
             .attr('transform', `translate(0, ${vis.config.innerHeight})`);
-            //.attr('class', 'x-axis')
-            
-        XAxisGroup.call(XAxis);
+
         return XAxisGroup; 
     }
 
-    static createXScale(vis){
-        vis.xValue = d => d[`Date`];
-        vis.dateRange = d3.extent(vis.data,vis.xValue);
-        
-        const xScale = d3.scaleTime()
-            .domain(vis.dateRange)
-            .range([0, vis.config.innerWidth]);
-            // .nice();
-        return xScale;
-    }
-
-    static createXAxis(vis) {
-        const xAxis = d3.axisBottom(vis.xScale)
-            .tickSize(-vis.config.innerHeight)
-            .tickPadding(10);
-          return xAxis;
-    }
-
-    static appendYAxis(vis){
-        const yAxis = MultiLineTimeAxis.createYAxis(vis);
-        const yAxisGroup = vis.chart.append('g');
-        // yAxisGroup
-        //     .attr('class', 'time-axis');
-        yAxisGroup.call(yAxis);
-        return yAxisGroup;
-    }
-
     static createYScale(vis){
-        vis.yValue = d => d[`SentScore(Avg)`];
-        vis.yAxisLabel = 'Sentiment Score';
-
         const yScale = d3.scaleLinear()
-            .domain(d3.extent(vis.data, vis.yValue))
-            .range([vis.config.innerHeight, 0])
-            .nice();
+            .domain([-1, 1])
+            .range([vis.config.innerHeight, 0]);
+
         return yScale;
     }
 
     static createYAxis(vis){
         const yAxis = d3.axisLeft(vis.yScale)
-            .tickSize(-vis.config.innerWidth)
-            .tickPadding(10);
+            .tickPadding(5);
+
         return yAxis;
     }
+
+    static appendYAxis(vis){
+        const yAxis = MultiLineTimeAxis.createYAxis(vis);
+        const yAxisGroup = vis.chart.append('g');
+
+        yAxisGroup.call(yAxis);
+        return yAxisGroup;
+    }
+
 }

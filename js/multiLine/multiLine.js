@@ -9,32 +9,54 @@ export class MultiLine {
         this.data = data;
 
         this.config = {
-        parentElement: _config.parentElement,
-        containerHeight: _config.containerHeight || 600,
-        containerWidth: _config.containerWidth || 500,
-        margin: { top: 100, bottom: 75, right: 200, left: 80}
+            parentElement: _config.parentElement,
+            containerHeight: _config.containerHeight || 600,
+            containerWidth: _config.containerWidth || 500,
+            margin: { top: 75, bottom: 50, right: 25, left: 75 }
         };
 
         this.config.innerWidth = this.config.containerWidth - this.config.margin.left - this.config.margin.right;
         this.config.innerHeight = this.config.containerHeight - this.config.margin.top - this.config.margin.bottom;
-
-        this.xScale = MultiLineTimeAxis.createXScale(this);
-        this.yScale = MultiLineTimeAxis.createYScale(this);
    
         this.initVis();
         }
        
         initVis() {
             const vis = this;
-            vis.svg = MultiLineUtilities.initializeSVG(vis, 'multiLine');
-            //TODO: ask team re: necessity of retrieve body ???
-            vis.chart = MultiLineUtilities.appendChart(vis, vis.svg);
-            vis.chartTitle = MultiLineUtilities.appendText(vis.chart, "Sentiment Analysis of NYT Articles", -20, vis.config.innerWidth / 2, "chart-title");
+
+            vis.nested = d3.nest()
+                .key(d => d.Candidates)
+                .entries(vis.data);
+
+            vis.svg = d3.select(vis.config.parentElement)
+                .attr('width', vis.config.containerWidth)
+                .attr('height', vis.config.containerHeight);
+
+            vis.chart = vis.svg.append('g')
+                .attr('transform', `translate(${vis.config.margin.left}, ${vis.config.margin.top})`);
+
+            vis.xScale = MultiLineTimeAxis.createXScale(vis);
+            vis.yScale = MultiLineTimeAxis.createYScale(vis);
+
+            vis.colorScale = d3.scaleOrdinal(d3.schemeCategory10)
+                .domain(vis.data.map(d => d.Candidates));
+
+            vis.chartTitle = MultiLineUtilities.appendText(vis.chart, 'Sentiment Analysis of NYT Articles', -20, vis.config.innerWidth/2, 'chart-title');
             vis.XAxisGroup = MultiLineTimeAxis.appendXAxis(vis);
-            vis.XAxisTitle = MultiLineUtilities.appendTextXAxis(vis.XAxisGroup, "Date", 60, vis.config.innerWidth / 2, "axis-title");
+            vis.XAxisTitle = MultiLineUtilities.appendTextXAxis(vis.XAxisGroup, 'Date', 40, vis.config.innerWidth/2, 'axis-title');
             vis.yAxisGroup = MultiLineTimeAxis.appendYAxis(vis);
-            vis.yAxisTitle = MultiLineUtilities.appendTextYAxis(vis.yAxisGroup, "Sentiment", -50, -150, "axis-title");
-        }
+            vis.yAxisTitle = MultiLineUtilities.appendTextYAxis(vis.yAxisGroup, 'Sentiment', -40, -vis.config.innerHeight/2, 'axis-title');
+
+            // MultiLine Color Legend
+            vis.chart.append('g')
+                .attr('transform', `translate(${vis.config.innerWidth - 75}, ${vis.config.innerHeight - 100})`)
+                .call(multiLineColorLegend, {
+                    colorScale: vis.colorScale,
+                    circleRadius: 5,
+                    spacing: 20,
+                    textOffset: 10
+                });
+    }
 
         update(){
             const vis = this;
@@ -42,66 +64,26 @@ export class MultiLine {
         }
 
         render(){
-          const vis = this;
-          const dataGroup = vis.chart.append('g');
-          vis.colorValue = d => d.Candidates;
-          vis.colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+            const vis = this;
+            const dataGroup = vis.chart.append('g');
 
-          const colorScale = vis.colorScale;
+            const lineGenerator = d3.line()
+                .x(d => vis.xScale(d['Date']))
+                .y(d => vis.yScale(d['SentScore(Avg)']))
+                .curve(d3.curveBasis);
 
-          const lineGenerator = d3.line()
-                  .x(d => vis.xScale(vis.xValue(d)))
-                  .y(d => vis.yScale(vis.yValue(d)))
-                  .curve(d3.curveBasis);
-          
-          vis.lastYValue = d =>
-            vis.yValue(d.values[d.values.length - 1]);
-          
-          vis.nested = d3.nest()
-            .key(vis.colorValue)
-            .entries(vis.data)
-            .sort((a, b) =>
-              d3.descending(vis.lastYValue(a), vis.lastYValue(b))
-            );
-  
-          vis.colorScale.domain(vis.nested.map(d => d.key));
-          colorScale.domain(vis.nested.map(d => d.key));
-          
-          // MultiLine Color Legend
-          // TODO: ask TEAM re: why can't vis.colorScale be placed in call below ??
-          vis.svg.append('g')
-              .attr('transform', `translate(850,180)`)
-              .call(multiLineColorLegend, {
-                colorScale,
-                circleRadius: 10,
-                spacing: 40,
-                textOffset: 20
-              });
+            const updateSelection = dataGroup.selectAll('line-path').data(vis.nested);
+            const enterSelection = updateSelection.enter();
+            const exitSelection = updateSelection.exit();
 
-          const updateSelection = dataGroup.selectAll('line-path').data(vis.nested);
-          const enterSelection = updateSelection.enter();
-          const exitSelection = updateSelection.exit();
-          // const lineGenerator = MultiLineUtilities.createLineGenerator(vis);
-          enterSelection.append('path')
-              .attr('class', 'line-path')
-              // .attr('cx', d => vis.xScale(d[`Date`]))
-              // .attr('cy', vis.config.innerHeight / 2)
-              .attr('d', d => lineGenerator(d.values))
-              .attr('stroke', d => vis.colorScale(d.key))
-            .append('title')
-              .text(d => d.key);        
-            
-            updateSelection
-                // .attr('cx', d => vis.xScale(d[`Date`]))
-                // .attr('cy', vis.config.innerHeight /2)
-                .attr('d', d => lineGenerator(d.values))
-                .attr('stroke', d => vis.colorScale(d.key));
+            enterSelection.append('path')
+                .attr('class', 'line-path')
+                .merge(updateSelection)
+                    .attr('d', d => lineGenerator(d.values))
+                    .attr('stroke', d => vis.colorScale(d.key))
+                .append('title')
+                    .text(d => d.key);
 
             exitSelection.remove();
-            //TODO: Find the place for the following:
-            // vis.xAxisG.select('.domain').remove();
-            // vis.yAxisG.selectAll('.domain').remove();
-
         }
-
 }

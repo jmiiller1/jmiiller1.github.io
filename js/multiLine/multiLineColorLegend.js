@@ -28,4 +28,4 @@ export const multiLineColorLegend = (selection, props) => {
         .text(d => d)
         .attr('dy', '0.32em')
         .attr('x', textOffset);
-  }
+};
