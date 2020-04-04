@@ -1,12 +1,7 @@
 export class MultiLineTimeAxis {
 
     static createXScale(vis){
-        //vis.dateRange = d3.extent(vis.data, vis.xValue);
-        //console.log(vis.dateRange)
-        //console.log(new Date(2019, 5, 1));
-
         const xScale = d3.scaleTime()
-            //.domain(vis.dateRange)
             .domain([new Date(2019, 5, 1), new Date(2020, 2, 1)])
             .range([0, vis.config.innerWidth]);
 
@@ -26,7 +21,7 @@ export class MultiLineTimeAxis {
         XAxisGroup.call(XAxis)
             .attr('transform', `translate(0, ${vis.config.innerHeight})`);
 
-        return XAxisGroup; 
+        return XAxisGroup;
     }
 
     static createYScale(vis){
