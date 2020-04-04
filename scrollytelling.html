@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bubble.css">
     <link rel="stylesheet" href="css/multiLine.css">
+    <link rel="stylesheet" href="css/timeline.css">
 </head>
 <body>
 <h1 class="main">Visualizing the New York Times' Democratic Primary Coverage</h1>
@@ -22,6 +23,9 @@
         </div>
         <div id="div4">
             <h2>Something</h2>
+        </div>
+        <div id="div5">
+            <h2>Something in div5</h2>
         </div>
     </div>
     <div class="fixed">
@@ -53,7 +57,7 @@
         </g>
         <svg id="bubble" width="100%" height="100%"></svg>
         <svg id="multiLine" class="hidden" width="100%" height="100%"></svg>
-        <g>
+        <g id="timeLine" class="hidden">
             <div class="timeline-container">
                 <h2>A High Level View Of The Currently Selected Time.</h2>
                 <p>(Select a time period to zoom in on!)</p>
@@ -75,9 +79,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.js"></script>
 <script src="js/control.js"></script>
 <script src="js/bubble/bubble.js"></script>
+<script src="js/bubble/view_bubble.js"></script>
 <script src="js/multiLine/view_2.js" type="module"></script>
 <script src="js/multiLine/multiLine.js" type="module"></script>
 <script src="js/multiLine/multiLineTimeAxis.js" type="module"></script>
 <script src="js/multiLine/multiLineUtilities.js" type="module"></script>
+<script src="js/timeline/timeline-brush.js" type="module"></script>
+<script src="js/timeline/timeline-utilities.js" type="module"></script>
+<script src="js/timeline/timeline-data.js" type="module"></script>
+<script src="js/timeline/time-axis.js" type="module"></script>
+<script src="js/timeline/timeline-context.js" type="module"></script>
+<script src="js/timeline/timeline-focus.js" type="module"></script>
+<script src="js/timeline/timeline-tooltip.js" type="module"></script>
+<script src="js/timeline/timeline-hoverline.js" type="module"></script>
+<script src="js/timeline/timeline-legend.js" type="module"></script>
+<script src="js/timeline/view_3.js" type="module"></script>
 </body>
 </html>

@@ -8,64 +8,66 @@
     <link rel="stylesheet" href="css/timeline.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="#">
-    </head>
+</head>
 <body>
-<h1>Visualizing the New York Times' Democratic Primary Coverage</h1>
-<span>
-    <input type="checkbox" id="politics" name="politics" autocomplete="off" checked>
-    <label for="politics">Politics</label>
-</span>
-<span>
-    <input type="checkbox" id="opinion" name="opinion" autocomplete="off" checked>
-    <label for="opinion">Opinion</label>
-</span>
-<span>
-    <input type="checkbox" id="business" name="business" autocomplete="off" checked>
-    <label for="business">Business</label>
-</span>
-<span>
-    <input type="checkbox" id="other" name="other" autocomplete="off" checked>
-    <label for="other">Other</label>
-</span>
-<span>
-    <input type="radio" id="all" name="category" autocomplete="off" value="all" checked>
-    <label for="all">All</label>
-</span>
-<span>
-    <input type="radio" id="separate" name="category" autocomplete="off" value="separate">
-    <label for="all">Separate for candidate</label>
-</span>
-<svg id="bubble"></svg>
-<div id="multiLine"></div>
-<div class="timeline-container">
-    <h2>A High Level View Of The Currently Selected Time.</h2>
-    <p>(Select a time period to zoom in on!)</p>
-    <div id="timeline-context"></div>
-</div>
+    <h1>Visualizing the New York Times' Democratic Primary Coverage</h1>
+    <span>
+        <input type="checkbox" id="politics" name="politics" autocomplete="off" checked>
+        <label for="politics">Politics</label>
+    </span>
+    <span>
+        <input type="checkbox" id="opinion" name="opinion" autocomplete="off" checked>
+        <label for="opinion">Opinion</label>
+    </span>
+    <span>
+        <input type="checkbox" id="business" name="business" autocomplete="off" checked>
+        <label for="business">Business</label>
+    </span>
+    <span>
+        <input type="checkbox" id="other" name="other" autocomplete="off" checked>
+        <label for="other">Other</label>
+    </span>
+    <span>
+        <input type="radio" id="all" name="category" autocomplete="off" value="all" checked>
+        <label for="all">All</label>
+    </span>
+    <span>
+        <input type="radio" id="separate" name="category" autocomplete="off" value="separate">
+        <label for="all">Separate for candidate</label>
+    </span>
 
-<div class="timeline-container">
-    <h2>A Zoomable View Of The Currently Selected Time</h2>
-    <p>(For M3, I will hopefully enable this view to display narrative, journalistic text as you zoom into it. This
+    <svg id="bubble"></svg>
+    <svg id="multiLine"></svg>
+    <div class="timeline-container">
+        <h2>A High Level View Of The Currently Selected Time.</h2>
+        <p>(Select a time period to zoom in on!)</p>
+        <div id="timeline-context"></div>
+    </div>
+
+    <div class="timeline-container">
+        <h2>A Zoomable View Of The Currently Selected Time</h2>
+        <p>(For M3, I will hopefully enable this view to display narrative, journalistic text as you zoom into it. This
         will provide the user with some context and narrative of how the Democratic Primary progressed.)</p>
-    <div id="timeline-focus"></div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.12.0/d3.js"></script>
-<script src="js/bubble/view_bubble.js"></script>
-<script src="js/bubble/bubble.js"></script>
-<script src="js/multiLine/view_2.js" type="module"></script>
-<script src="js/multiLine/multiLine.js" type="module"></script>
-<script src="js/multiLine/multiLineTimeAxis.js" type="module"></script>
-<script src="js/multiLine/multiLineUtilities.js" type="module"></script>
-<script src="js/timeline/timeline-brush.js" type="module"></script>
-<script src="js/timeline/timeline-utilities.js" type="module"></script>
-<script src="js/timeline/timeline-data.js" type="module"></script>
-<script src="js/timeline/time-axis.js" type="module"></script>
-<script src="js/timeline/timeline-context.js" type="module"></script>
-<script src="js/timeline/timeline-focus.js" type="module"></script>
-<script src="js/timeline/timeline-tooltip.js" type="module"></script>
-<script src="js/timeline/timeline-hoverline.js" type="module"></script>
-<script src="js/timeline/timeline-legend.js" type="module"></script>
-<script src="js/timeline/view_3.js" type="module"></script>
+        <div id="timeline-focus"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.12.0/d3.js"></script>
+    <script src="js/bubble/view_bubble.js"></script>
+    <script src="js/bubble/bubble.js"></script>
+    <script src="js/multiLine/view_2.js" type="module"></script>
+    <script src="js/multiLine/multiLine.js" type="module"></script>
+    <script src="js/multiLine/multiLineTimeAxis.js" type="module"></script>
+    <script src="js/multiLine/multiLineUtilities.js" type="module"></script>
+    <script src="js/timeline/timeline-brush.js" type="module"></script>
+    <script src="js/timeline/timeline-utilities.js" type="module"></script>
+    <script src="js/timeline/timeline-data.js" type="module"></script>
+    <script src="js/timeline/time-axis.js" type="module"></script>
+    <script src="js/timeline/timeline-context.js" type="module"></script>
+    <script src="js/timeline/timeline-focus.js" type="module"></script>
+    <script src="js/timeline/timeline-tooltip.js" type="module"></script>
+    <script src="js/timeline/timeline-hoverline.js" type="module"></script>
+    <script src="js/timeline/timeline-legend.js" type="module"></script>
+    <script src="js/timeline/view_3.js" type="module"></script>
 </body>
 </html>
