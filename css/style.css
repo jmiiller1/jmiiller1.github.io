@@ -1,26 +1,36 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,600');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
+
 *{
     margin:0;
     padding:0;
 }
-html,
-body{
+
+html, body{
     height: 100%;
     padding: 0;
     scroll-behavior: smooth;
     background: #f7f5f2;
     color: #666;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'PT Serif', serif;
     font-weight: 300;
 }
 
-h1, h2, h3, h4, h5, p {
+h1 {
+    position: fixed;
     text-align: center;
-    max-width: 800px;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 1000px;
+    height: 40px;
+}
+
+h2, h3, h4, h5, p {
+    text-align: center;
+    max-width: 400px;
     margin: auto;
 }
 
-h2{
+h2 {
     line-height: 1.25;
     padding-top: 45px;
     font-weight: 300;
@@ -30,45 +40,47 @@ h5, p {
     font-weight: 200
 }
 
-svg{
-    padding: 20px;
+svg {
+    padding: 0;
 }
-text{
+
+text {
     font-size: 10px;
 }
-strong{
+
+strong {
     font-weight: 600;
 }
 
 #graphic {
-    max-width:  1440px;
+    max-width: 1440px;
     width: 100%;
-    position:   relative;
-    height:  100%;
-    position:  relative;
-    margin:auto;
+    position: relative;
+    height: 100%;
+    margin: auto;
 }
+
 .container {
     height: 100%;
-    max-width: 440px;
+    max-width: 400px;
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding-top: 45px;
     position: absolute;
     line-height: 1.5;
-    left: 500px;
+    left: 880px;
 }
+
 .container div {
     height: 100%;
     display: block;
     padding: 0 45px;
 }
+
 .fixed {
     position: fixed;
-    max-width: 500px;
-    height: 500px;
-    top: 50px;
+    max-width: 880px;
+    height: 600px;
+    top: 90px;
+    padding: 0 20px;
 }
-
-
-
