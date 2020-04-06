@@ -63,8 +63,8 @@ export class TimelineFocus {
         const vis = this;
 
         vis.body = TimelineUtilities.retrieveBody();
-        vis.svg = TimelineUtilities.initializeSVG(vis.config.containerHeight, vis.config.containerWidth, vis.config.parentElement, 'timeline');
-        vis.chart = TimelineUtilities.appendChart(vis.config.innerHeight, vis.config.innerWidth, vis.config.margin, vis.svg, '');
+        vis.svg = TimelineUtilities.initializeSVG(vis.config.containerHeight, vis.config.containerWidth, vis.config.parentElement, 'timeline-svg');
+        vis.chart = TimelineUtilities.appendChart(vis.config.innerHeight, vis.config.innerWidth, vis.config.margin, vis.svg, 'timeline-chart');
     }
 
     performTimeAxisSetup() {
@@ -79,7 +79,7 @@ export class TimelineFocus {
 
         vis.config.timelineEventColor = 'lightgrey';
         vis.timelineTooltip = TimelineTooltip.appendTooltip(vis.body);
-        vis.timelineDataGroup = vis.chart.append('g').attr('class', 'timelineData');
+        vis.timelineDataGroup = vis.chart.append('g').attr('class', 'timeline-data');
     }
 
     performMultilineSetup() {

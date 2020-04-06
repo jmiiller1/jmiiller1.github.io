@@ -37,7 +37,7 @@ export class TimelineHoverline {
 
     static mouseOut(hoverLine) {
         return function(d) {
-            hoverLine.transition().duration(100).attr('opacity', 0);
+            hoverLine.transition().duration(300).attr('opacity', 0);
         }
     }
 }
