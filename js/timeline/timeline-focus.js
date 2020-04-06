@@ -37,6 +37,7 @@ export class TimelineFocus {
 
         vis.config.innerWidth = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
         vis.config.innerHeight = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
+        vis.config.outerTickSize = -vis.config.innerHeight;
 
         vis.timeScale = TimeAxis.createTimeScale([new Date(2019, 5, 1), new Date(2020, 2, 1)], vis.config.innerWidth);
         vis.sentimentScale = SentimentAxis.createSentimentScale(vis.config.innerHeight);
@@ -70,7 +71,7 @@ export class TimelineFocus {
     performTimeAxisSetup() {
         const vis = this;
 
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth);
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth, vis.config.outerTickSize);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.chart, "Time", vis.config.innerHeight + 50, vis.config.innerWidth / 2, "axis-title");
     }
 
@@ -121,7 +122,7 @@ export class TimelineFocus {
         const vis = this;
 
         vis.timeAxisGroup.remove();
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth);
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth, vis.config.outerTickSize);
 
         vis.updateTimeline();
         vis.updateMultiline()
