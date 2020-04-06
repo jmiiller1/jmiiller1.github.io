@@ -1,32 +1,43 @@
 export class TimelineHoverline {
 
-    static appendHoverline(chart, height) {
+    static appendHoverline(hoverlineContainer, height) {
 
-        const hoverLineGroup = chart.append('g');
+        const hoverLineGroup = hoverlineContainer.append('g');
         hoverLineGroup.attr('class', 'timeline-hoverline');
 
         const hoverLine = hoverLineGroup.append('line');
         hoverLine.attr('x1', 0).attr('x2', 0);
-        hoverLine.attr('y1', height / 2 - 20).attr('y2', height / 2 + 20);
+        hoverLine.attr('y1', 0).attr('y2', height);
         hoverLine.attr('opacity', 0);
 
         return hoverLine;
 
     }
 
-    static mouseMove(hoverLine, parentSelector, marginLeft) {
+    static appendHoverlineContainer(chart, height, width) {
+        const hoverLineContainer = chart.append('svg:rect');
+        hoverLineContainer.attr('class', 'hoverline-container');
+        hoverLineContainer.attr('height', height - 5);
+        hoverLineContainer.attr('width', width);
+        hoverLineContainer.attr('fill', 'none');
+        hoverLineContainer.attr('pointer-events', 'all');
+
+        return hoverLineContainer;
+    }
+
+    static mouseMove(hoverLine, parentSelector, marginLeft, width) {
         return function(d) {
             let x = d3.mouse(this)[0];
-            const parentx = d3.select(parentSelector).node().getBoundingClientRect().x;
 
-            hoverLine.attr('x1', x - parentx - marginLeft).attr('x2', x - parentx - marginLeft);
-            hoverLine.transition().duration(100).attr('opacity', 0.7);
+            hoverLine.attr('x1', x).attr('x2', x);
+            hoverLine.transition().duration(100).attr('opacity', 0.3);
+
         }
     }
 
     static mouseOut(hoverLine) {
         return function(d) {
-            hoverLine.transition().duration(500).attr('opacity', 0);
+            hoverLine.transition().duration(100).attr('opacity', 0);
         }
     }
 }

@@ -19,14 +19,14 @@ export class TimelineContext {
             containerWidth: _config.containerWidth,
             dispatcher: _config.dispatcher,
             margin: { top: 50, right: 50, bottom: 50, left: 50 },
-            radius: _config.radius,
-            colorScale: _config.colorScale
+            radius: _config.radius
         };
 
         vis.config.innerWidth = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
         vis.config.innerHeight = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
+        vis.config.timelineEventColor = 'lightgrey';
 
-        vis.timeScale = TimeAxis.createTimeScale([new Date(2019, 6, 1), new Date(2020, 4, 1)], vis.config.innerWidth);
+        vis.timeScale = TimeAxis.createTimeScale([new Date(2019, 5, 1), new Date(2020, 2, 1)], vis.config.innerWidth);
 
         vis.initVis();
     }
@@ -35,9 +35,9 @@ export class TimelineContext {
         const vis = this;
 
         vis.body = TimelineUtilities.retrieveBody();
-        vis.svg = TimelineUtilities.initializeSVG(vis.config.containerHeight, vis.config.containerWidth, '#timeline-context', 'timeline');
+        vis.svg = TimelineUtilities.initializeSVG(vis.config.containerHeight, vis.config.containerWidth, vis.config.parentElement, 'timeline');
 
-        vis.chart = TimelineUtilities.appendChart(vis.config.innerHeight, vis.config.innerWidth, vis.config.margin, vis.svg);
+        vis.chart = TimelineUtilities.appendChart(vis.config.innerHeight, vis.config.innerWidth, vis.config.margin, vis.svg, 'timeline-chart');
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
@@ -45,6 +45,7 @@ export class TimelineContext {
         vis.brush = TimelineBrush.appendBrushX(vis.chart, vis.config.innerHeight, vis.config.innerWidth, vis.timeScale, vis.config.dispatcher);
 
         vis.tooltip = TimelineTooltip.appendTooltip(vis.body);
+
     }
 
     update() {
@@ -64,9 +65,9 @@ export class TimelineContext {
         enterSelection.append('circle')
             .attr('class', 'event')
             .attr('cx', d => vis.timeScale(d['Date']))
-            .attr('cy', vis.config.innerHeight / 2)
+            .attr('cy', vis.config.innerHeight)
             .attr('r', vis.config.radius)
-            .attr('fill', d => vis.config.colorScale(d['type']))
+            .attr('fill', vis.config.timelineEventColor)
             .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.tooltip))
             .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.tooltip));
 

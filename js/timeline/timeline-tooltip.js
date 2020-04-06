@@ -12,7 +12,7 @@ export class TimelineTooltip {
 
     }
 
-    static mouseMove(tooltip, parentSelector) {
+    static mouseMove(tooltip) {
         return function(d) {
 
             const html = tooltip.html(TimeAxis.formatTime(d['Date']));

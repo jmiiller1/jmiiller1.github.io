@@ -12,7 +12,7 @@ export class TimelineBrush {
         const moveBrush = TimelineBrush.moveBrush(timeScale, dispatcher);
 
         const brushX = d3.brushX();
-        brushX.extent([[0, height / 2 - 20], [width, height / 2 + 20]]);
+        brushX.extent([[0, height - 20], [width, height + 20]]);
         brushX.on('brush', moveBrush);
 
         return brushX

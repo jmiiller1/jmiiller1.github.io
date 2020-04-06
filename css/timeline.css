@@ -62,3 +62,9 @@ body .timeline-tooltip {
     pointer-events: none;
 }
 
+.sentiment-axis .tick line {
+    opacity: 0.2;
+    stroke-width: 1px;
+    stroke-dasharray: 5,5;
+}
+

@@ -7,7 +7,7 @@ export class TimeAxis {
         const timeAxisGroup = chart.append('g');
         timeAxisGroup
             .attr('class', 'time-axis')
-            .attr('transform', `translate(0, ${height / 2})`);
+            .attr('transform', `translate(0, ${height})`);
         timeAxisGroup.call(timeAxis);
 
         return timeAxisGroup;
