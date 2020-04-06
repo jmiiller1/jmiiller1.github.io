@@ -9,7 +9,7 @@
     display: block;
 }
 
-.timeline .time-axis {
+.timeline-svg .time-axis {
     pointer-events: none;
 }
 
@@ -26,39 +26,57 @@ body .timeline-tooltip {
     pointer-events: none;
 }
 
-.timeline .axis-title {
+.timeline-svg .axis-title {
     fill: black;
     font-size: 1.5em;
 }
 
-.timeline .chart-title {
+.timeline-svg .chart-title {
     fill: black;
     font-size: 2em;
     text-anchor: middle;
 }
 
-.timeline .event, .timeline .legend-event {
+.timeline-svg .event, .timeline-svg .legend-event {
     stroke-width: 1px;
     stroke: black;
     opacity: 0.7;
     overflow: visible;
 }
 
-.timeline .domain {
+.timeline-svg .domain {
     stroke: black;
     stroke-width: 3px;
     border-radius: 4px;
 }
 
-.timeline .tick line {
+.timeline-svg .tick line {
     stroke: black;
     stroke-width: 2px;
     border-radius: 4px;
 }
 
-.timeline .timeline-hoverline line {
+.timeline-svg .timeline-hoverline line {
     stroke-width: 2px;
     stroke: black;
     pointer-events: none;
+}
+
+.sentiment-axis .tick line {
+    opacity: 0.2;
+    stroke-width: 1px;
+    stroke-dasharray: 5,5;
+}
+
+.timeline-svg .multiline-data .line-path {
+    fill: none;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    mix-blend-mode: multiply;
+}
+
+.timeline-svg .multiline-data .line-path:hover {
+    stroke-width: 8;
 }
 

@@ -6,38 +6,53 @@ import {TimelineLegend} from "./timeline-legend.js";
 const dispatcher = d3.dispatch("focus");
 const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(['debate', 'enter', 'exit', 'key-event']);
 
-d3.csv('data/timeline/DemocraticPrimaryDebateSchedule.csv', d3.autotype).then(data => {
-    data.forEach((row) => {
-        row['Date'] = TimelineData.convertStringToDate(row['Date']);
-        row.type = 'debate';
-    });
+Promise.all(
+    [d3.csv('data/timeline/DemocraticPrimaryDebateSchedule.csv'),
+            d3.csv('data/NYT_data_average.csv', d3.autotype)]).then((files) => {
 
-    const timelineContext = new TimelineContext(data, {
-        parentElement: '#timeline',
-        containerHeight: 150,
-        containerWidth: 800,
-        dispatcher: dispatcher,
-        colorScale: colorScale,
-        radius: 5
-    });
+        const demDebateData = files[0];
+        const sentimentAnalysisData = files[1];
 
-    const timelineFocus = new TimelineFocus(data, {
-        parentElement: '#timeline',
-        containerHeight: 350,
-        containerWidth: 1200,
-        dispatcher: dispatcher,
-        colorScale: colorScale,
-        radius: 10
-    });
+        demDebateData.forEach((row) => {
+            row['Date'] = TimelineData.convertStringToDate(row['Date']);
+            row.type = 'debate';
+        });
 
-    const timelineLegend = new TimelineLegend({
-        parentElement: '#timeline',
-        containerHeight: 600,
-        containerWidth: 1200,
-        colorScale: colorScale,
-        radius: 10
-    });
+        sentimentAnalysisData.forEach((row) => {
+            row['Date'] = new Date (row['Date']);
+            row['SentScore(headline)'] = +row['SentScore(headline)'];
+            row['SentScore(abstract)'] = +row['SentScore(abstract)'];
+            row['SentScore(lead)'] = +row['SentScore(lead)'];
+            row['SentScore(Avg)'] = +row['SentScore(Avg)'];
+        });
 
-    timelineContext.update();
-    timelineFocus.update();
+        const timelineContext = new TimelineContext(demDebateData, {
+            parentElement: '#timeline-context',
+            containerHeight: 150,
+            containerWidth: 800,
+            dispatcher: dispatcher,
+            radius: 5
+        });
+
+        const timelineFocus = new TimelineFocus(demDebateData, sentimentAnalysisData,
+            {
+            parentElement: '#mergedMultilineTimeline',
+            containerHeight: 600,
+            containerWidth: 1200,
+            dispatcher: dispatcher,
+            colorScale: colorScale,
+            radius: 7
+        });
+
+        /*const timelineLegend = new TimelineLegend({
+            parentElement: '#timeline',
+            containerHeight: 600,
+            containerWidth: 1200,
+            colorScale: colorScale,
+            radius: 10
+        });*/
+
+        timelineContext.update();
+        timelineFocus.update();
 });
+
