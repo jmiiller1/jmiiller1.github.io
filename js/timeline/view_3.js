@@ -28,8 +28,8 @@ Promise.all(
 
         const timelineContext = new TimelineContext(demDebateData, {
             parentElement: '#timeline-context',
-            containerHeight: 150,
-            containerWidth: 800,
+            containerHeight: 100,
+            containerWidth: 840,
             dispatcher: dispatcher,
             radius: 5
         });
@@ -37,11 +37,11 @@ Promise.all(
         const timelineFocus = new TimelineFocus(demDebateData, sentimentAnalysisData,
             {
             parentElement: '#mergedMultilineTimeline',
-            containerHeight: 600,
-            containerWidth: 1200,
+            containerHeight: 500,
+            containerWidth: 840,
             dispatcher: dispatcher,
             colorScale: colorScale,
-            radius: 7
+            radius: 5
         });
 
         /*const timelineLegend = new TimelineLegend({

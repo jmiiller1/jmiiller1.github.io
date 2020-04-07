@@ -21,7 +21,9 @@ export class SentimentAxis {
         const yAxisGroup = chart.append('g');
         yAxisGroup.attr('class', 'sentiment-axis');
 
-        yAxisGroup.call(yAxis);
+        yAxisGroup.call(yAxis)
+            .selectAll('.domain').remove();
+
         return yAxisGroup;
     }
 

@@ -84,3 +84,100 @@ strong {
     top: 90px;
     padding: 0 20px;
 }
+
+/* for bubble chart */
+
+#tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 5px;
+    background: #edc948;
+    border: 0;
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.legend-title {
+    font-weight: bold;
+}
+
+/* for timeline + multiline */
+#timeline-context, #timeline-focus {
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.timeline-container {
+    display: block;
+}
+
+.timeline-svg .time-axis {
+    pointer-events: none;
+}
+
+body .timeline-tooltip {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 33px;
+    padding: 2px;
+    font-size: 12px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+.timeline-svg .axis-title {
+    fill: black;
+    /*font-size: 1.5em;*/
+}
+
+.timeline-svg .chart-title {
+    fill: black;
+    font-size: 2em;
+    text-anchor: middle;
+}
+
+.timeline-svg .event, .timeline-svg .legend-event {
+    stroke-width: 1px;
+    stroke: black;
+    opacity: 0.7;
+    overflow: visible;
+}
+
+.domain {
+    stroke-width: 1.5px;
+}
+
+.tick line {
+    stroke-width: 1.5px;
+}
+
+.timeline-svg .timeline-hoverline line {
+    /*stroke-width: 2px;*/
+    stroke: black;
+    pointer-events: none;
+}
+
+.sentiment-axis .tick line {
+    opacity: 0.5;
+    /*stroke-width: 1px;*/
+    stroke-dasharray: 5, 5;
+}
+
+.timeline-svg .multiline-data .line-path {
+    fill: none;
+    stroke-width: 2px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    mix-blend-mode: multiply;
+}
+
+.timeline-svg .multiline-data .line-path:hover {
+    stroke-width: 8;
+}

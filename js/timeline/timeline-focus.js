@@ -28,7 +28,7 @@ export class TimelineFocus {
             parentElement: _config.parentElement,
             containerHeight: _config.containerHeight,
             containerWidth: _config.containerWidth,
-            margin: { top: 50, right: 50, bottom: 50, left: 100 },
+            margin: { top: 20, right: 25, bottom: 50, left: 75 },
             dispatcher: _config.dispatcher,
             radius: _config.radius,
             colorScale: d3.scaleOrdinal(d3.schemeDark2)
@@ -70,8 +70,8 @@ export class TimelineFocus {
     performTimeAxisSetup() {
         const vis = this;
 
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth);
-        vis.timeAxisTitle = TimelineUtilities.appendText(vis.chart, "Time", vis.config.innerHeight + 50, vis.config.innerWidth / 2, "axis-title");
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight + 10, vis.config.innerWidth);
+        vis.timeAxisTitle = TimelineUtilities.appendText(vis.chart, 'Time', vis.config.innerHeight + 40, vis.config.innerWidth / 2, 'axis-title');
     }
 
     performTimelineSetup() {
@@ -121,7 +121,7 @@ export class TimelineFocus {
         const vis = this;
 
         vis.timeAxisGroup.remove();
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth);
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight + 10, vis.config.innerWidth);
 
         vis.updateTimeline();
         vis.updateMultiline()
