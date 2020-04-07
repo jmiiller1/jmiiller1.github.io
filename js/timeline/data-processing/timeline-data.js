@@ -29,17 +29,11 @@ export class TimelineData {
     };
 
     static dateInRange(extent) {
-        return function(d) {
+        return function (d) {
             const smallest = extent[0] < extent[1] ? extent[0] : extent[1];
             const largest = extent[0] < extent[1] ? extent[1] : extent[0];
 
-            if (d['Date'] > smallest && d['Date'] < largest) {
-                return true;
-            } else {
-                return false;
-            }
+            return d['Date'] > smallest && d['Date'] < largest;
         }
     }
-
-
 }

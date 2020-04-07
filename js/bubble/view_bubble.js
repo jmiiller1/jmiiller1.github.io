@@ -17,7 +17,7 @@ d3.csv('data/NYT_data.csv').then(data => {
     bubble = new Bubble({
         parentElement: '#bubble',
         containerWidth: 840,
-        containerHeight: 600
+        containerHeight: 575
     }, data);
 
     bubble.group = 'all';  // don't separate each candidate at the beginning

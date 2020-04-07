@@ -1,6 +1,4 @@
-/*
-  Timeline Chart of the current state of the Democratic Primary.
- */
+//Timeline Chart of the current state of the Democratic Primary.
 
 import { TimeAxis } from './time-axis.js';
 import { TimelineUtilities } from './timeline-utilities.js';
@@ -31,7 +29,7 @@ export class TimelineFocus {
             parentElement: _config.parentElement,
             containerHeight: _config.containerHeight,
             containerWidth: _config.containerWidth,
-            margin: { top: 50, right: 50, bottom: 50, left: 100 },
+            margin: { top: 20, right: 25, bottom: 50, left: 75 },
             dispatcher: _config.dispatcher,
             radius: _config.radius,
             colorScale: d3.scaleOrdinal(d3.schemeDark2)
@@ -58,9 +56,6 @@ export class TimelineFocus {
         vis.performMultilineSetup();
         vis.performFocusListenerSetup();
 
-        //vis.legend = TimelineLegend.appendLegend(vis, vis.config.innerHeight / 4, (9 * vis.config.innerWidth) / 10);
-        //vis.legendTitle = TimelineUtilities.appendText(vis.legend, 'Legend', vis.config.innerHeight / 4 - 20, (9 * vis.config.innerWidth) / 10 + 60, '');
-
     }
 
     performBasicSetup() {
@@ -74,8 +69,8 @@ export class TimelineFocus {
     performTimeAxisSetup() {
         const vis = this;
 
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth, vis.config.outerTickSize);
-        vis.timeAxisTitle = TimelineUtilities.appendText(vis.chart, "Time", vis.config.innerHeight + 50, vis.config.innerWidth / 2, "axis-title");
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight + 10, vis.config.innerWidth);
+        vis.timeAxisTitle = TimelineUtilities.appendText(vis.chart, 'Time', vis.config.innerHeight + 40, vis.config.innerWidth / 2, 'axis-title');
     }
 
     performTimelineSetup() {
@@ -126,10 +121,10 @@ export class TimelineFocus {
         const vis = this;
 
         vis.timeAxisGroup.remove();
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth, vis.config.outerTickSize);
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight + 10, vis.config.innerWidth);
 
         vis.updateTimeline();
-        vis.updateMultiline()
+        vis.updateMultiline();
     }
 
     updateTimeline() {
@@ -167,17 +162,14 @@ export class TimelineFocus {
 
         enterSelection.append('circle')
             .attr('class', 'event')
-            .attr('cx', d => vis.timeScale(d['Date']))
-            .attr('cy', vis.config.innerHeight)
             .attr('r', vis.config.radius)
             .attr('fill', vis.config.timelineEventColor)
             .attr('z-index', 20)
-            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.timelineTooltip))
-            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.timelineTooltip));
-
-        updateSelection
-            .attr('cx', d => vis.timeScale(d['Date']))
-            .attr('cy', vis.config.innerHeight);
+            .merge(updateSelection)
+                .attr('cx', d => vis.timeScale(d['Date']))
+                .attr('cy', vis.config.innerHeight + 10)
+                .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.timelineTooltip))
+                .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.timelineTooltip));
 
         exitSelection.remove();
     }
@@ -221,18 +213,11 @@ export class TimelineFocus {
 
         enterSelection.append('path')
             .attr('class', 'line-path')
-            .attr('d', d => lineGenerator(d.values))
-            .attr('stroke', d => vis.config.colorScale(d.key))
-            .attr('fill', 'none') // remove later
-            .append('title')
-            .text(d => d.key);
-
-        updateSelection
-            .attr('d', d => lineGenerator(d.values))
-            .attr('stroke', d => vis.config.colorScale(d.key))
-            .attr('fill', 'none') // remove later
-            .append('title')
-            .text(d => d.key);
+            .merge(updateSelection)
+                .attr('d', d => lineGenerator(d.values))
+                .attr('stroke', d => vis.config.colorScale(d.key))
+                .append('title')
+                .text(d => d.key);
 
         exitSelection.remove();
     }

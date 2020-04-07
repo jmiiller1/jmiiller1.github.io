@@ -1,6 +1,5 @@
-/*
-  Timeline Chart of the current state of the Democratic Primary.
- */
+// Timeline Chart of the current state of the Democratic Primary.
+
 
 import { TimelineBrush } from './timeline-brush.js';
 import { TimelineUtilities } from './timeline-utilities.js';
@@ -20,7 +19,7 @@ export class TimelineContext {
             containerHeight: _config.containerHeight,
             containerWidth: _config.containerWidth,
             dispatcher: _config.dispatcher,
-            margin: { top: 50, right: 50, bottom: 50, left: 50 },
+            margin: { top: 20, right: 25, bottom: 50, left: 75 },
             radius: _config.radius
         };
 
@@ -45,10 +44,9 @@ export class TimelineContext {
         vis.timelineDataGroup = vis.chart.append('g');
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth, vis.config.outerTickSize);
-        vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
+        vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, 'Time', 40, vis.config.innerWidth/2, 'axis-title');
 
         vis.brush = TimelineBrush.appendBrushX(vis.chart, vis.config.innerHeight, vis.config.innerWidth, vis.timeScale, vis.config.dispatcher);
-
     }
 
     update() {
@@ -72,14 +70,13 @@ export class TimelineContext {
 
         enterSelection.append('circle')
             .attr('class', 'event')
-            .attr('cx', d => vis.timeScale(d['Date']))
-            .attr('cy', vis.config.innerHeight)
             .attr('r', vis.config.radius)
-            .attr('fill', vis.config.timelineEventColor);
-
-        updateSelection
-            .attr('cx', d => vis.timeScale(d['Date']))
-            .attr('cy', vis.config.innerHeight / 2);
+            .merge(updateSelection)
+                .attr('cx', d => vis.timeScale(d['Date']))
+                .attr('cy', vis.config.innerHeight)
+                .attr('fill', vis.config.timelineEventColor)
+                .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.tooltip))
+                .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.tooltip));
 
         exitSelection.remove();
     }
@@ -106,4 +103,3 @@ export class TimelineContext {
         exitSelection.remove();
     }
 }
-

@@ -11,7 +11,7 @@
 
 .timeline-svg .axis-title {
     fill: black;
-    font-size: 1.5em;
+    /*font-size: 1.5em;*/
 }
 
 .timeline-svg .chart-title {
@@ -27,33 +27,29 @@
     overflow: visible;
 }
 
-.timeline-svg .domain {
-    stroke: black;
-    stroke-width: 3px;
-    border-radius: 4px;
+.domain {
+    stroke-width: 1.5px;
 }
 
-.timeline-svg .tick line {
-    stroke: black;
-    stroke-width: 2px;
-    border-radius: 4px;
+.tick line {
+    stroke-width: 1.5px;
 }
 
 .timeline-svg .timeline-hoverline line {
-    stroke-width: 2px;
+    /*stroke-width: 2px;*/
     stroke: black;
     pointer-events: none;
 }
 
 .sentiment-axis .tick line {
-    opacity: 0.2;
-    stroke-width: 1px;
-    stroke-dasharray: 5,5;
+    opacity: 0.5;
+    /*stroke-width: 1px;*/
+    stroke-dasharray: 5, 5;
 }
 
 .timeline-svg .multiline-data .line-path {
     fill: none;
-    stroke-width: 2;
+    stroke-width: 2px;
     stroke-linejoin: round;
     stroke-linecap: round;
     mix-blend-mode: multiply;

@@ -1,13 +1,14 @@
 export class TimeAxis {
 
-    static appendTimeAxis(chart, timeScale, height, width, outerTickSize) {
+    static appendTimeAxis(chart, timeScale, height, width) {
 
-        const timeAxis = TimeAxis.createTimeAxis(timeScale, width, outerTickSize);
+        const timeAxis = TimeAxis.createTimeAxis(timeScale, width);
 
         const timeAxisGroup = chart.append('g');
         timeAxisGroup
             .attr('class', 'time-axis')
             .attr('transform', `translate(0, ${height})`);
+
         timeAxisGroup.call(timeAxis);
 
         const axisPath = timeAxisGroup.select('path');
@@ -26,9 +27,8 @@ export class TimeAxis {
         return timeScale;
     }
 
-    static createTimeAxis(timeScale, width, outerTickSize) {
+    static createTimeAxis(timeScale, width) {
         const timeAxis = d3.axisBottom(timeScale)
-            .tickSizeOuter(outerTickSize)
             .ticks(width / 80);
 
         return timeAxis;

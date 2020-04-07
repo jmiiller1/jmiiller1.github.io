@@ -11,7 +11,7 @@ export class MultiLineColorLegend {
             circleRadius: 5,
             spacing: 20,
             textOffset: 10
-        })
+        });
 
         return legend;
 

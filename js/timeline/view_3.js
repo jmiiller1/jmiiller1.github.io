@@ -3,7 +3,7 @@ import {TimelineFocus} from "./timeline-focus.js";
 import { TimelineData } from "./data-processing/timeline-data.js";
 import {TimelineLegend} from "./timeline-legend.js";
 
-const dispatcher = d3.dispatch("focus");
+const dispatcher = d3.dispatch('focus');
 const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(['debate', 'enter', 'exit', 'key-event']);
 
 Promise.all(
@@ -35,8 +35,8 @@ Promise.all(
 
         const timelineContext = new TimelineContext(demDebateData, keyEventData, {
             parentElement: '#timeline-context',
-            containerHeight: 150,
-            containerWidth: 1000,
+            containerHeight: 100,
+            containerWidth: 840,
             dispatcher: dispatcher,
             radius: 5
         });
@@ -44,20 +44,22 @@ Promise.all(
         const timelineFocus = new TimelineFocus(demDebateData, sentimentAnalysisData, keyEventData,
             {
             parentElement: '#mergedMultilineTimeline',
-            containerHeight: 600,
-            containerWidth: 1200,
+            containerHeight: 500,
+            containerWidth: 840,
             dispatcher: dispatcher,
             colorScale: colorScale,
-            radius: 7
+            radius: 5
         });
 
-        /*const timelineLegend = new TimelineLegend({
+        /*
+        const timelineLegend = new TimelineLegend({
             parentElement: '#timeline',
             containerHeight: 600,
             containerWidth: 1200,
             colorScale: colorScale,
             radius: 10
-        });*/
+        });
+        */
 
         timelineContext.update();
         timelineFocus.update();

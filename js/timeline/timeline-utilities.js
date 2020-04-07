@@ -4,7 +4,8 @@ export class TimelineUtilities {
 
         const parentElem = d3.select(parentid);
         const svg = parentElem.append('svg');
-        svg.attr('class', className)
+        svg
+            .attr('class', className)
             .attr('height', height)
             .attr('width', width);
 
@@ -14,22 +15,22 @@ export class TimelineUtilities {
     static appendChart(height, width, margin, svg, className) {
 
         const chart = svg.append('g');
-        chart.attr('class', className)
-            .attr('transform', `translate(${margin.left}, ${margin.top})`)
-            .attr('height', height)
-            .attr('width', width);
+        chart
+            .attr('class', className)
+            .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
         return chart;
     }
 
     static appendText(group, text, height, width, className) {
 
-        const textElem = group.append('text');
-        textElem.attr('class', className);
-        textElem.attr('x', width);
-        textElem.attr('y', height);
-        textElem.attr('text-anchor', 'middle');
-        textElem.text(text);
+        const textElem = group.append('text')
+            .attr('class', className)
+            .attr('font-family', 'sans-serif')
+            .attr('x', width)
+            .attr('y', height)
+            .attr('text-anchor', 'middle')
+            .text(text);
 
         return group;
     }
