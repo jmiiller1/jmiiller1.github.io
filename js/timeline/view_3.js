@@ -1,9 +1,9 @@
-import {TimelineContext} from "./timeline-context.js";
-import {TimelineFocus} from "./timeline-focus.js";
-import { TimelineData } from "./timeline-data.js";
+import {TimelineContext} from './timeline-context.js';
+import {TimelineFocus} from './timeline-focus.js';
+import { TimelineData } from './timeline-data.js';
 import {TimelineLegend} from "./timeline-legend.js";
 
-const dispatcher = d3.dispatch("focus");
+const dispatcher = d3.dispatch('focus');
 const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(['debate', 'enter', 'exit', 'key-event']);
 
 Promise.all(
@@ -44,13 +44,15 @@ Promise.all(
             radius: 5
         });
 
-        /*const timelineLegend = new TimelineLegend({
+        /*
+        const timelineLegend = new TimelineLegend({
             parentElement: '#timeline',
             containerHeight: 600,
             containerWidth: 1200,
             colorScale: colorScale,
             radius: 10
-        });*/
+        });
+        */
 
         timelineContext.update();
         timelineFocus.update();

@@ -8,6 +8,7 @@ export class TimeAxis {
         timeAxisGroup
             .attr('class', 'time-axis')
             .attr('transform', `translate(0, ${height})`);
+
         timeAxisGroup.call(timeAxis);
 
         return timeAxisGroup;
@@ -25,7 +26,6 @@ export class TimeAxis {
 
     static createTimeAxis(timeScale, width) {
         const timeAxis = d3.axisBottom(timeScale)
-            .tickSizeOuter(0)
             .ticks(width / 80);
 
         return timeAxis;

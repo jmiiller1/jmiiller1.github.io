@@ -1,6 +1,4 @@
-/*
-  Timeline Chart of the current state of the Democratic Primary.
- */
+//Timeline Chart of the current state of the Democratic Primary.
 
 import { TimeAxis } from './time-axis.js';
 import { TimelineUtilities } from './timeline-utilities.js';
@@ -53,9 +51,6 @@ export class TimelineFocus {
         vis.performHoverLineSetup();
         vis.performMultilineSetup();
         vis.performFocusListenerSetup();
-
-        //vis.legend = TimelineLegend.appendLegend(vis, vis.config.innerHeight / 4, (9 * vis.config.innerWidth) / 10);
-        //vis.legendTitle = TimelineUtilities.appendText(vis.legend, 'Legend', vis.config.innerHeight / 4 - 20, (9 * vis.config.innerWidth) / 10 + 60, '');
 
     }
 

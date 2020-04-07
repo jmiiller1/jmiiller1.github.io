@@ -15,12 +15,12 @@ export class TimelineHoverline {
     }
 
     static appendHoverlineContainer(chart, height, width) {
-        const hoverLineContainer = chart.append('svg:rect');
-        hoverLineContainer.attr('class', 'hoverline-container');
-        hoverLineContainer.attr('height', height - 5);
-        hoverLineContainer.attr('width', width);
-        hoverLineContainer.attr('fill', 'none');
-        hoverLineContainer.attr('pointer-events', 'all');
+        const hoverLineContainer = chart.append('svg:rect')
+            .attr('class', 'hoverline-container')
+            .attr('height', height - 5)
+            .attr('width', width)
+            .attr('fill', 'none')
+            .attr('pointer-events', 'all');
 
         return hoverLineContainer;
     }

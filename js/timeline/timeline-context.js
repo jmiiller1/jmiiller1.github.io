@@ -1,6 +1,4 @@
-/*
-  Timeline Chart of the current state of the Democratic Primary.
- */
+//Timeline Chart of the current state of the Democratic Primary.
 
 import { TimelineBrush } from './timeline-brush.js';
 import { TimelineUtilities } from './timeline-utilities.js';
@@ -40,12 +38,11 @@ export class TimelineContext {
         vis.chart = TimelineUtilities.appendChart(vis.config.innerHeight, vis.config.innerWidth, vis.config.margin, vis.svg, 'timeline-chart');
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth);
-        vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
+        vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, 'Time', 40, vis.config.innerWidth/2, 'axis-title');
 
         vis.brush = TimelineBrush.appendBrushX(vis.chart, vis.config.innerHeight, vis.config.innerWidth, vis.timeScale, vis.config.dispatcher);
 
         vis.tooltip = TimelineTooltip.appendTooltip(vis.body);
-
     }
 
     update() {
@@ -71,11 +68,6 @@ export class TimelineContext {
             .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.tooltip))
             .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.tooltip));
 
-        updateSelection
-            .attr('cx', d => vis.timeScale(d['Date']))
-            .attr('cy', vis.config.innerHeight / 2);
-
         exitSelection.remove();
     }
 }
-
