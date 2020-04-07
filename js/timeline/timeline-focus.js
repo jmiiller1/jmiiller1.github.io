@@ -150,17 +150,14 @@ export class TimelineFocus {
 
         enterSelection.append('circle')
             .attr('class', 'event')
-            .attr('cx', d => vis.timeScale(d['Date']))
-            .attr('cy', vis.config.innerHeight)
             .attr('r', vis.config.radius)
             .attr('fill', vis.config.timelineEventColor)
             .attr('z-index', 20)
-            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.timelineTooltip))
-            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.timelineTooltip));
-
-        updateSelection
-            .attr('cx', d => vis.timeScale(d['Date']))
-            .attr('cy', vis.config.innerHeight);
+            .merge(updateSelection)
+                .attr('cx', d => vis.timeScale(d['Date']))
+                .attr('cy', vis.config.innerHeight + 10)
+                .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.timelineTooltip))
+                .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.timelineTooltip));
 
         exitSelection.remove();
     }
@@ -179,18 +176,11 @@ export class TimelineFocus {
 
         enterSelection.append('path')
             .attr('class', 'line-path')
-            .attr('d', d => lineGenerator(d.values))
-            .attr('stroke', d => vis.config.colorScale(d.key))
-            .attr('fill', 'none') // remove later
-            .append('title')
-            .text(d => d.key);
-
-        updateSelection
-            .attr('d', d => lineGenerator(d.values))
-            .attr('stroke', d => vis.config.colorScale(d.key))
-            .attr('fill', 'none') // remove later
-            .append('title')
-            .text(d => d.key);
+            .merge(updateSelection)
+                .attr('d', d => lineGenerator(d.values))
+                .attr('stroke', d => vis.config.colorScale(d.key))
+                .append('title')
+                .text(d => d.key);
 
         exitSelection.remove();
     }

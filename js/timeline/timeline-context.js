@@ -61,12 +61,13 @@ export class TimelineContext {
 
         enterSelection.append('circle')
             .attr('class', 'event')
-            .attr('cx', d => vis.timeScale(d['Date']))
-            .attr('cy', vis.config.innerHeight)
             .attr('r', vis.config.radius)
-            .attr('fill', vis.config.timelineEventColor)
-            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.tooltip))
-            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.tooltip));
+            .merge(updateSelection)
+                .attr('cx', d => vis.timeScale(d['Date']))
+                .attr('cy', vis.config.innerHeight)
+                .attr('fill', vis.config.timelineEventColor)
+                .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.tooltip))
+                .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.tooltip));
 
         exitSelection.remove();
     }
