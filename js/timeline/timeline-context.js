@@ -1,10 +1,8 @@
 // Timeline Chart of the current state of the Democratic Primary.
 
-
 import { TimelineBrush } from './timeline-brush.js';
 import { TimelineUtilities } from './timeline-utilities.js';
 import { TimeAxis } from './time-axis.js';
-import { TimelineTooltip } from "./timeline-tooltip.js";
 
 export class TimelineContext {
 
@@ -28,7 +26,8 @@ export class TimelineContext {
         vis.config.timelineEventColor = 'lightgrey';
         vis.config.outerTickSize = 0;
 
-        vis.timeScale = TimeAxis.createTimeScale([new Date(2018, 10, 31), new Date(2020, 3, 1)], vis.config.innerWidth, 0);
+        vis.completeDomain = [new Date(2018, 10, 31), new Date(2020, 3, 1)];
+        vis.timeScale = TimeAxis.createTimeScale(vis.completeDomain, vis.config.innerWidth, 0);
 
         vis.initVis();
     }
@@ -74,9 +73,7 @@ export class TimelineContext {
             .merge(updateSelection)
                 .attr('cx', d => vis.timeScale(d['Date']))
                 .attr('cy', vis.config.innerHeight)
-                .attr('fill', vis.config.timelineEventColor)
-                .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.tooltip))
-                .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.tooltip));
+                .attr('fill', vis.config.timelineEventColor);
 
         exitSelection.remove();
     }
@@ -94,11 +91,7 @@ export class TimelineContext {
             .attr('y', vis.config.innerHeight - vis.config.radius)
             .attr('width', vis.config.radius * 2)
             .attr('height', vis.config.radius * 2)
-            .attr('fill', vis.config.timelineEventColor)
-
-        updateSelection
-            .attr('x', d => vis.timeScale(d['Date']) - vis.config.radius)
-            .attr('y', vis.config.innerHeight - vis.config.radius);
+            .attr('fill', vis.config.timelineEventColor);
 
         exitSelection.remove();
     }

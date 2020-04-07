@@ -7,26 +7,25 @@ export class TimelineBrush {
         brushGroup.call(brushX);
     }
 
-    static createBrushX(height, width, timeScale, dispatcher) {
+    static createBrushX(height, width, timeScale, dispatcher, completeDomain) {
 
         const moveBrush = TimelineBrush.moveBrush(timeScale, dispatcher);
 
         const brushX = d3.brushX();
         brushX.extent([[0, height - 20], [width, height + 20]]);
-        brushX.on('brush', moveBrush);
-        brushX.on('end', moveBrush);
+        brushX.on('brush', TimelineBrush.moveBrush(timeScale, dispatcher, completeDomain));
+        brushX.on('end', TimelineBrush.moveBrush(timeScale, dispatcher, completeDomain));
 
         return brushX
     }
 
-    static moveBrush(timeScale, dispatcher) {
+    static moveBrush(timeScale, dispatcher, completeDomain) {
         return function() {
             if (d3.event.selection) {
                 const highlightedArea = d3.event.selection.map(timeScale.invert);
                 dispatcher.call('focus', this, highlightedArea);
             } else {
-                const highlightedArea = [new Date(2019, 5, 1), new Date(2020, 2, 1)];
-                dispatcher.call('focus', this, highlightedArea);
+                dispatcher.call('focus', this, completeDomain);
             }
         }
     }

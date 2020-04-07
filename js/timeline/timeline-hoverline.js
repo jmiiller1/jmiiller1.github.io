@@ -25,7 +25,7 @@ export class TimelineHoverline {
         return hoverLineContainer;
     }
 
-    static mouseMove(hoverLine, parentSelector, marginLeft, width) {
+    static mouseMove(hoverLine) {
         return function(d) {
             let x = d3.mouse(this)[0];
 

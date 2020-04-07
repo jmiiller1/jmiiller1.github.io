@@ -40,7 +40,8 @@ export class TimelineFocus {
         vis.config.innerHeight = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
         vis.config.outerTickSize = -vis.config.innerHeight;
 
-        vis.timeScale = TimeAxis.createTimeScale([new Date(2018, 10, 31), new Date(2020, 3, 1)], vis.config.innerWidth);
+        vis.completeDomain = [new Date(2018, 10, 31), new Date(2020, 3, 1)];
+        vis.timeScale = TimeAxis.createTimeScale(vis.completeDomain, vis.config.innerWidth);
         vis.sentimentScale = SentimentAxis.createSentimentScale(vis.config.innerHeight);
 
         vis.initVis();
@@ -97,7 +98,7 @@ export class TimelineFocus {
         vis.hoverlineContainer = TimelineHoverline.appendHoverlineContainer(vis.chart, vis.config.innerHeight, vis.config.innerWidth);
         vis.hoverLine = TimelineHoverline.appendHoverline(vis.chart, vis.config.innerHeight);
 
-        vis.hoverlineContainer.on('mousemove', TimelineHoverline.mouseMove(vis.hoverLine, vis.config.parentElement, vis.config.margin.left, vis.config.innerWidth));
+        vis.hoverlineContainer.on('mousemove', TimelineHoverline.mouseMove(vis.hoverLine));
         vis.hoverlineContainer.on('mouseout', TimelineHoverline.mouseOut(vis.hoverLine));
     }
 
@@ -139,13 +140,6 @@ export class TimelineFocus {
         vis.renderMultiline()
     }
 
-    render() {
-        const vis = this;
-
-        vis.renderTimeline();
-        vis.renderMultiline();
-    }
-
     renderTimeline() {
         const vis = this;
 
@@ -183,18 +177,15 @@ export class TimelineFocus {
 
         enterSelection.append('rect')
             .attr('class', 'event')
-            .attr('x', d => vis.timeScale(d['Date']) - vis.config.radius)
-            .attr('y', vis.config.innerHeight - vis.config.radius)
             .attr('width', vis.config.radius * 2)
             .attr('height', vis.config.radius * 2)
             .attr('fill', vis.config.timelineEventColor)
             .attr('z-index', 20)
-            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.timelineTooltip))
-            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.timelineTooltip));
-
-        updateSelection
-            .attr('x', d => vis.timeScale(d['Date']) - vis.config.radius)
-            .attr('y', vis.config.innerHeight - vis.config.radius);
+            .merge(updateSelection)
+                .attr('x', d => vis.timeScale(d['Date']) - vis.config.radius)
+                .attr('y', vis.config.innerHeight - vis.config.radius + 10)
+                .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.timelineTooltip))
+                .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.timelineTooltip));
 
         exitSelection.remove();
     }
