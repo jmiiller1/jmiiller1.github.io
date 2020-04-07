@@ -11,6 +11,9 @@ export class TimeAxis {
 
         timeAxisGroup.call(timeAxis);
 
+        const axisPath = timeAxisGroup.select('path');
+        axisPath.style('pointer-events', 'none');
+
         return timeAxisGroup;
     }
 

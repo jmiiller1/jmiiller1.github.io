@@ -24,6 +24,9 @@ export class SentimentAxis {
         yAxisGroup.call(yAxis)
             .selectAll('.domain').remove();
 
+        const axisPath = yAxisGroup.select('path');
+        axisPath.style('pointer-events', 'none');
+
         return yAxisGroup;
     }
 

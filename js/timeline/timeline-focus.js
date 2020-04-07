@@ -2,7 +2,7 @@
 
 import { TimeAxis } from './time-axis.js';
 import { TimelineUtilities } from './timeline-utilities.js';
-import { TimelineData } from "./timeline-data.js";
+import { TimelineData } from "./data-processing/timeline-data.js";
 import { TimelineTooltip } from "./timeline-tooltip.js";
 import {TimelineLegend} from "./timeline-legend.js";
 import {TimelineHoverline} from "./timeline-hoverline.js";
@@ -11,11 +11,14 @@ import {MultiLineColorLegend} from "./multiLineColorLegend.js";
 
 export class TimelineFocus {
 
-    constructor(demDebateData, sentimentAnalysisData, _config) {
+    constructor(demDebateData, sentimentAnalysisData, keyEventData, _config) {
         const vis = this;
 
         vis.demDebateData = demDebateData;
         vis.demDebateCopy = demDebateData;
+
+        vis.keyEventData = keyEventData;
+        vis.keyEventCopy = keyEventData;
 
         vis.sentimentAnalysisDataCopy = sentimentAnalysisData;
         vis.groupedSentimentAnalysisData = d3.nest()
@@ -35,8 +38,10 @@ export class TimelineFocus {
 
         vis.config.innerWidth = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
         vis.config.innerHeight = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
+        vis.config.outerTickSize = -vis.config.innerHeight;
 
-        vis.timeScale = TimeAxis.createTimeScale([new Date(2019, 5, 1), new Date(2020, 2, 1)], vis.config.innerWidth);
+        vis.completeDomain = [new Date(2018, 10, 31), new Date(2020, 3, 1)];
+        vis.timeScale = TimeAxis.createTimeScale(vis.completeDomain, vis.config.innerWidth);
         vis.sentimentScale = SentimentAxis.createSentimentScale(vis.config.innerHeight);
 
         vis.initVis();
@@ -93,7 +98,7 @@ export class TimelineFocus {
         vis.hoverlineContainer = TimelineHoverline.appendHoverlineContainer(vis.chart, vis.config.innerHeight, vis.config.innerWidth);
         vis.hoverLine = TimelineHoverline.appendHoverline(vis.chart, vis.config.innerHeight);
 
-        vis.hoverlineContainer.on('mousemove', TimelineHoverline.mouseMove(vis.hoverLine, vis.config.parentElement, vis.config.margin.left, vis.config.innerWidth));
+        vis.hoverlineContainer.on('mousemove', TimelineHoverline.mouseMove(vis.hoverLine));
         vis.hoverlineContainer.on('mouseout', TimelineHoverline.mouseOut(vis.hoverLine));
     }
 
@@ -107,6 +112,7 @@ export class TimelineFocus {
             vis.groupedSentimentAnalysisData = d3.nest()
                 .key(d => d.Candidates)
                 .entries(vis.sentimentAnalysisDataCopy.filter(TimelineData.dateInRange(extent)));
+            vis.keyEventData = vis.keyEventCopy.filter(TimelineData.dateInRange(extent));
 
             vis.update();
         });
@@ -119,7 +125,7 @@ export class TimelineFocus {
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight + 10, vis.config.innerWidth);
 
         vis.updateTimeline();
-        vis.updateMultiline()
+        vis.updateMultiline();
     }
 
     updateTimeline() {
@@ -134,14 +140,14 @@ export class TimelineFocus {
         vis.renderMultiline()
     }
 
-    render() {
+    renderTimeline() {
         const vis = this;
 
-        vis.renderTimeline();
-        vis.renderMultiline();
+        vis.renderDemDebateData();
+        vis.renderKeyEventData();
     }
 
-    renderTimeline() {
+    renderDemDebateData() {
         const vis = this;
 
         const updateSelection = vis.timelineDataGroup.selectAll('circle').data(vis.demDebateData);
@@ -156,6 +162,28 @@ export class TimelineFocus {
             .merge(updateSelection)
                 .attr('cx', d => vis.timeScale(d['Date']))
                 .attr('cy', vis.config.innerHeight + 10)
+                .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.timelineTooltip))
+                .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.timelineTooltip));
+
+        exitSelection.remove();
+    }
+
+    renderKeyEventData() {
+        const vis = this;
+        
+        const updateSelection = vis.timelineDataGroup.selectAll('rect').data(vis.keyEventData);
+        const enterSelection = updateSelection.enter();
+        const exitSelection = updateSelection.exit();
+
+        enterSelection.append('rect')
+            .attr('class', 'event')
+            .attr('width', vis.config.radius * 2)
+            .attr('height', vis.config.radius * 2)
+            .attr('fill', vis.config.timelineEventColor)
+            .attr('z-index', 20)
+            .merge(updateSelection)
+                .attr('x', d => vis.timeScale(d['Date']) - vis.config.radius)
+                .attr('y', vis.config.innerHeight - vis.config.radius + 10)
                 .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.timelineTooltip))
                 .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.timelineTooltip));
 
