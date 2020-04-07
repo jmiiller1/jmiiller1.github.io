@@ -9,23 +9,6 @@
     display: block;
 }
 
-.timeline-svg .time-axis {
-    pointer-events: none;
-}
-
-body .timeline-tooltip {
-    position: absolute;
-    text-align: center;
-    width: 60px;
-    height: 33px;
-    padding: 2px;
-    font-size: 12px;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    pointer-events: none;
-}
-
 .timeline-svg .axis-title {
     fill: black;
     font-size: 1.5em;

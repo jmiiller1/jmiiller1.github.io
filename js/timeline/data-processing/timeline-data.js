@@ -18,6 +18,7 @@ export class TimelineData {
     }
 
     static convertStringToDate(string) {
+        string = string.replace(',', '');
         const splitString = string.split(" ");
 
         const month = this.getMonth2Nums()[splitString[0]];

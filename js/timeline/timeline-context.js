@@ -9,10 +9,12 @@ import { TimelineTooltip } from "./timeline-tooltip.js";
 
 export class TimelineContext {
 
-    constructor(data, _config) {
+    constructor(demDebateData, keyEventData, _config) {
         const vis = this;
 
-        vis.data = data;
+        vis.data = demDebateData;
+        vis.keyEventData = keyEventData;
+
         vis.config = {
             parentElement: _config.parentElement,
             containerHeight: _config.containerHeight,
@@ -27,7 +29,7 @@ export class TimelineContext {
         vis.config.timelineEventColor = 'lightgrey';
         vis.config.outerTickSize = 0;
 
-        vis.timeScale = TimeAxis.createTimeScale([new Date(2019, 5, 1), new Date(2020, 2, 1)], vis.config.innerWidth, 0);
+        vis.timeScale = TimeAxis.createTimeScale([new Date(2018, 10, 31), new Date(2020, 3, 1)], vis.config.innerWidth, 0);
 
         vis.initVis();
     }
@@ -40,12 +42,12 @@ export class TimelineContext {
 
         vis.chart = TimelineUtilities.appendChart(vis.config.innerHeight, vis.config.innerWidth, vis.config.margin, vis.svg, 'timeline-chart');
 
+        vis.timelineDataGroup = vis.chart.append('g');
+
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth, vis.config.outerTickSize);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, "Time", 40, vis.config.innerWidth / 2, "axis-title");
 
         vis.brush = TimelineBrush.appendBrushX(vis.chart, vis.config.innerHeight, vis.config.innerWidth, vis.timeScale, vis.config.dispatcher);
-
-        vis.tooltip = TimelineTooltip.appendTooltip(vis.body);
 
     }
 
@@ -57,9 +59,14 @@ export class TimelineContext {
     render() {
         const vis = this;
 
-        const dataGroup = vis.chart.append('g');
+        vis.renderDemDebateData();
+        vis.renderKeyEventData();
+    }
 
-        const updateSelection = dataGroup.selectAll('circle').data(vis.data);
+    renderDemDebateData() {
+        const vis = this;
+
+        const updateSelection = vis.timelineDataGroup.selectAll('circle').data(vis.data);
         const enterSelection = updateSelection.enter();
         const exitSelection = updateSelection.exit();
 
@@ -68,13 +75,33 @@ export class TimelineContext {
             .attr('cx', d => vis.timeScale(d['Date']))
             .attr('cy', vis.config.innerHeight)
             .attr('r', vis.config.radius)
-            .attr('fill', vis.config.timelineEventColor)
-            .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.tooltip))
-            .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.tooltip));
+            .attr('fill', vis.config.timelineEventColor);
 
         updateSelection
             .attr('cx', d => vis.timeScale(d['Date']))
             .attr('cy', vis.config.innerHeight / 2);
+
+        exitSelection.remove();
+    }
+
+    renderKeyEventData() {
+        const vis = this;
+
+        const updateSelection = vis.timelineDataGroup.selectAll('rect').data(vis.keyEventData);
+        const enterSelection = updateSelection.enter();
+        const exitSelection = updateSelection.exit();
+
+        enterSelection.append('rect')
+            .attr('class', 'event')
+            .attr('x', d => vis.timeScale(d['Date']) - vis.config.radius)
+            .attr('y', vis.config.innerHeight - vis.config.radius)
+            .attr('width', vis.config.radius * 2)
+            .attr('height', vis.config.radius * 2)
+            .attr('fill', vis.config.timelineEventColor)
+
+        updateSelection
+            .attr('x', d => vis.timeScale(d['Date']) - vis.config.radius)
+            .attr('y', vis.config.innerHeight - vis.config.radius);
 
         exitSelection.remove();
     }

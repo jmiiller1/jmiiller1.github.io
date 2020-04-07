@@ -10,6 +10,9 @@ export class TimeAxis {
             .attr('transform', `translate(0, ${height})`);
         timeAxisGroup.call(timeAxis);
 
+        const axisPath = timeAxisGroup.select('path');
+        axisPath.style('pointer-events', 'none');
+
         return timeAxisGroup;
     }
 

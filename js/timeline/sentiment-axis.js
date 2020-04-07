@@ -22,6 +22,10 @@ export class SentimentAxis {
         yAxisGroup.attr('class', 'sentiment-axis');
 
         yAxisGroup.call(yAxis);
+
+        const axisPath = yAxisGroup.select('path');
+        axisPath.style('pointer-events', 'none');
+
         return yAxisGroup;
     }
 

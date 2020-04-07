@@ -28,7 +28,7 @@ export class TimelineUtilities {
         textElem.attr('class', className);
         textElem.attr('x', width);
         textElem.attr('y', height);
-        textElem.attr('text-anchor', 'middle')
+        textElem.attr('text-anchor', 'middle');
         textElem.text(text);
 
         return group;

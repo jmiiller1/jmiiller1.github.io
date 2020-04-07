@@ -25,7 +25,6 @@ export class MultiLineColorLegend {
             textOffset
         } = props;
 
-        console.log(colorScale);
         const groups = selection.selectAll('g')
             .data(colorScale.domain());
         const groupsEnter = groups
