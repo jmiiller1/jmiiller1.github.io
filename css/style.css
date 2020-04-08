@@ -121,7 +121,6 @@ strong {
 
 .timeline-svg .axis-title {
     fill: black;
-    /*font-size: 1.5em;*/
 }
 
 .timeline-svg .chart-title {
@@ -146,14 +145,12 @@ strong {
 }
 
 .timeline-svg .timeline-hoverline line {
-    /*stroke-width: 2px;*/
     stroke: black;
     pointer-events: none;
 }
 
 .sentiment-axis .tick line {
     opacity: 0.5;
-    /*stroke-width: 1px;*/
     stroke-dasharray: 5, 5;
 }
 
