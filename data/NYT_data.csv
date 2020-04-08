@@ -1,4 +1,227 @@
-"Date","Candidates","NewsDesk","Category","Headline","SentScore(headline)","SentScore(abstract)","SentScore(lead)","SentScore(Avg)","Count"
+"Date","Candidates","NewsDesk","Category","Headline","SentScore(headline)","SentScore(snippet)","SentScore(lead)","SentScore(avg)","Count"
+"2018-12-05","Bloomberg","politics","politics","Bloomberg, Focusing on Climate Change, Says He Would Battle the Coal Industry",-0.38,0.0,-100,-0.19,934
+"2018-12-06","Warren","politics","politics","Elizabeth Warren Stands by DNA Test. But Around Her, Worries Abound.",-0.57,0.0,-100,-0.29,1790
+"2018-12-08","Biden","oped","opinion","I Like Joe Biden. I Urge Him Not to Run. ",0.36,0.0,-100,0.18,1265
+"2018-12-10","Bloomberg","metro","other","Former Bloomberg Executives to Be Charged in Construction Fraud Scheme",-0.68,-0.84,-100,-0.76,1079
+"2018-12-12","Bloomberg","metro","other","Cash ‘Sandwiches’: ‘Brazen’ Fraud by Bloomberg Executives Is Detailed in Charges",-0.71,-0.49,-100,-0.6,776
+"2018-12-14","Warren","u.s. / politics","politics","‘It’s Time to Change the Rules,’ Warren Tells Graduates in Speech on Racism",-0.62,0.57,-100,-0.03,94
+"2018-12-14","Warren","politics","politics","Elizabeth Warren, Speaking to Black Graduates, Warns ‘the Rules Are Rigged’",-0.1,0.3,-100,0.1,832
+"2018-12-14","Biden","style","other","Joe Biden, Shailene Woodley and Andie MacDowell at Conservation International Gala",0.0,0.38,-100,0.19,15
+"2018-12-19","Biden","oped","opinion","Why Biden, Bernie and Beto Shouldn’t Get Cocky ",-0.13,0.23,-100,0.05,1056
+"2018-12-20","Warren","oped","opinion","Elizabeth Warren, Trumpian of the Left",0.0,0.08,-100,0.04,907
+"2018-12-27","Sanders","politics","politics","For Bernie Sanders, Holding Onto Support May Be Hard in a 2020 Bid",0.32,0.0,-100,0.16,1575
+"2018-12-29","Warren","politics","politics","Kamala Harris, Elizabeth Warren and Other Democrats Shift Into High Gear for 2020",0.0,0.0,-100,0.0,1745
+"2018-12-31","Warren","u.s. / politics","politics","Elizabeth Warren vs. Donald Trump: A Blow-by-Blow History",0.0,-0.18,-100,-0.09,406
+"2018-12-31","Warren","politics","politics","Elizabeth Warren Announces Iowa Trip as She Starts Running for President in 2020",0.0,0.0,-100,0.0,1956
+"2018-12-31","Warren","nytnow","other","Shutdown, Elizabeth Warren, Happy New Year: Your Monday Evening Briefing",0.57,0.0,-100,0.29,1085
+"2019-01-01","Warren","politics","politics","On Politics: Elizabeth Warren Is Running for President",0.0,0.0,0.0,0.0,419
+"2019-01-02","Sanders","politics","politics","Sexism Claims From Bernie Sanders’s 2016 Run: Paid Less, Treated Worse",-0.43,-0.77,-0.77,-0.65,2177
+"2019-01-03","Warren","oped","opinion","Elizabeth Warren Wants to Stop Inequality Before It Starts",-0.3,0.1,0.1,-0.03,1048
+"2019-01-01","Warren","obits","other","Warren Wells, Star Receiver With a Derailed Career, Dies at 76",-0.1,-0.64,-0.64,-0.46,701
+"2019-01-05","Warren","politics","politics","Elizabeth Warren Campaigns in Iowa: ‘This Is How It Starts’",0.0,0.0,0.0,0.0,829
+"2019-01-07","Warren","politics","politics","With Elizabeth Warren Visit, Iowans Get the First Taste of 2020: ‘I’m Ready to Be Convinced’",0.36,0.38,0.38,0.37,1096
+"2019-01-07","Warren","oped","opinion","Elizabeth Warren and Her Party of Ideas",0.4,0.67,0.67,0.58,841
+"2019-01-10","Sanders","politics","politics","Bernie Sanders Apologizes Again to Women Who Were Mistreated in 2016 Campaign",0.36,-0.4,-0.4,-0.15,1058
+"2019-01-15","Warren","express","other","Trump’s Use of Wounded Knee to Mock Elizabeth Warren Angers Native Americans",-0.73,-0.03,-0.03,-0.26,1169
+"2019-01-14","Sanders","politics","politics","Bernie Sanders, Addressing Sexism Complaints, Will Meet With Former Staff Members",-0.4,-0.1,-0.1,-0.2,607
+"2019-01-14","Biden","oped","opinion","Why Biden Should Run",0.0,0.42,0.42,0.28,457
+"2019-01-16","Sanders","politics","politics","Sanders Meets With Former Staff Members, Seeking to Quell Anxiety Over Sexism",-0.18,-0.4,-0.4,-0.33,836
+"2019-01-21","Biden","letters","other","Should Joe Biden Run for President?",0.0,0.34,0.34,0.23,276
+"2019-01-23","Biden","politics","politics","Joe Biden’s Paid Speech Buoyed the G.O.P. in Midwest Battleground",-0.4,0.44,0.44,0.16,1763
+"2019-01-23","Buttigieg","politics","politics","Pete Buttigieg, Mayor of South Bend, Ind., Joins Democratic 2020 Race",0.0,0.0,0.0,0.0,433
+"2019-01-24","Warren","washington","politics","Warren’s Plan Is Latest Push by Democrats to Raise Taxes on the Rich",0.56,0.49,0.49,0.52,1033
+"2019-01-25","Bloomberg","politics","politics","Bloomberg Rebukes Trump While Deflecting Criticism of His Own Centrist Views",-0.44,-0.15,-0.15,-0.25,569
+"2019-01-28","Warren","oped","opinion","Elizabeth Warren Does Teddy Roosevelt",0.0,0.0,0.0,0.0,873
+"2019-01-27","Warren","politics","politics","Elizabeth Warren’s 2020 Strategy: Stand Out by ‘Nerding Out’",0.0,0.59,0.59,0.39,1401
+"2019-01-29","Bloomberg","politics","politics","Kamala Harris and Michael Bloomberg Clash on Medicare for All",0.0,0.54,0.54,0.36,468
+"2019-01-31","Sanders","politics","politics","Sanders Unveils Estate Tax Plan, Joining Democrats Who Want to Tax the Rich",0.6,0.34,0.34,0.43,546
+"2019-02-01","Warren","politics","politics","Elizabeth Warren Apologizes to Cherokee Nation for DNA Test",0.36,-0.32,-0.32,-0.09,1047
+"2019-02-05","Warren","politics","politics","Elizabeth Warren Disclosure Forms Show $300,000 Book Advance, Other Assets",0.18,0.78,0.78,0.58,530
+"2019-02-04","Sanders","oped","opinion","Schumer and Sanders: Limit Corporate Stock Buybacks",0.0,0.13,0.13,0.09,1079
+"2019-02-07","Biden","oped","opinion","The Biden Fallacy",0.0,0.77,0.77,0.51,1119
+"2019-02-09","Sanders","politics","politics","Sanders and O’Rourke Are Way Ahead in Race for Small-Dollar Donors",0.0,0.36,0.36,0.24,1850
+"2019-02-09","Warren","national","politics","Elizabeth Warren Formally Announces 2020 Presidential Bid in Lawrence, Mass.",0.0,-0.41,-0.41,-0.28,1260
+"2019-02-10","Warren","politics","politics","‘He May Not Even Be a Free Person,’ Elizabeth Warren Says of Trump in 2020",-0.4,-0.36,-0.36,-0.37,559
+"2019-02-11","Warren","express","other","Trump Mocks Warren With Apparent Reference to Trail of Tears, Which Killed Thousands",-0.86,-0.6,-0.6,-0.68,852
+"2019-02-15","Warren","obits","other","Patricia Nell Warren, Novelist of Gay Romance, Dies at 82",0.56,0.56,0.56,0.56,1072
+"2019-02-16","Warren","business","business","The Week in Business: Amazon Breaks Up With New York, and Warren Buffett Takes Stock",0.18,-0.54,-0.54,-0.3,927
+"2019-02-17","Sanders","politics","politics","Bernie Sanders Stumbled With Black Voters in 2016. Can He Do Better in 2020?",0.44,-0.54,-0.54,-0.21,1713
+"2019-02-19","Sanders","politics","politics","Bernie Sanders, Once the Progressive Outlier, Joins a Crowded Presidential Field",0.0,0.51,0.51,0.34,1892
+"2019-02-19","Warren","politics","politics","Elizabeth Warren Proposes Universal Child Care",0.49,0.82,0.82,0.71,690
+"2019-02-19","Sanders","politics","politics","On Politics: Bernie Sanders Announces 2020 Bid",0.0,0.4,0.4,0.27,425
+"2019-02-18","Warren","politics","politics","Elizabeth Warren’s Native American Ancestry Draws a Shrug From These Voters",0.0,-0.2,-0.2,-0.13,1342
+"2019-02-20","Sanders","culture","other","Jimmy Fallon Gets in Costume to Roast Bernie Sanders",0.0,0.42,0.42,0.28,649
+"2019-02-19","Sanders","u.s. / politics","politics","How Bernie Sanders Has Gone After Donald Trump",0.0,0.0,0.0,0.0,217
+"2019-02-20","Sanders","u.s. / politics","politics","Bernie Sanders Set the Agenda. But Can He Win on It?",0.74,0.0,0.0,0.25,368
+"2019-02-19","Sanders","express","other","Bernie Sanders on the Issues: Where He Stands and What Could Derail Him",-0.3,0.0,0.0,-0.1,952
+"2019-02-20","Sanders","nytnow","other","President Trump, Karl Lagerfeld, Bernie Sanders: Your Wednesday Briefing",0.0,0.4,0.4,0.27,1354
+"2019-02-21","Sanders","oped","opinion","Sanders Has an Advantage, and It’s Not About Economics",0.25,0.25,0.25,0.25,1033
+"2019-02-23","Warren","business","business","Kraft Heinz, the U.S. Budget, and Big Stock Losses Feature in Warren Buffett’s Letter",-0.4,-0.56,-0.56,-0.51,1570
+"2019-02-25","Sanders","politics","politics","Bernie Sanders Raises $10 Million in Less Than a Week",0.0,0.0,0.0,0.0,1194
+"2019-02-25","Warren","politics","politics","Elizabeth Warren to Forgo Receptions and Fund-Raisers With Big Donors",0.0,0.44,0.44,0.29,483
+"2019-02-26","Sanders","politics","politics","Architects of Bernie Sanders’s 2016 Race Part Ways With 2020 Campaign",0.0,0.0,0.0,0.0,791
+"2019-02-27","Biden","politics","politics","Biden’s Family Is Urging Him to Run in 2020",0.0,0.59,0.59,0.39,745
+"2019-03-03","Biden","letters","other","Joe Biden: Heed Beau’s Advice and Run",0.0,0.45,0.0,0.15,110
+"2019-03-02","Sanders","politics","politics","Bernie Sanders Begins 2020 Race With Some Familiar Themes and a New One: Himself",0.0,0.2,0.0,0.07,1027
+"2019-03-05","Bloomberg","politics","politics","Michael Bloomberg Will Not Run for President in 2020",0.0,-0.34,0.71,0.12,1528
+"2019-03-06","Bloomberg","oped","opinion","In Praise of Bloomberg",0.56,0.0,0.0,0.19,717
+"2019-03-07","Biden","nytnow","other","Kashmir, China, Joe Biden: Your Friday Briefing",0.0,0.4,0.0,0.13,1352
+"2019-03-07","Biden","politics","politics","Joe Biden’s 2020 Plan Is Almost Complete. Democrats Are Impatient.",-0.3,0.26,0.46,0.14,1778
+"2019-03-09","Sanders","politics","politics","Bernie Sanders-Style Politics Are Defining 2020 Race, Unnerving Moderates",0.0,0.03,0.3,0.11,1864
+"2019-03-08","Warren","politics","politics","Elizabeth Warren Proposes Breaking Up Tech Giants Like Amazon and Facebook",0.49,-0.3,0.44,0.21,1444
+"2019-03-11","Biden","oped","opinion","The Trouble With Biden",-0.4,-0.64,0.71,-0.11,1209
+"2019-03-13","Warren","oped","opinion","One-on-One With Elizabeth Warren",0.0,0.13,0.0,0.04,818
+"2019-03-12","Biden","oped","opinion","The Biden Paradox, and How to Solve It",0.1,0.79,0.49,0.46,948
+"2019-03-12","Biden","politics","politics","Biden Signals He Is Close to 2020 Run for President",0.0,0.36,0.0,0.12,892
+"2019-03-15","Warren","oped","opinion","Elizabeth Warren Actually Wants to Fix Capitalism",0.0,0.0,0.72,0.24,1662
+"2019-03-14","Sanders","investigative","other","Sanders Institute Suspends Operations as Senator Runs for President",0.0,0.0,-0.32,-0.11,533
+"2019-03-15","Sanders","politics","politics","Bernie Sanders’s Campaign Work Force Will Be Unionized",0.0,0.0,0.0,0.0,345
+"2019-03-16","Sanders","politics","politics","Beto O’Rourke Is 46. Bernie Sanders Is 77. Does Age Matter Anymore for Democrats?",0.03,0.48,0.0,0.17,1822
+"2019-03-19","Warren","politics","politics","Elizabeth Warren Calls for Ending Electoral College",0.0,-0.48,0.46,-0.01,425
+"2019-03-21","Biden","politics","politics","Joe Biden Weighing Unique Steps to Reassure Voters Concerned About His Age",0.34,0.0,0.34,0.23,1606
+"2019-03-22","Biden","culture","other","Seth Meyers Would Appreciate Joe Biden’s Announcing His Candidacy Already",0.4,0.4,0.95,0.59,566
+"2019-03-25","Buttigieg","metro","other","New York Buzzes Over a Mayor Mulling a 2020 Bid (Buttigieg, Not de Blasio)",0.0,0.0,0.0,0.0,1086
+"2019-03-27","Biden","politics","politics","Joe Biden Says He Regrets Role in Anita Hill Hearing",-0.36,0.62,-0.44,-0.06,439
+"2019-03-28","Buttigieg","politics","politics","The Buttigieg Boomlet",0.0,0.19,0.46,0.22,1107
+"2019-03-28","Buttigieg","politics","politics","Pete Buttigieg (It’s ‘Boot-Edge-Edge’) Is Making Waves in the 2020 Race",0.0,0.08,-0.64,-0.19,1397
+"2019-03-29","Biden","politics","politics","When Joe Biden Voted to Let States Overturn Roe v. Wade",0.0,0.23,-0.61,-0.13,2150
+"2019-03-29","Sanders","politics","politics","Bernie Sanders Says ‘No’ to Incrementalism, Highlighting Divide Among Democrats",0.0,0.78,0.8,0.53,1036
+"2019-03-31","Biden","politics","politics","Who Is Lucy Flores, the Woman Accusing Joe Biden of Kissing Her?",0.46,-0.32,0.57,0.24,744
+"2019-03-31","Biden","politics","politics","Joe Biden Scrambles to Stem Crisis After Lucy Flores’s Allegation",-0.62,0.18,0.4,-0.02,1802
+"2019-03-30","Biden","politics","politics","Joe Biden Says He Did Not Act Inappropriately with Lucy Flores",0.0,0.36,0.06,0.14,1514
+"2019-03-31","Warren","politics","politics","Elizabeth Warren Loses Finance Director as She Struggles in Early Fund-raising",-0.59,-0.33,0.29,-0.21,1879
+"2019-04-01","Biden","politics","politics","On Politics: Biden Accused of Inappropriate Touching",-0.3,0.38,0.44,0.18,426
+"2019-04-03","Biden","nytnow","other","Rupert Murdoch, Joe Biden, Mozambique: Your Wednesday Evening Briefing",0.0,0.0,0.0,0.0,1086
+"2019-04-03","Biden","oped","opinion","The Joe Biden Media Frenzy",-0.32,-0.4,0.0,-0.24,1577
+"2019-04-02","Biden","oped","opinion","The Real Joe Biden Decision",0.0,0.55,0.59,0.38,1022
+"2019-04-01","Biden","politics","politics","A Second Woman Says Biden’s Touching Made Her Uncomfortable",-0.38,0.0,-0.59,-0.32,1040
+"2019-04-02","Biden","oped","opinion","The Wrong Time for Joe Biden",-0.48,0.0,-0.76,-0.41,980
+"2019-04-02","Biden","nytnow","other","Health Care, Brexit, Joe Biden: Your Tuesday Evening Briefing",0.49,0.0,0.0,0.16,1116
+"2019-04-01","Biden","nytnow","other","Joe Biden, Turkey, Nipsey Hussle: Your Monday Briefing",0.0,0.0,0.0,0.0,1361
+"2019-04-01","Biden","politics","politics","Joe Biden in the Modern Age",0.0,0.46,0.46,0.31,1113
+"2019-04-04","Biden","science","other","Beyond Biden: How Close Is Too Close?",0.0,-0.52,0.36,-0.05,1227
+"2019-04-05","Biden","oped","opinion","Biden, Honorable Patriot, Should Side With Restraint",0.54,-0.49,0.48,0.18,905
+"2019-04-05","Biden","politics","politics","Joe Biden Jokes About Hugging in a Speech, Then Offers a Mixed Apology",0.61,0.71,-0.62,0.23,1451
+"2019-04-04","Biden","politics","politics","How Joe Biden’s Touching Resonated With Readers",0.0,0.03,0.46,0.16,1445
+"2019-04-05","Biden","washington","politics","Finding Biden in Familiar Fix, President Trump Adds a Jab",0.0,-0.54,-0.79,-0.44,1200
+"2019-04-05","Biden","politics","politics","On Politics: Trump Goes After Biden",0.0,-0.56,0.44,-0.04,447
+"2019-04-04","Biden","newsdesk","other","Joe Biden Is of an Older Generation. Does It Matter?",0.03,0.0,0.03,0.02,939
+"2019-04-04","Biden","oped","opinion","Should Biden Run?",0.0,-0.42,0.0,-0.14,829
+"2019-04-03","Biden","politics","politics","Joe Biden, in Video, Says He Will Be ‘More Mindful’ of Personal Space",0.0,-0.78,-0.67,-0.48,1160
+"2019-04-04","Biden","oped","opinion","The Biden Sort-Of Lovefest",0.0,0.08,0.83,0.3,917
+"2019-04-05","Biden","gender","other","Critics to Joe Biden: You’re Missing the Point",-0.53,0.0,0.0,-0.18,1039
+"2019-04-07","Biden","culture","other","‘S.N.L.’ and Kit Harington Spoof Biden and ‘Game of Thrones’",0.0,0.34,0.42,0.25,1276
+"2019-04-06","Biden","editorial","opinion","Meet the Man Behind Trump’s Biden Tweet",0.0,0.0,0.7,0.23,1314
+"2019-04-10","Biden","culture","other","Jimmy Fallon Grapples With the Awkwardness of Joe Biden’s Candidacy",-0.18,-0.23,0.95,0.18,646
+"2019-04-10","Warren","politics","politics","Elizabeth Warren’s 2020 Campaign Says It Raised $6 Million",0.0,0.59,-0.83,-0.08,1270
+"2019-04-11","Biden","politics","politics","Biden, Despite Troubles, Tops Democratic Contenders in Poll of Iowa Voters",-0.06,0.4,0.15,0.17,442
+"2019-04-09","Sanders","washington","politics","Bernie Sanders, Now a Millionaire, Pledges to Release Tax Returns by Monday",0.0,0.0,0.0,0.0,516
+"2019-04-10","Buttigieg","politics","politics","Pete Buttigieg, Gay and Christian, Challenges Religious Right on Their Own Turf",0.08,0.15,0.71,0.31,1574
+"2019-04-10","Sanders","washington","politics","Medicare for All and Beyond, Sanders Uses the Senate as His Launching Pad",0.0,-0.2,-0.38,-0.19,1512
+"2019-04-15","Sanders","politics","politics","Trump and Sanders Campaigns Lead 2020 Fund-Raising Race",0.0,0.0,0.44,0.15,369
+"2019-04-14","Buttigieg","politics","politics","Pete Buttigieg’s Focus: Storytelling First. Policy Details Later.",0.0,0.0,-0.15,-0.05,1645
+"2019-04-15","Sanders","politics","politics","Bernie Sanders Released His Tax Returns. He’s Part of the 1%.",0.0,0.0,0.0,0.0,928
+"2019-04-14","Buttigieg","politics","politics","Pete Buttigieg Announces Official Start to 2020 Campaign",0.0,-0.6,-0.1,-0.23,906
+"2019-04-16","Biden","politics","politics","Biden, at Hollings Funeral, Talks About How ‘People Can Change’",-0.36,0.89,0.62,0.38,1133
+"2019-04-15","Warren","politics","politics","Elizabeth Warren Proposes Broad Plan to Protect Public Lands",0.38,0.0,0.0,0.13,594
+"2019-04-16","Sanders","washington","politics","The Rematch: Bernie Sanders vs. a Clinton Loyalist",0.36,0.27,-0.54,0.03,1737
+"2019-04-15","Buttigieg","politics","politics","Pete Buttigieg’s Campaign Kickoff: Full Speech, Annotated",0.0,0.38,0.2,0.19,4430
+"2019-04-16","Sanders","politics","politics","‘Stop Sanders’ Democrats Are Agonizing Over His Momentum",-0.57,0.61,0.25,0.1,1866
+"2019-04-16","Sanders","politics","politics","Bernie Sanders, at Fox News Town Hall, Says His Wealth Isn’t the ‘American Dream’",0.49,-0.51,-0.51,-0.18,636
+"2019-04-17","Sanders","culture","other","Kimmel Suggests Bernie Sanders’s Cash-Heavy Campaign Could Spend a Bit on ‘Personal Grooming’",0.0,0.56,0.95,0.5,638
+"2019-04-18","Sanders","oped","opinion","Bernie Sanders and the Myth of the 1 Percent",0.0,0.82,0.54,0.45,912
+"2019-04-19","Sanders","washington","politics","Sanders’s ‘Slip of the Tongue’ Would Be a Problem in Some White Houses. Not Trump’s.",-0.4,-0.49,0.4,-0.16,1179
+"2019-04-19","Biden","politics","politics","Joe Biden Begins Taking Money for a 2020 Presidential Campaign",0.0,0.0,0.44,0.15,705
+"2019-04-19","Warren","obits","other","Lorraine Warren, Paranormal Investigator Portrayed in ‘The Conjuring,’ Dies at 92",0.0,0.0,-0.3,-0.1,823
+"2019-04-19","Buttigieg","politics","politics","Pete Buttigieg Fired South Bend’s Black Police Chief. It Still Stings.",-0.56,-0.62,-0.62,-0.6,2596
+"2019-04-19","Warren","politics","politics","Elizabeth Warren Calls for Impeachment Process Against Trump",0.0,0.13,0.48,0.2,536
+"2019-04-19","Sanders","letters","other","The Democrats’ ‘Stop Sanders’ Movement",0.0,-0.48,0.0,-0.16,350
+"2019-04-19","Warren","obits","other","Warren Adler, ‘The War of the Roses’ Author, Is Dead at 91",-0.85,0.89,-0.72,-0.23,982
+"2019-04-22","Warren","business","business","Elizabeth Warren Wants to Make It Easier to Prosecute Executives",0.03,0.64,0.0,0.22,878
+"2019-04-23","Sanders","letters","other","Sarah Huckabee Sanders’s Lies About Lying",-0.74,0.23,0.0,-0.17,167
+"2019-04-23","Biden","politics","politics","Joe Biden Plans to Enter the 2020 Race on Thursday. He’s Starting With $0.",0.0,-0.12,0.36,0.08,1487
+"2019-04-22","Warren","politics","politics","Elizabeth Warren’s Higher Education Plan: Cancel Student Debt and Eliminate Tuition",-0.54,0.0,-0.62,-0.39,1082
+"2019-04-22","Biden","politics","politics","Joe Biden Plans to Close Foundation When He Enters 2020 Race",0.0,-0.3,0.42,0.04,704
+"2019-04-25","Biden","politics","politics","Biden on the Issues: Where He Stands and How He’s Changed",0.0,0.0,0.68,0.23,1094
+"2019-04-25","Biden","letters","other","Cheers and Fears as Joe Biden Joins the Race",0.08,0.03,0.0,0.03,433
+"2019-04-24","Buttigieg","politics","politics","Pete Buttigieg and Beto O’Rourke Stake Out Similar Turf in a Crowded Field",0.0,0.0,0.0,0.0,1544
+"2019-04-25","Biden","politics","politics","Joe Biden Announces 2020 Run for President, After Months of Hesitation",-0.27,0.32,-0.6,-0.18,2030
+"2019-04-25","Biden","oped","opinion","Biden Joins the Really Big Crowd",0.0,0.42,0.0,0.14,922
+"2019-04-25","Biden","politics","politics","5 Questions That Will Determine if Joe Biden Can Succeed",0.49,-0.32,0.54,0.24,1399
+"2019-04-25","Biden","washington","politics","Joe Biden Expresses Regret to Anita Hill, but She Says ‘I’m Sorry’ Is Not Enough",-0.23,0.15,0.62,0.18,2016
+"2019-04-24","Buttigieg","magazine","other","How Pete Buttigieg’s Meaningless Erudition Made Him the ‘Smart’ Candidate",-0.44,0.89,0.84,0.43,1303
+"2019-04-25","Biden","nytnow","other","Joe Biden, Facebook, N.F.L. Draft: Your Thursday Briefing",0.0,0.0,0.0,0.0,1381
+"2019-04-25","Biden","politics","politics","On Politics: Biden Enters 2020 Race",0.0,0.0,0.44,0.15,510
+"2019-04-25","Biden","politics","politics","Joe Biden’s Campaign Announcement Video, Annotated",0.0,0.0,-0.1,-0.03,911
+"2019-04-24","Sanders","oped","opinion","Bernie Sanders Scares a Lot of People, and Quite a Few of Them Are Democrats",-0.34,0.0,0.0,-0.11,2981
+"2019-04-25","Biden","upshot","opinion","How Does Joe Biden Fit Into a Changing Democratic Party?",0.64,0.18,0.0,0.27,992
+"2019-04-25","Biden","politics","politics","Biden’s Campaign Will Test These 4 Ideas",0.0,0.67,0.65,0.44,1310
+"2019-04-26","Biden","arts&leisure","other","Joe Biden’s Run Has Late Night Looking for a Fight",-0.38,0.68,0.95,0.42,790
+"2019-04-26","Biden","politics","politics","Joe Biden Called Anita Hill After Prodding. But He’s Still Not Apologizing.",0.09,-0.2,-0.6,-0.24,1893
+"2019-04-26","Biden","politics","politics","Recap and Analysis: Joe Biden’s Visit to ‘The View’",0.0,-0.44,0.44,0.0,1753
+"2019-04-27","Sanders","politics","politics","Bernie Sanders Opens Space for Debate on Voting Rights for Incarcerated People",0.0,0.38,-0.03,0.12,1214
+"2019-04-26","Biden","nytnow","other","Sri Lanka, Notre-Dame, Joe Biden: Your Friday Briefing",0.0,0.0,0.0,0.0,1481
+"2019-04-26","Biden","politics","politics","Joe Biden Raises $6.3 Million, Topping Rivals’ First-Day Hauls",0.0,0.74,0.6,0.44,910
+"2019-04-26","Buttigieg","politics","politics","Pete Buttigieg Swears Off the Lobbyist Money He Once Accepted",0.32,-0.3,-0.13,-0.04,335
+"2019-04-26","Biden","letters","other","Joe Biden Reaches Out to Anita Hill",0.05,-0.49,0.0,-0.15,518
+"2019-04-25","Biden","nytnow","other","ISIS, Joe Biden, Australia’s Feral Cats: Your Friday Briefing",0.0,0.0,0.0,0.0,1463
+"2019-04-26","Biden","nytnow","other","Joe Biden, N.F.L. Draft, ‘Avengers: Endgame’: Your Friday Briefing",0.0,0.0,0.0,0.0,1394
+"2019-04-26","Biden","summary","other","Quotation of the Day: Biden’s ‘Regret’ for Hill’s Pain Fails to Soothe",-0.56,0.0,-0.61,-0.39,62
+"2019-04-27","Buttigieg","oped","opinion","Which Way, Pete Buttigieg?",0.0,0.1,0.67,0.26,911
+"2019-04-29","Biden","nytnow","other","Sri Lanka, Spain Elections, Biden: Your Monday Briefing",0.0,0.4,0.0,0.13,1690
+"2019-04-28","Biden","politics","politics","In Pennsylvania, Joe Biden Finds Support Where He Most Needs It",0.4,0.4,0.0,0.27,1859
+"2019-04-29","Biden","oped","opinion","Joe Biden and the Apologies That Weren’t",0.0,-0.3,-0.95,-0.42,1092
+"2019-04-29","Biden","politics","politics","Biden, Now the Front-Runner, Gives First Speech as 2020 Candidate",0.0,0.36,0.49,0.29,1317
+"2019-04-30","Biden","politics","politics","In Scranton, College Students Give High Marks to Biden’s First Campaign Speech",0.0,-0.27,-0.4,-0.23,1221
+"2019-04-30","Biden","politics","politics","What Joe Biden Has Said About Anita Hill Over the Years",0.0,0.53,0.23,0.25,1265
+"2019-04-30","Warren","business","business","Warren Buffett Backs Occidental’s Bid for Anadarko With $10 Billion Investment",-0.05,0.4,0.21,0.19,796
+"2019-04-30","Buttigieg","politics","politics","As Buttigieg Builds His Campaign, Gay Donors Provide the Foundation",0.0,0.47,0.08,0.18,1712
+"2019-05-02","Biden","letters","other","Joe Biden and the Debate Over Apologies",0.0,0.0,0.0,0.0,364
+"2019-05-01","Biden","washington","politics","Trump Lashes Out on Twitter Over Firefighters’ Support of Biden",0.4,0.32,0.42,0.38,820
+"2019-05-01","Biden","arts&leisure","other","Jimmy Kimmel Predicts Biden Won’t Sell Many ‘MAMA’ Hats",0.0,-0.57,0.95,0.13,686
+"2019-05-02","Biden","nytnow","other","William Barr, Joe Biden, India: Your Thursday Briefing",0.0,0.0,0.0,0.0,1294
+"2019-05-01","Biden","politics","politics","As Biden Woos Labor, Trump Uses Twitter Barrage to Stake His Own Claim",0.0,-0.25,0.4,0.05,1426
+"2019-05-02","Biden","summary","other","Quotation of the Day: As Biden Woos Unions, Trump Takes to Twitter to Stake His Own Claim",0.0,0.0,0.0,0.0,39
+"2019-05-02","Biden","politics","politics","Voters Like Joe Biden. But Are They in Love?",0.82,0.06,0.46,0.45,1197
+"2019-05-02","Biden","washington","politics","Biden Faces Conflict of Interest Questions That Are Being Promoted by Trump and Allies",0.54,0.34,0.46,0.45,2508
+"2019-05-03","Biden","oped","opinion","Joe Biden and the Party of Davos",0.4,0.0,0.84,0.42,881
+"2019-05-02","Warren","politics","politics","Elizabeth Warren’s Campaign, ‘Based on Ideas,’ Bets on Iowa",0.0,-0.24,0.0,-0.08,1509
+"2019-05-01","Biden","oped","opinion","I Support Anita Hill, and Joe Biden, Too",0.4,-0.69,-0.84,-0.37,748
+"2019-05-04","Biden","politics","politics","Biden Thinks Trump Is the Problem, Not All Republicans. Other Democrats Disagree.",-0.65,0.25,0.0,-0.13,1683
+"2019-05-04","Biden","politics","politics","Biden Makes First Campaign Appearance in South Carolina, Key Primary State",0.0,0.2,0.23,0.14,716
+"2019-05-05","Warren","business","business","Warren Buffett’s Case for Capitalism",0.0,0.0,0.0,0.0,1037
+"2019-05-06","Biden","politics","politics","Some Look at Joe Biden’s Campaign and See Hillary Clinton’s",0.0,-0.03,-0.3,-0.11,1731
+"2019-05-06","Biden","oped","opinion","Is Biden Really the Most ‘Electable’ Democrat?",0.0,0.0,0.4,0.13,1015
+"2019-05-07","Biden","politics","politics","Joe Biden Has Support From Older Black Voters. Is It Enough?",0.4,0.55,0.57,0.51,1596
+"2019-05-08","Warren","politics","politics","Elizabeth Warren, Unveiling Opioid Plan, Says Sackler Name Should Come Off Harvard Buildings",0.0,0.0,-0.44,-0.15,513
+"2019-05-11","Biden","politics","politics","Biden’s 2020 Rivals Attack Him From the Left on Climate Change",-0.48,-0.44,-0.44,-0.45,730
+"2019-05-13","Biden","politics","politics","Joe Biden Defends Record on Climate and Calls for ‘Environmental Revolution’",0.0,-0.44,-0.44,-0.29,670
+"2019-05-15","Biden","politics","politics","Joe Biden, Campaigning in New Hampshire, Straddles Past and Present",0.0,-0.01,-0.38,-0.13,1303
+"2019-05-15","Warren","letters","other","Elizabeth Warren’s Snub of Fox News",-0.42,0.0,0.0,-0.14,146
+"2019-05-14","Warren","politics","politics","Warren Calls Fox News a ‘Hate-for-Profit Racket’ and Refuses an Appearance",0.0,0.0,-0.42,-0.14,723
+"2019-05-14","Biden","politics","politics","Alexandria Ocasio-Cortez and Joe Biden Spar Over Climate Policy in Intraparty Spat",0.0,-0.46,-0.68,-0.38,543
+"2019-05-15","Biden","politics","politics","Trump Can’t Stop Attacking Biden. G.O.P. Strategists Wish He Would.",-0.36,0.55,-0.57,-0.13,1569
+"2019-05-18","Sanders","express","other","Bernie Sanders’s Education Plan Laments Rise of Charter Schools",-0.36,0.0,0.0,-0.12,477
+"2019-05-18","Biden","national","politics","Fact-Checking Joe Biden on the Campaign Trail",0.0,-0.51,0.0,-0.17,1462
+"2019-05-18","Biden","politics","politics","Biden Delivers Call for National Unity at Philadelphia Rally",0.0,-0.32,0.0,-0.11,1050
+"2019-05-18","Sanders","politics","politics","‘I Did My Best to Stop American Foreign Policy’: Bernie Sanders on the 1980s",0.46,-0.3,0.3,0.15,1473
+"2019-05-20","Sanders","letters","other","Bernie Sanders as Mayor",0.0,0.0,0.0,0.0,135
+"2019-05-20","Buttigieg","business","business","Fox News Welcomes Pete Buttigieg. Trump and ‘Fox & Friends’ Aren’t Pleased.",0.68,0.13,-0.66,0.05,1065
+"2019-05-20","Biden","nytnow","other","Tornadoes, Joe Biden, Huawei: Your Monday Evening Briefing",0.0,0.0,0.0,0.0,1059
+"2019-05-19","Sanders","oped","opinion","I Wanted Ronald Reagan. India Kept Electing Bernie Sanders.",0.0,0.11,-0.95,-0.28,1192
+"2019-05-21","Biden","politics","politics","As Biden Rakes In Big Money, Will There Be a Political Cost?",0.0,0.34,0.05,0.13,1514
+"2019-05-21","Biden","letters","other","Should Democrats Rally Around Joe Biden to Beat Trump?",0.0,0.0,0.0,0.0,531
+"2019-05-23","Sanders","politics","politics","Sanders’s Education Plan Renews Debate Over Charter Schools and Segregation",0.0,0.5,0.4,0.3,1514
+"2019-05-23","Buttigieg","oped","opinion","President Pete? One-on-One With Buttigieg",0.0,0.0,0.0,0.0,775
+"2019-05-25","Sanders","politics","politics","Bernie Sanders, No Longer the Front-Runner, Brings Campaign Home to Vermont",-0.3,0.0,0.0,-0.1,831
+"2019-05-25","Sanders","national","politics","Fact-Checking Bernie Sanders on the Campaign Trail",0.0,0.36,0.4,0.25,1474
+"2019-05-29","Biden","politics","politics","Trump and Biden Campaign Trade Jabs Over North Korea’s Remarks",0.0,0.1,-0.03,0.03,481
+"2019-05-28","Warren","politics","politics","Elizabeth Warren Gains Ground in 2020 Field, One Plan at a Time",0.34,0.42,0.0,0.25,1652
+"2019-05-29","Biden","politics","politics","Joe Biden Debuts Education Plan, Then Touts It to Teachers’ Union",-0.03,0.42,0.27,0.22,853
+"2019-05-30","Biden","politics","politics","Four Years After Beau Biden’s Death, His Father Bonds With Voters in Pain",-0.8,-0.73,-0.23,-0.59,1416
+"2019-05-31","Biden","politics","politics","Cedric Richmond, Biden’s New Co-Chairman, Sees a Path to the Nomination in the South",0.0,-0.54,0.2,-0.11,928
+"2019-05-30","Biden","oped","opinion","Joe Biden: Be Proud of Your Crime Bill",-0.1,0.42,-0.9,-0.2,904
+"2019-05-31","Warren","politics","politics","Elizabeth Warren Wants Congress to Ensure Presidents Can Be Indicted",0.38,0.57,-0.24,0.24,617
 "2019-06-01","Warren","national","politics","Fact-Checking Elizabeth Warren on the Campaign Trail",0.0,0.49,0.48,0.32,1317
 "2019-06-02","Sanders","oped","opinion","Bernie Sanders: I Know Where I Came From. Does President Trump?",0.0,-0.42,0.13,-0.1,904
 "2019-06-02","Warren","society","other","Corinne Warren, John Sawyer Jr.",0.0,0.0,0.53,0.18,200
@@ -560,7 +783,7 @@
 "2020-01-28","Biden","magazine","other","Is a Good-Enough Candidacy Good Enough for Joe Biden?",0.44,0.62,-0.49,0.19,5334
 "2020-01-28","Biden","washington","politics","Republican senator suggests White House defense could hurt Biden in Iowa caucuses.",-0.44,0.0,-0.27,-0.24,200
 "2020-01-28","Sanders","politics","politics","Pro-Israel Democratic Super PAC to Air Attack Ads Against Bernie Sanders",0.2,-0.4,-0.44,-0.21,1174
-"2020-01-29","Biden","politics","politics","On Politics: Biden Seizes on a Comment",0.0,-0.3,-0.3,-0.2,1552
+"2020-01-29","Biden","politics","politics","On Politics: Biden Seizes on a Comment",0.0,0.0,-0.3,-0.1,1552
 "2020-01-29","Biden","politics","politics","As Biden Makes Push in Iowa, His Ground Game May Have Some Gaps",0.0,-0.74,0.36,-0.13,1301
 "2020-01-29","Warren","politics","politics","Elizabeth Warren’s Iowa Pivot: From Her Plans to Her Plan to Win",0.59,0.32,0.76,0.55,1673
 "2020-01-29","Biden","politics","politics","Biden Aides Weigh Pursuing an Iowa Caucus Alliance With Klobuchar",0.0,0.84,0.64,0.5,660
@@ -650,7 +873,7 @@
 "2020-02-17","Bloomberg","politics","politics","On Politics: Bloomberg Under the Microscope",0.0,0.0,0.0,0.0,1292
 "2020-02-18","Bloomberg","oped","opinion","The Trumpian Liberalism of Michael Bloomberg",0.0,0.0,0.67,0.22,1149
 "2020-02-19","Bloomberg","oped","opinion","I Was the Judge in the Stop-and-Frisk Case. I Don’t Think Bloomberg Is Racist.",-0.61,-0.3,-0.84,-0.58,992
-"2020-02-18","Bloomberg","politics","politics","On Politics: Bloomberg’s in the Debate",0.0,0.0,0.0,0.0,1270
+"2020-02-18","Bloomberg","politics","politics","On Politics: Bloomberg’s in the Debate",0.0,0.0,-100,0.0,1270
 "2020-02-18","Bloomberg","podcasts","other","Michael Bloomberg’s Not-So-Secret Weapon",-0.3,0.21,0.0,-0.03,287
 "2020-02-19","Bloomberg","politics","politics","When Did Bloomberg Turn Against Stop-and-Frisk? When He Ran for President.",0.0,0.0,0.04,0.01,3438
 "2020-02-19","Bloomberg","metro","other","What to Watch For as Michael Bloomberg Debates",0.0,0.0,0.0,0.0,1260
@@ -738,3 +961,168 @@
 "2020-02-28","Biden","culture","other","There’s a New Artist in Town. The Name Is Biden.",0.0,-0.48,0.0,-0.16,1650
 "2020-03-01","Biden","politics","politics","Joe Biden Had a Big Night. He Needs Another in 72 Hours.",0.0,0.75,0.44,0.4,1712
 "2020-03-01","Buttigieg","politics","politics","For Buttigieg, a Search for Black Support That Never Arrived",0.4,-0.15,0.7,0.32,1325
+"2020-03-01","Biden","editorial","opinion","What Comes Next, Joe Biden?",0.0,0.67,0.78,0.48,1107
+"2020-03-03","Sanders","oped","opinion","Bernie Sanders Can’t Count on New Voters",0.0,0.0,-0.4,-0.13,925
+"2020-03-03","Sanders","business","business","Capitalists Make Their Case Against Sanders",0.0,0.77,0.08,0.28,1190
+"2020-03-02","Sanders","politics","politics","How the Democratic Establishment Stumbled as Sanders Surged",0.0,0.83,0.08,0.3,2805
+"2020-03-02","Biden","politics","politics","Amy Klobuchar Drops Out of Presidential Race and Endorses Biden",0.34,0.2,0.7,0.41,1261
+"2020-03-02","Bloomberg","business","business","How Bloomberg Buys the Silence of Unhappy Employees",-0.42,-0.19,0.86,0.08,1672
+"2020-03-02","Sanders","business","business","Silicon Valley Leaders’ Plea to Democrats: Anyone but Sanders",0.0,0.0,0.0,0.0,1712
+"2020-03-03","Biden","washington","politics","Trump Targets Biden Again as Democratic Race Hits Critical Stage",-0.32,0.64,0.0,0.11,978
+"2020-03-01","Biden","oped","opinion","Why South Carolina Was So Personal for Joe Biden",0.0,0.79,0.0,0.26,531
+"2020-03-02","Sanders","express","other","Public Enemy Splits With Flavor Flav After Sanders Rally Dispute",-0.74,0.38,-0.53,-0.29,792
+"2020-03-02","Sanders","oped","opinion","Is Texas Big Enough for Ted Cruz and Bernie Sanders?",0.0,0.0,0.3,0.1,987
+"2020-03-01","Buttigieg","politics","politics","Pete Buttigieg Drops Out of Democratic Presidential Race",0.0,-0.77,-0.86,-0.54,1253
+"2020-03-03","Buttigieg","culture","other","Late Night Bids Adieu to Buttigieg, Klobuchar and ‘Poor’ Tom Steyer",0.0,0.32,0.95,0.42,795
+"2020-03-01","Sanders","politics","politics","Why Some Suburban Women Are Wary of Bernie Sanders",0.0,0.0,0.27,0.09,1490
+"2020-03-02","Biden","podcasts","other","Joe Biden’s Big Win",0.59,0.0,0.0,0.2,297
+"2020-03-02","Biden","oped","opinion","Bernie or Biden. Period.",0.0,0.0,0.0,0.0,1167
+"2020-03-03","Sanders","summary","other","Quotation of the Day: The Party Establishment Kept Stumbling as Sanders Surged",0.4,0.0,0.34,0.25,56
+"2020-03-01","Sanders","politics","politics","Bernie Sanders Raised $46 Million in February, a Record for 2020",0.0,0.0,0.54,0.18,374
+"2020-03-02","Bloomberg","politics","politics","Mike Bloomberg’s Stealth Weapon",-0.36,0.38,0.65,0.22,1868
+"2020-03-03","Sanders","politics","politics","Sanders Campaign Was Caught Off Guard by Quick Massing of Opposition",0.0,0.84,0.0,0.28,1255
+"2020-03-04","Biden","washington","politics","The Coronavirus. The Stock Market. Now Biden’s Comeback Adds to Trump’s Bad Week.",-0.54,-0.2,-0.54,-0.43,1388
+"2020-03-05","Sanders","business","business","Bernie Sanders Had a Problem With MSNBC. Then Came Super Tuesday.",0.3,-0.03,0.0,0.09,959
+"2020-03-05","Sanders","oped","opinion","Bernie Sanders Is Going for Broke",-0.42,0.64,0.77,0.33,868
+"2020-03-05","Sanders","politics","politics","How Huge Voter Turnout Eluded Bernie Sanders on Super Tuesday",0.74,0.77,0.58,0.7,1227
+"2020-03-04","Sanders","politics","politics","In Bernie Sanders Country, It’s Super Tuesday. It’s Also ‘Town Meeting Day.’",0.6,0.0,0.4,0.33,1164
+"2020-03-04","Biden","politics","politics","On Politics: Biden’s Big Comeback",0.0,0.08,0.77,0.28,1438
+"2020-03-03","Bloomberg","editorial","opinion","Mike Bloomberg Heads South",0.0,0.6,0.51,0.37,1180
+"2020-03-04","Biden","letters","other","Joe Biden’s Stunning Super Tuesday Comeback",0.76,0.51,0.0,0.42,1209
+"2020-03-05","Bloomberg","politics","politics","Bloomberg Greets Public Failure With Public Emotion. He’s Not Used to Either.",-0.4,-0.48,-0.3,-0.39,810
+"2020-03-04","Biden","oped","opinion","Joe Biden Just Performed a Miracle",0.59,0.6,-0.65,0.18,1396
+"2020-03-05","Warren","oped","opinion","Elizabeth Warren Was the Wrong Kind of Radical",-0.48,0.4,0.71,0.21,1255
+"2020-03-05","Biden","politics","politics","Why Did Biden Suddenly Sweep Virginia? Credit Trump, These Voters Say",0.38,0.0,0.49,0.29,1527
+"2020-03-05","Sanders","oped","opinion","How Bernie Sanders Can Still Win It All",0.59,0.57,0.95,0.7,1020
+"2020-03-03","Warren","politics","politics","Elizabeth Warren: A Populist for the Professional Class",0.0,0.0,0.51,0.17,1868
+"2020-03-05","Sanders","politics","politics","The Sanders Surge That Wasn’t",0.0,0.0,0.46,0.15,1174
+"2020-03-04","Biden","oped","opinion","Why Joe Biden Is Winning",0.53,0.0,0.0,0.18,701
+"2020-03-04","Biden","politics","politics","Democrats Decide That Joe Biden, as Risky as He Ever Was, Is the Safest Bet",0.23,0.88,0.68,0.59,1469
+"2020-03-04","Biden","business","business","Wall Street, Encouraged by Biden’s Wins, Breaks Out Its Checkbooks",0.74,-0.49,0.67,0.3,1295
+"2020-03-05","Warren","letters","other","Elizabeth Warren’s Exit, and 2 Men Left Standing",0.0,-0.2,0.0,-0.07,902
+"2020-03-04","Biden","politics","politics","With Black Voters and a Suburban Surge, Joe Biden Took Texas",0.0,0.86,-0.36,0.17,1698
+"2020-03-05","Biden","editorial","opinion","Why Southern Democrats Saved Biden",0.42,-0.53,0.0,-0.04,1099
+"2020-03-05","Sanders","oped","opinion","Can Bernie Sanders Still Win?",0.59,0.35,0.0,0.31,1420
+"2020-03-04","Biden","oped","opinion","Why Biden Is the Change Candidate",0.0,0.82,0.54,0.45,884
+"2020-03-05","Bloomberg","oped","opinion","Bloomberg’s $500 Million Experiment Worked",0.0,-0.4,0.0,-0.13,1068
+"2020-03-05","Biden","washington","politics","Republicans, Egged On by Trump, Scrutinize Hunter Biden as His Father Surges",0.0,0.0,0.27,0.09,1382
+"2020-03-04","Warren","politics","politics","Elizabeth Warren Slides to Third Place in Massachusetts",0.0,0.3,0.0,0.1,804
+"2020-03-04","Sanders","politics","politics","Latinos and Young People Come Through for Sanders in California",0.0,0.0,0.92,0.31,1404
+"2020-03-04","Warren","politics","politics","After Mounting Losses, Elizabeth Warren Reviews Her Options",-0.4,0.78,0.46,0.28,1346
+"2020-03-04","Biden","oped","opinion","The Great Biden Consolidation",0.62,0.0,-0.81,-0.06,1047
+"2020-03-05","Biden","express","other","Bill de Blasio Suggests Black Voters Do Not Know Enough About Joe Biden’s Record",0.0,0.82,-0.34,0.16,744
+"2020-03-05","Warren","politics","politics","Will Elizabeth Warren Endorse a Candidate? She Has a Few Options",0.32,0.87,0.9,0.7,1025
+"2020-03-04","Sanders","national","politics","Long Lines and a Surge for Sanders",0.0,0.6,0.44,0.35,967
+"2020-03-05","Biden","oped","opinion","Biden’s Rise Gives the Establishment One Last Chance",0.25,-0.64,0.82,0.14,887
+"2020-03-05","Warren","nytnow","other","Elizabeth Warren, Coronavirus, Stock Market: Your Thursday Evening Briefing",0.0,0.0,0.0,0.0,1182
+"2020-03-05","Biden","oped","opinion","How Biden Came Back",0.0,0.0,0.0,0.0,871
+"2020-03-07","Warren","oped","opinion","When Will We Be Ready for a President Warren?",0.36,-0.23,0.36,0.17,1441
+"2020-03-06","Warren","gender","other","Elizabeth Warren and the Curse of ‘Electability’",-0.54,0.0,0.0,-0.18,756
+"2020-03-05","Sanders","politics","politics","Bernie Sanders Cancels Mississippi Rally, Shifting Focus to Michigan",-0.23,0.0,0.0,-0.08,1150
+"2020-03-06","Warren","nytnow","other","Coronavirus, Elizabeth Warren, Syria: Your Friday Briefing",0.0,0.0,0.0,0.0,1440
+"2020-03-06","Sanders","foreign","other","Behind the Story: Searching for Sanders in a Russian Archive",0.0,0.0,0.0,0.0,692
+"2020-03-06","Warren","oped","opinion","I Am Burning With Fury and Grief Over Elizabeth Warren. And I Am Not Alone.",-0.73,0.57,0.53,0.12,1048
+"2020-03-06","Sanders","letters","other","Defending Bernie Sanders’s Sister-City Efforts in the U.S.S.R.",0.0,-0.05,0.0,-0.02,701
+"2020-03-07","Buttigieg","politics","politics","There Won’t Be a Gay President in 2021. So What Does Buttigieg’s Campaign Tell Us?",0.0,0.38,0.42,0.27,1471
+"2020-03-06","Sanders","upshot","opinion","Bernie Sanders Might Have a Michigan Problem",-0.4,-0.23,0.78,0.05,977
+"2020-03-06","Biden","washington","politics","In Biden’s Hometown, Trump Says He’s Ready to Face Off Against Him",0.36,-0.36,0.53,0.18,1088
+"2020-03-06","Warren","politics","politics","On Politics: Warren’s Out but Not Down",0.0,0.61,0.0,0.2,1412
+"2020-03-06","Warren","politics","politics","‘America Needs Her’: Readers React to Elizabeth Warren’s Exit",0.0,0.0,0.0,0.0,1766
+"2020-03-07","Biden","editorial","opinion","The Resurrection of Joe Biden",0.0,0.2,-0.61,-0.14,1063
+"2020-03-07","Biden","oped","opinion","Where’s Joe Biden’s Universal Child Care Plan?",0.49,0.0,0.8,0.43,1131
+"2020-03-06","Sanders","foreign","other","As Bernie Sanders Pushed for Closer Ties, Soviet Union Spotted Opportunity",0.42,-0.1,0.42,0.25,1948
+"2020-03-06","Sanders","politics","politics","The Bernie Sanders Personality Test",0.0,0.0,-0.46,-0.15,2195
+"2020-03-06","Warren","culture","other","Late Night Says Elizabeth Warren ‘Realized She Was Overqualified’",0.0,0.23,0.95,0.4,604
+"2020-03-07","Biden","politics","politics","Biden Is Back: This Week in the 2020 Race",0.0,0.83,0.0,0.28,800
+"2020-03-06","Sanders","nytnow","other","Coronavirus, Bernie Sanders, Woody Allen: Your Friday Evening Briefing",0.0,0.0,0.0,0.0,1022
+"2020-03-07","Sanders","national","politics","A Sanders Voter, Weary of Debt at 29: ‘I Have Nothing to Lose’",-0.56,-0.36,-0.36,-0.43,1978
+"2020-03-08","Sanders","politics","politics","Sanders Is Behind With Black Voters. He Didn’t Fix That in Flint.",0.0,0.2,0.4,0.2,879
+"2020-03-09","Biden","letters","other","A Republican Plan to Investigate Hunter Biden",0.0,-0.85,0.0,-0.28,556
+"2020-03-09","Biden","business","business","Manipulated Biden Video Escalates Online Speech War With Trump",-0.76,-0.7,-0.76,-0.74,616
+"2020-03-09","Sanders","politics","politics","Sanders Is Counting on His Own Firewall: Michigan’s Blue-Collar Voters",0.0,0.93,0.72,0.55,1534
+"2020-03-08","Warren","culture","other","Daniel Craig Hosts ‘S.N.L.,’ but Elizabeth Warren Steals the Show",-0.67,0.54,0.77,0.22,1150
+"2020-03-07","Biden","oped","opinion","If Joe Biden Wins",0.57,-0.62,-0.96,-0.34,860
+"2020-03-07","Sanders","oped","opinion","Bernie Sanders Has Already Won the Democratic Primary",0.57,0.62,0.77,0.65,1181
+"2020-03-08","Sanders","politics","politics","Bernie Sanders Won Michigan in 2016. Tuesday’s Primary Looks Much Tougher.",0.66,0.81,0.68,0.72,1616
+"2020-03-08","Biden","politics","politics","Kamala Harris Endorses Joe Biden for President",0.34,0.61,0.25,0.4,879
+"2020-03-09","Sanders","business","business","What Bernie Sanders Gets Right About the Media",0.0,0.75,0.36,0.37,1273
+"2020-03-09","Sanders","politics","politics","Where Sanders Is Falling Short",-0.15,0.0,0.46,0.1,1246
+"2020-03-08","Sanders","politics","politics","Jesse Jackson Endorses Bernie Sanders",0.34,0.62,0.88,0.62,835
+"2020-03-09","Warren","oped","opinion","Watching ‘Hillary’ in the Wake of Elizabeth Warren’s Exit",0.0,0.0,0.6,0.2,1724
+"2020-03-10","Sanders","oped","opinion","We’ve Been Looking in the Wrong Places to Understand Sanders’s Socialism",-0.48,0.6,-0.94,-0.27,1166
+"2020-03-10","Sanders","letters","other","Devoted to Bernie Sanders, but if He’s Not the Nominee …",0.21,-0.49,0.0,-0.09,477
+"2020-03-11","Biden","politics","politics","Joe Biden Is Poised to Deliver the Biggest Surprise of 2020: A Short, Orderly Primary",0.48,-0.13,-0.67,-0.11,1655
+"2020-03-11","Biden","podcasts","other","Joe Biden Takes Command",0.0,0.91,0.0,0.3,289
+"2020-03-10","Sanders","upshot","opinion","Why Tonight’s Primary Results Are So Important for Bernie Sanders",0.33,0.21,0.91,0.49,686
+"2020-03-11","Biden","politics","politics","Joe Biden Will Host ‘Virtual Events’ as Coronavirus Fears Heat Up",-0.42,0.0,-0.15,-0.19,500
+"2020-03-11","Sanders","politics","politics","Why Sanders Is Staying In",0.0,-0.53,0.46,-0.02,1285
+"2020-03-10","Biden","oped","opinion","Joe Biden Is No Longer Toast",-0.3,0.3,-0.27,-0.09,1366
+"2020-03-10","Biden","politics","politics","Highlights From Democratic Primary Results: Joe Biden Wins Four States",0.57,0.0,0.48,0.35,2717
+"2020-03-10","Bloomberg","politics","politics","Bloomberg’s Job Security Promises Are Falling Through, Campaign Workers Say",0.53,-0.42,0.12,0.07,804
+"2020-03-10","Warren","podcasts","other","The Field: What Happened to Elizabeth Warren?",0.0,0.0,0.0,0.0,319
+"2020-03-10","Sanders","oped","opinion","Bernie Sanders Versus the World",0.0,-0.38,0.13,-0.08,1242
+"2020-03-09","Sanders","politics","politics","The People Who See Bernie Sanders as Their Only Hope",0.44,0.65,0.0,0.36,1681
+"2020-03-11","Sanders","oped","opinion","The Sanders Coalition Is Not Quite What We Thought It Was",0.0,0.34,-0.08,0.09,2737
+"2020-03-11","Sanders","politics","politics","Read Bernie Sanders’s Full Speech About Staying in the Race",0.0,-0.49,-0.49,-0.33,1316
+"2020-03-09","Biden","politics","politics","Cory Booker Endorses Joe Biden as Candidates Race Toward More Primaries",0.34,0.32,0.67,0.44,1241
+"2020-03-09","Sanders","science","other","Even if Sanders Wins, Medicare for All Almost Certainly Won’t Happen",0.7,0.91,0.0,0.54,1512
+"2020-03-11","Sanders","politics","politics","Bernie Sanders Made a Big Concession Speech. Just Not the Usual Kind.",-0.42,0.25,-0.19,-0.12,1476
+"2020-03-11","Biden","oped","opinion","How Joe Biden Wins It All",0.57,0.0,0.0,0.19,844
+"2020-03-11","Biden","politics","politics","On Politics: Biden Cruises",0.0,0.44,0.0,0.15,1004
+"2020-03-11","Biden","nytnow","other","Coronavirus, Joe Biden, Vladimir Putin: Your Wednesday Briefing",0.0,0.0,0.0,0.0,1429
+"2020-03-11","Sanders","nytnow","other","Coronavirus, Bernie Sanders, Dinosaurs: Your Wednesday Evening Briefing",0.0,0.0,0.0,0.0,1135
+"2020-03-11","Sanders","national","politics","‘I’m Baffled’: What It’s Like to Be a Black Sanders Supporter in the South",0.56,-0.54,0.46,0.16,1306
+"2020-03-10","Bloomberg","metro","other","Weinstein Appealed to Bezos and Bloomberg for Help, Documents Show",0.4,0.0,-0.13,0.09,1281
+"2020-03-11","Biden","politics","politics","Biden Takes Command of Race, Winning Four States Including Michigan",0.53,0.7,0.57,0.6,1856
+"2020-03-11","Biden","nytnow","other","Coronavirus, Joe Biden, Harvey Weinstein: Your Wednesday Briefing",0.0,0.0,0.0,0.0,1379
+"2020-03-13","Sanders","oped","opinion","Bernie Sanders and the Case of the Missing Youth Vote",-0.3,0.01,0.78,0.17,1157
+"2020-03-13","Biden","politics","politics","Joe Biden’s Young Voter Problem: They Don’t Think He’s Listening",-0.4,0.58,-0.08,0.04,1496
+"2020-03-11","Sanders","upshot","opinion","Sanders’s Big Problem Isn’t the Delegate Math. It’s the Voters.",-0.4,0.0,0.54,0.05,854
+"2020-03-13","Buttigieg","culture","other","Pete Buttigieg Hosts ‘Jimmy Kimmel Live’ Without an Audience",0.0,-0.2,0.95,0.25,720
+"2020-03-12","Biden","oped","opinion","The One Democrat Joe Biden Would Be Clueless Without",-0.36,0.0,0.38,0.01,1147
+"2020-03-13","Sanders","oped","opinion","Why Young Latinx Voters Rallied Behind Sanders",0.0,0.0,0.86,0.29,813
+"2020-03-11","Sanders","politics","politics","Behind Bernie Sanders’s Decision to Stay in the Race",0.0,0.61,0.24,0.28,1520
+"2020-03-12","Biden","politics","politics","Joe Biden Needs to Bulk Up His Team. He’s Hiring a New Campaign Manager.",0.0,0.0,-0.23,-0.08,951
+"2020-03-12","Biden","oped","opinion","Biden’s Best Bleeping Week",0.64,0.45,0.0,0.36,909
+"2020-03-14","Sanders","politics","politics","Bernie Sanders, Stand-Up Comic",0.0,0.46,0.0,0.15,1342
+"2020-03-15","Biden","politics","politics","Biden, Courting Liberals, Backs Tuition-Free College for Many Students",-0.05,0.3,0.57,0.27,589
+"2020-03-15","Sanders","politics","politics","What Bernie Sanders’s Allies Want to Hear at Tonight’s Debate",0.08,-0.27,0.0,-0.07,866
+"2020-03-14","Biden","politics","politics","‘Am I on Camera?’ Joe Biden’s Foray Into Virtual Campaigning",0.0,-0.62,-0.46,-0.36,1011
+"2020-03-14","Sanders","oped","opinion","Why Sanders Isn’t Winning Over Black Voters",0.53,0.07,0.53,0.38,1202
+"2020-03-14","Warren","letters","other","Did Sexism Doom Elizabeth Warren’s Bid?",-0.4,0.0,0.0,-0.13,1266
+"2020-03-16","Sanders","politics","politics","Bernie Sanders Wants to Fight On. He Has His Reasons.",-0.38,-0.32,0.0,-0.23,1539
+"2020-03-16","Sanders","magazine","other","Did America Misjudge Bernie Sanders? Or Did He Misjudge America?",0.0,0.4,0.36,0.25,6847
+"2020-03-16","Biden","politics","politics","Behind Joe Biden’s Thinking on a Female Running Mate",0.0,0.27,0.4,0.23,1623
+"2020-03-17","Sanders","upshot","opinion","Sanders Has More Time. He Just Doesn’t Have the Delegates.",0.0,-0.3,0.12,-0.06,657
+"2020-03-17","Biden","politics","politics","Joe Biden Wins Primaries in Florida, Illinois and Arizona: Highlights",0.57,0.33,0.86,0.59,2299
+"2020-03-16","Biden","politics","politics","Joe Biden Commits to Selecting a Woman as Vice President",0.03,0.0,0.0,0.01,504
+"2020-03-19","Biden","climate","other","Climate Voters Still Want More From Biden",0.08,0.88,0.48,0.48,1317
+"2020-03-18","Sanders","nytnow","other","Coronavirus, Bernie Sanders, Penguins: Your Wednesday Evening Briefing",0.0,0.0,0.0,0.0,1226
+"2020-03-18","Sanders","politics","politics","Bernie Sanders Has No Realistic Chance to Win. Some Democrats Say, ‘It’s Over.’",0.56,-0.62,-0.75,-0.27,1638
+"2020-03-19","Sanders","magazine","other","Behind the Cover: Bernie Sanders",0.0,0.0,-100,0.0,93
+"2020-03-19","Sanders","nytnow","other","Coronavirus, Bernie Sanders, Utah: Your Thursday Briefing",0.0,0.0,0.0,0.0,1571
+"2020-03-18","Biden","politics","politics","On Politics: Biden Gets Out the Broom",0.0,0.55,0.0,0.18,1265
+"2020-03-17","Biden","politics","politics","The Left Is Still Leery of Biden. Here’s How He’s Reaching Out to Them.",0.2,0.61,0.82,0.54,1508
+"2020-03-18","Sanders","politics","politics","The Bernie Sanders Revolution Has Moved to Mom’s Couch",0.0,0.1,-0.77,-0.22,1247
+"2020-03-18","Biden","nytnow","other","Coronavirus, New York City, Joe Biden: Your Wednesday Briefing",0.0,0.0,0.0,0.0,1650
+"2020-03-18","Sanders","oped","opinion","Sanders Is Betting It All on New York. Big Mistake.",-0.34,-0.6,-0.69,-0.54,920
+"2020-03-21","Sanders","politics","politics","How It All Came Apart for Bernie Sanders",0.0,0.0,0.68,0.23,2456
+"2020-03-21","Biden","politics","politics","Biden Takes Charge as Coronavirus Spreads: This Week in the 2020 Race",0.0,-0.1,-0.38,-0.16,1035
+"2020-03-19","Biden","politics","politics","Biden’s Running Mate? Party Leaders Favor Female Ex-Rivals",0.66,0.0,0.61,0.42,1499
+"2020-03-21","Biden","politics","politics","Joe Biden’s Campaign Was Cash Poor. He Seized Control of the Nomination Anyway.",-0.48,0.56,-0.25,-0.06,1083
+"2020-03-23","Biden","politics","politics","Biden Addresses a Visibility Question: ‘How Do We Get More of You?’",0.0,0.08,-0.05,0.01,809
+"2020-03-23","Biden","politics","politics","Joe Biden Is Trying to Be Heard on the Virus. Can He Break Through?",0.0,-0.6,-0.08,-0.23,1565
+"2020-03-23","Bloomberg","politics","politics","Ex-Field Organizers Sue Bloomberg Campaign, Claiming They Were Misled",0.0,-0.68,-0.64,-0.44,1006
+"2020-03-27","Biden","oped","opinion","Should Biden Freak Out About the Trump Bump?",-0.44,0.0,-0.87,-0.44,1382
+"2020-03-26","Sanders","politics","politics","As Coronavirus Crisis Unfolds, Sanders Sees a Moment That Matches His Ideas",-0.62,0.3,-0.29,-0.21,1345
+"2020-03-27","Biden","oped","opinion","What Biden Can Do",0.0,0.0,0.0,0.0,1000
+"2020-03-31","Biden","politics","politics","Biden Faces a Cash Gap With Trump. He Has to Close It Virtually.",0.0,-0.67,0.54,-0.04,1723
+"2020-03-31","Sanders","politics","politics","Sanders Argues He Has ‘Narrow Path’ and Says He Wants to Push His Issues",-0.38,0.13,-0.3,-0.18,571
+"2020-03-30","Biden","politics","politics","Are Democrats Cool on Biden?",0.32,0.4,0.46,0.39,1065
+"2020-03-31","Biden","politics","politics","On Politics: Does Biden Need to Turn the Flash On?",0.0,0.0,0.0,0.0,1168
+"2020-04-01","Biden","politics","politics","How ‘Never Bernie’ Voters Threw In With Biden and Changed the Primary",0.0,0.36,0.14,0.17,1502
+"2020-04-02","Biden","politics","politics","How Will Joe Biden Find His Joe Biden?",0.0,0.0,0.0,0.0,1598
+"2020-04-01","Biden","politics","politics","Pro-Trump Super PAC to Spend $10 Million on Attack Ads Against Biden",0.2,0.0,0.57,0.26,1213
+"2020-04-03","Buttigieg","politics","politics","Pete Buttigieg’s Next Move: A PAC Called Win the Era",0.59,0.67,0.59,0.61,382
+"2020-04-06","Biden","politics","politics","Biden and Trump Speak About Coronavirus",0.0,0.1,0.13,0.08,496
+"2020-04-06","Sanders","politics","politics","Will Wisconsin Be the Last Stand for Bernie Sanders?",0.0,-0.38,0.0,-0.13,1137
