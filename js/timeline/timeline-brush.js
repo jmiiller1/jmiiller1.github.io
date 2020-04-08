@@ -1,7 +1,7 @@
 export class TimelineBrush {
 
     static appendBrushX(chart, height, width, timeScale, dispatcher) {
-        const brushX = TimelineBrush.createBrushX(height, width, timeScale, dispatcher);
+        const brushX = TimelineBrush.createBrushX(height, width, timeScale, dispatcher, [new Date(2018, 10, 31), new Date(2020, 3, 1)]);
         const brushGroup = chart.append('g');
         brushGroup.attr('class', 'timeline-brush');
         brushGroup.call(brushX);
