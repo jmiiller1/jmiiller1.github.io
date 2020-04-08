@@ -27,7 +27,7 @@ export class TimelineHoverline {
 
     static mouseMove(hoverLine) {
         return function(d) {
-            let x = d3.mouse(this)[0];
+            const x = d3.mouse(this)[0];
 
             hoverLine.attr('x1', x).attr('x2', x);
             hoverLine.transition().duration(100).attr('opacity', 0.3);
