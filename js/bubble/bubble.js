@@ -258,7 +258,7 @@ class Bubble {
         // update data in vis.force
         vis.force
             .nodes(vis.filtered)
-            .force('x', d3.forceX(d => vis.xScale(d['SentScore(Avg)'])).strength(1))
+            .force('x', d3.forceX(d => vis.xScale(d['SentScore(avg)'])).strength(1))
             .force('collision', d3.forceCollide().radius(d => vis.radiusScale(d.Count) + 0.5))
 
         if (vis.group === 'separate') {
@@ -270,7 +270,7 @@ class Bubble {
                 .entries(vis.filtered);
 
             vis.averages.forEach((d, i) => {
-                d.mean = d3.mean(d.values.map(d => d['SentScore(Avg)']));
+                d.mean = d3.mean(d.values.map(d => d['SentScore(avg)']));
                 d.id = d.key;
             });
 
@@ -281,7 +281,7 @@ class Bubble {
             vis.yAxisG.selectAll('.tick').remove();
 
             vis.averages = [{
-                mean: d3.mean(vis.filtered.map(d => d['SentScore(Avg)'])),
+                mean: d3.mean(vis.filtered.map(d => d['SentScore(avg)'])),
                 id: 9999
             }];
 
@@ -316,7 +316,7 @@ class Bubble {
                 d3.select('#tooltip').classed('hidden', false);
                 d3.select('.headline').text(d.Headline);
                 d3.select('.date').text(d.Pub_date);
-                d3.select('.sentiment').text(d['SentScore(Avg)']);
+                d3.select('.sentiment').text(d['SentScore(avg)']);
             })
             .on('mouseout', d => {
                 d3.select('#tooltip').classed('hidden', true);

@@ -22,9 +22,9 @@ Promise.all(
         sentimentAnalysisData.forEach((row) => {
             row['Date'] = new Date (row['Date']);
             row['SentScore(headline)'] = +row['SentScore(headline)'];
-            row['SentScore(abstract)'] = +row['SentScore(abstract)'];
+            row['SentScore(snippet)'] = +row['SentScore(snippet)'];
             row['SentScore(lead)'] = +row['SentScore(lead)'];
-            row['SentScore(Avg)'] = +row['SentScore(Avg)'];
+            row['SentScore(avg)'] = +row['SentScore(avg)'];
         });
 
         keyEventData.forEach((row) => {

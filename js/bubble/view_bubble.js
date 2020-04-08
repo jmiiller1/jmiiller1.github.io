@@ -4,8 +4,8 @@ let bubble;
 // load data
 d3.csv('data/NYT_data.csv').then(data => {
     data.forEach(d => {
-        d['SentScore(Avg)'] = +d['SentScore(Avg)'];
-        d['SentScore(abstract)'] = +d['SentScore(abstract)'];
+        d['SentScore(avg)'] = +d['SentScore(avg)'];
+        d['SentScore(snippet)'] = +d['SentScore(snippet)'];
         d['SentScore(headline)'] = +d['SentScore(headline)'];
         d['SentScore(lead)'] = +d['SentScore(lead)'];
         d['Pub_date'] = d['Date'];
@@ -17,7 +17,7 @@ d3.csv('data/NYT_data.csv').then(data => {
     bubble = new Bubble({
         parentElement: '#bubble',
         containerWidth: 840,
-        containerHeight: 575
+        containerHeight: 600
     }, data);
 
     bubble.group = 'all';  // don't separate each candidate at the beginning

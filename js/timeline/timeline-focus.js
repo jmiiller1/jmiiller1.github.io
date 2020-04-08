@@ -196,7 +196,7 @@ export class TimelineFocus {
 
         const lineGenerator = d3.line()
             .x(d => vis.timeScale(d['Date']))
-            .y(d => vis.sentimentScale(d['SentScore(Avg)']))
+            .y(d => vis.sentimentScale(d['SentScore(avg)']))
             .curve(d3.curveBasis);
 
         const updateSelection = vis.multilineDataGroup.selectAll('path').data(vis.groupedSentimentAnalysisData);
