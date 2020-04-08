@@ -80,6 +80,7 @@ export class TimelineFocus {
         vis.config.timelineEventColor = 'lightgrey';
         vis.timelineTooltip = TimelineTooltip.appendTooltip(vis.body);
         vis.timelineDataGroup = vis.chart.append('g').attr('class', 'timeline-data');
+        vis.timelineLegend = TimelineLegend.appendLegend(vis.chart, 0, 100, vis.config.radius * 2, vis.config.radius);
     }
 
     performMultilineSetup() {

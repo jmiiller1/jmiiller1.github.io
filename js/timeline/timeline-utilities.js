@@ -40,7 +40,6 @@ export class TimelineUtilities {
             .attr('class', className)
             .attr('x', width)
             .attr('y', height)
-            //.attr('fill', 'black')
             .text(titleName);
     }
 
@@ -50,7 +49,6 @@ export class TimelineUtilities {
             .attr('text-anchor', 'middle')
             .attr('x', width)
             .attr('y', height)
-            //.attr('fill', 'black')
             .attr('transform', `rotate(-90)`)
             .text(titleName);
     }

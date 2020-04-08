@@ -4,7 +4,6 @@ import { TimelineData } from "./data-processing/timeline-data.js";
 import {TimelineLegend} from "./timeline-legend.js";
 
 const dispatcher = d3.dispatch('focus');
-const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(['debate', 'enter', 'exit', 'key-event']);
 
 Promise.all(
     [d3.csv('data/timeline/DemocraticPrimaryDebateSchedule.csv'),
@@ -47,7 +46,6 @@ Promise.all(
             containerHeight: 500,
             containerWidth: 840,
             dispatcher: dispatcher,
-            colorScale: colorScale,
             radius: 5
         });
 
