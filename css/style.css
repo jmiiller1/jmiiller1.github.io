@@ -165,3 +165,7 @@ strong {
 .timeline-svg .multiline-data .line-path:hover {
     stroke-width: 8;
 }
+
+.timeline-tooltip b {
+    font-weight: bold;
+}
