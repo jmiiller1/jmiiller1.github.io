@@ -6,13 +6,17 @@ import {TimelineLegend} from "./timeline-legend.js";
 const dispatcher = d3.dispatch('focus');
 
 Promise.all(
-    [d3.csv('data/timeline/DemocraticPrimaryDebateSchedule.csv'),
-            d3.csv('data/NYT_data_average.csv', d3.autotype),
-            d3.csv('data/timeline/WikiDemPrimaryTimeline-processed.csv')]).then((files) => {
+    [
+        d3.csv('data/NYT_data_average.csv', d3.autotype),
+        d3.csv('data/polling_data.csv'),
+        d3.csv('data/timeline/DemocraticPrimaryDebateSchedule.csv'),
+        d3.csv('data/timeline/WikiDemPrimaryTimeline-processed.csv')
+    ]).then((files) => {
 
-        const demDebateData = files[0];
-        const sentimentAnalysisData = files[1];
-        const keyEventData = files[2];
+        const sentimentAnalysisData = files[0];
+        const pollingData = files[1];
+        const demDebateData = files[2];
+        const keyEventData = files[3];
 
         demDebateData.forEach((row) => {
             row['Date'] = TimelineData.convertStringToDate(row['Date']);
@@ -27,6 +31,13 @@ Promise.all(
             row['SentScore(avg)'] = +row['SentScore(avg)'];
         });
 
+        pollingData.forEach((row) => {
+        row['Date'] = new Date (row['Date']);
+        row['Percentage'] = +row['Percentage'];
+        });
+
+
+
         keyEventData.forEach((row) => {
             row['Date'] = TimelineData.convertStringToDate(row['Date']);
             row.type = 'key-event';
@@ -40,7 +51,7 @@ Promise.all(
             radius: 5
         });
 
-        const timelineFocus = new TimelineFocus(demDebateData, sentimentAnalysisData, keyEventData,
+        const timelineFocus = new TimelineFocus(sentimentAnalysisData, pollingData, demDebateData, keyEventData,
             {
             parentElement: '#mergedMultilineTimeline',
             containerHeight: 500,

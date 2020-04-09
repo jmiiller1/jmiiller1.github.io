@@ -2,16 +2,17 @@
 
 import { TimeAxis } from './time-axis.js';
 import { TimelineUtilities } from './timeline-utilities.js';
-import { TimelineData } from "./data-processing/timeline-data.js";
-import { TimelineTooltip } from "./timeline-tooltip.js";
-import {TimelineLegend} from "./timeline-legend.js";
-import {TimelineHoverline} from "./timeline-hoverline.js";
-import {SentimentAxis} from "./sentiment-axis.js";
-import {MultiLineColorLegend} from "./multiLineColorLegend.js";
+import { TimelineData } from './data-processing/timeline-data.js';
+import { TimelineTooltip } from './timeline-tooltip.js';
+import { TimelineLegend } from './timeline-legend.js';
+import { TimelineHoverline } from './timeline-hoverline.js';
+import { SentimentAxis } from './sentiment-axis.js';
+import { PollingAxis } from './polling-axis.js';
+import { MultiLineColorLegend } from './multiLineColorLegend.js';
 
 export class TimelineFocus {
 
-    constructor(demDebateData, sentimentAnalysisData, keyEventData, _config) {
+    constructor(sentimentAnalysisData, pollingData, demDebateData, keyEventData, _config) {
         const vis = this;
 
         vis.demDebateData = demDebateData;
@@ -24,6 +25,11 @@ export class TimelineFocus {
         vis.groupedSentimentAnalysisData = d3.nest()
             .key(d => d.Candidates)
             .entries(sentimentAnalysisData);
+
+        vis.pollingData = pollingData;
+        vis.filteredPollingData = d3.nest()
+            .key(d => d.Candidates)
+            .entries(pollingData);
 
         vis.config = {
             parentElement: _config.parentElement,
@@ -42,7 +48,8 @@ export class TimelineFocus {
 
         vis.completeDomain = [new Date(2018, 10, 31), new Date(2020, 3, 1)];
         vis.timeScale = TimeAxis.createTimeScale(vis.completeDomain, vis.config.innerWidth);
-        vis.sentimentScale = SentimentAxis.createSentimentScale(vis.config.innerHeight);
+        vis.sentimentScale = SentimentAxis.createSentimentScale(vis.config.innerHeight/2 - 25);
+        vis.pollingScale = PollingAxis.createPollingScale(vis.config.innerHeight/2 - 25);
 
         vis.initVis();
     }
@@ -87,9 +94,13 @@ export class TimelineFocus {
         const vis = this;
 
         vis.yAxisGroup = SentimentAxis.appendYAxis(vis.chart, vis.sentimentScale, vis.config.innerWidth);
-        vis.yAxisTitle = TimelineUtilities.appendTextYAxis(vis.yAxisGroup, 'Sentiment', -40, -vis.config.innerHeight/2, 'axis-title');
+        vis.yAxisTitle = TimelineUtilities.appendTextYAxis(vis.yAxisGroup, 'Sentiment', -40, -vis.config.innerHeight/4, 'axis-title');
+
+        vis.pollingAxisGroup = PollingAxis.appendYAxis(vis.chart, vis.pollingScale, vis.config.innerWidth, vis.config.innerHeight/2 + 25);
+        vis.pollingAxisTitle = TimelineUtilities.appendTextYAxis(vis.pollingAxisGroup, 'Percentage', -40, -vis.config.innerHeight/4, 'axis-title');
 
         vis.multilineDataGroup = vis.chart.append('g').attr('class', 'multiline-data');
+        vis.pollingMultilineGroup = vis.chart.append('g').attr('class', 'polling-data').attr('transform', `translate(0, ${vis.config.innerHeight/2 + 25})`);
         vis.colorScaleLegend = MultiLineColorLegend.appendColorLegend(vis.chart, 0, vis.config.innerWidth, vis.config.colorScale);
     }
 
@@ -113,6 +124,11 @@ export class TimelineFocus {
             vis.groupedSentimentAnalysisData = d3.nest()
                 .key(d => d.Candidates)
                 .entries(vis.sentimentAnalysisDataCopy.filter(TimelineData.dateInRange(extent)));
+
+            vis.filteredPollingData = d3.nest()
+                .key(d => d.Candidates)
+                .entries(vis.pollingData.filter(TimelineData.dateInRange(extent)));
+
             vis.keyEventData = vis.keyEventCopy.filter(TimelineData.dateInRange(extent));
 
             vis.update();
@@ -212,6 +228,28 @@ export class TimelineFocus {
                 .text(d => d.key);
 
         exitSelection.remove();
+
+        console.log(vis.groupedSentimentAnalysisData)
+        console.log(vis.filteredPollingData)
+
+        const pollingLineGenerator = d3.line()
+            .x(d => vis.timeScale(d['Date']))
+            .y(d => vis.pollingScale(d['Percentage']))
+            .curve(d3.curveBasis);
+
+        const pollingUpdateSelection = vis.pollingMultilineGroup.selectAll('path').data(vis.filteredPollingData);
+        const pollingEnterSelection = pollingUpdateSelection.enter();
+        const pollingExitSelection = pollingUpdateSelection.exit();
+
+        pollingEnterSelection.append('path')
+            .attr('class', 'line-path')
+            .merge(pollingUpdateSelection)
+            .attr('d', d => pollingLineGenerator(d.values))
+            .attr('stroke', d => vis.config.colorScale(d.key))
+            .append('title')
+            .text(d => d.key);
+
+        pollingExitSelection.remove();
     }
 }
 
