@@ -1,15 +1,15 @@
 
 export class MultiLineColorLegend {
 
-    static appendColorLegend(chart, height, width, colorScale) {
+    static appendColorLegend(chart, xPos, yPos, colorScale) {
         const legendGroup = chart.append('g')
             .attr('class', 'color-legend')
-            .attr('transform', `translate(${width - 75}, ${height + 20})`);
+            .attr('transform', `translate(${xPos}, ${yPos})`);
 
         const legend = MultiLineColorLegend.renderColorLegend(legendGroup,{
             colorScale: colorScale,
             circleRadius: 5,
-            spacing: 20,
+            spacing: 80,
             textOffset: 10
         });
 
@@ -33,7 +33,7 @@ export class MultiLineColorLegend {
         groupsEnter
             .merge(groups)
             .attr('transform', (d, i) =>
-                `translate(0, ${i * spacing})`
+                `translate(${i * spacing}, 0)`
             );
         groups.exit().remove();
 

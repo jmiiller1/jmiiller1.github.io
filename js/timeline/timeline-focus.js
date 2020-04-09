@@ -35,7 +35,7 @@ export class TimelineFocus {
             parentElement: _config.parentElement,
             containerHeight: _config.containerHeight,
             containerWidth: _config.containerWidth,
-            margin: { top: 20, right: 25, bottom: 50, left: 75 },
+            margin: { top: 50, right: 25, bottom: 50, left: 75 },
             dispatcher: _config.dispatcher,
             radius: _config.radius,
             colorScale: d3.scaleOrdinal(d3.schemeDark2)
@@ -87,7 +87,7 @@ export class TimelineFocus {
         vis.config.timelineEventColor = 'lightgrey';
         vis.timelineTooltip = TimelineTooltip.appendTooltip(vis.body);
         vis.timelineDataGroup = vis.chart.append('g').attr('class', 'timeline-data');
-        vis.timelineLegend = TimelineLegend.appendLegend(vis.chart, 0, 100, vis.config.radius * 2, vis.config.radius);
+        vis.timelineLegend = TimelineLegend.appendLegend(vis.chart, 20, -20, 120, vis.config.radius);
     }
 
     performMultilineSetup() {
@@ -101,7 +101,7 @@ export class TimelineFocus {
 
         vis.multilineDataGroup = vis.chart.append('g').attr('class', 'multiline-data');
         vis.pollingMultilineGroup = vis.chart.append('g').attr('class', 'polling-data').attr('transform', `translate(0, ${vis.config.innerHeight/2 + 25})`);
-        vis.colorScaleLegend = MultiLineColorLegend.appendColorLegend(vis.chart, 0, vis.config.innerWidth, vis.config.colorScale);
+        vis.colorScaleLegend = MultiLineColorLegend.appendColorLegend(vis.chart, vis.config.innerWidth / 2, -20, vis.config.colorScale);
     }
 
     performHoverLineSetup() {
