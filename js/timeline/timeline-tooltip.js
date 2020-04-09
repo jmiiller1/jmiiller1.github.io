@@ -53,7 +53,10 @@ export class TimelineTooltip {
         } else if (d.type === 'key-event') {
             htmlString = htmlString.concat('<p> <b>Description: </b>' + d['Description'] + '</p>');
             htmlString = htmlString.concat('<p> <b>Date: </b>' + TimeAxis.formatTime(d['Date']) + '</p>');
-            htmlString = htmlString.concat('<a> <b>Url: </b>' + d['Url'] + '</a>');
+
+            if (d['Url'] !== '') {
+                htmlString = htmlString.concat('<a> <b>Url: </b>' + d['Url'] + '</a>');
+            }
         }
 
         return htmlString;

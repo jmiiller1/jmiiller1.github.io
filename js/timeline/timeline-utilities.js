@@ -56,4 +56,23 @@ export class TimelineUtilities {
     static retrieveBody() {
         return d3.select('body');
     }
+
+    static computeYOffsetIndex(dateMap) {
+        return function(d) {
+            const date = d['Date'];
+            //const dateKey = date.getDay().toString() + date.getMonth().toString() + date.getFullYear().toString();
+            const dateKey = date.toString();
+
+            if (dateMap.has(dateKey)) {
+                const count = dateMap.get(dateKey);
+                dateMap.set(dateKey, count + 1);
+                return count;
+
+            } else {
+                dateMap.set(dateKey, 1);
+                return 0;
+
+            }
+        }
+    }
 }

@@ -40,7 +40,7 @@ export class TimelineContext {
 
         vis.chart = TimelineUtilities.appendChart(vis.config.innerHeight, vis.config.innerWidth, vis.config.margin, vis.svg, 'timeline-chart');
 
-        vis.timelineDataGroup = vis.chart.append('g');
+        vis.timelineDataGroup = vis.chart.append('g').attr('transform', `translate(0, ${vis.config.innerHeight})`);
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth, vis.config.outerTickSize);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, 'Time', 40, vis.config.innerWidth/2, 'axis-title');
@@ -56,11 +56,13 @@ export class TimelineContext {
     render() {
         const vis = this;
 
-        vis.renderDemDebateData();
-        vis.renderKeyEventData();
+        const dateMap = new Map();
+
+        vis.renderDemDebateData(dateMap);
+        vis.renderKeyEventData(dateMap);
     }
 
-    renderDemDebateData() {
+    renderDemDebateData(dateMap) {
         const vis = this;
 
         const updateSelection = vis.timelineDataGroup.selectAll('circle').data(vis.data);
@@ -72,13 +74,13 @@ export class TimelineContext {
             .attr('r', vis.config.radius)
             .merge(updateSelection)
                 .attr('cx', d => vis.timeScale(d['Date']))
-                .attr('cy', vis.config.innerHeight)
+                .attr('cy', d => 2 * vis.config.radius * TimelineUtilities.computeYOffsetIndex(dateMap)(d))
                 .attr('fill', vis.config.timelineEventColor);
 
         exitSelection.remove();
     }
 
-    renderKeyEventData() {
+    renderKeyEventData(dateMap) {
         const vis = this;
 
         const updateSelection = vis.timelineDataGroup.selectAll('rect').data(vis.keyEventData);
@@ -88,7 +90,7 @@ export class TimelineContext {
         enterSelection.append('rect')
             .attr('class', 'event')
             .attr('x', d => vis.timeScale(d['Date']) - vis.config.radius)
-            .attr('y', vis.config.innerHeight - vis.config.radius)
+            .attr('y', d => -vis.config.radius + (2 * vis.config.radius * TimelineUtilities.computeYOffsetIndex(dateMap)(d)))
             .attr('width', vis.config.radius * 2)
             .attr('height', vis.config.radius * 2)
             .attr('fill', vis.config.timelineEventColor);

@@ -35,7 +35,7 @@ export class TimelineFocus {
             parentElement: _config.parentElement,
             containerHeight: _config.containerHeight,
             containerWidth: _config.containerWidth,
-            margin: { top: 50, right: 25, bottom: 50, left: 75 },
+            margin: { top: 50, right: 25, bottom: 100, left: 75 },
             dispatcher: _config.dispatcher,
             radius: _config.radius,
             colorScale: d3.scaleOrdinal(d3.schemeDark2)
@@ -86,7 +86,7 @@ export class TimelineFocus {
 
         vis.config.timelineEventColor = 'lightgrey';
         vis.timelineTooltip = TimelineTooltip.appendTooltip(vis.body);
-        vis.timelineDataGroup = vis.chart.append('g').attr('class', 'timeline-data');
+        vis.timelineDataGroup = vis.chart.append('g').attr('class', 'timeline-data').attr('transform', `translate(0, ${vis.config.innerHeight})`);
         vis.timelineLegend = TimelineLegend.appendLegend(vis.chart, 20, -20, 120, vis.config.radius);
     }
 
@@ -97,7 +97,7 @@ export class TimelineFocus {
         vis.yAxisTitle = TimelineUtilities.appendTextYAxis(vis.yAxisGroup, 'Sentiment', -40, -vis.config.innerHeight/4, 'axis-title');
 
         vis.pollingAxisGroup = PollingAxis.appendYAxis(vis.chart, vis.pollingScale, vis.config.innerWidth, vis.config.innerHeight/2 + 25);
-        vis.pollingAxisTitle = TimelineUtilities.appendTextYAxis(vis.pollingAxisGroup, 'Percentage', -40, -vis.config.innerHeight/4, 'axis-title');
+        vis.pollingAxisTitle = TimelineUtilities.appendTextYAxis(vis.pollingAxisGroup, 'National Polling Percentage', -40, -vis.config.innerHeight/4, 'axis-title');
 
         vis.multilineDataGroup = vis.chart.append('g').attr('class', 'multiline-data');
         vis.pollingMultilineGroup = vis.chart.append('g').attr('class', 'polling-data').attr('transform', `translate(0, ${vis.config.innerHeight/2 + 25})`);
@@ -161,11 +161,13 @@ export class TimelineFocus {
     renderTimeline() {
         const vis = this;
 
-        vis.renderDemDebateData();
-        vis.renderKeyEventData();
+        const dateMap = new Map();
+
+        vis.renderDemDebateData(dateMap);
+        vis.renderKeyEventData(dateMap);
     }
 
-    renderDemDebateData() {
+    renderDemDebateData(dateMap) {
         const vis = this;
 
         const updateSelection = vis.timelineDataGroup.selectAll('circle').data(vis.demDebateData);
@@ -179,14 +181,14 @@ export class TimelineFocus {
             .attr('z-index', 20)
             .merge(updateSelection)
                 .attr('cx', d => vis.timeScale(d['Date']))
-                .attr('cy', vis.config.innerHeight + 10)
+                .attr('cy', d => 2 * vis.config.radius + (2 * vis.config.radius * TimelineUtilities.computeYOffsetIndex(dateMap)(d)))
                 .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.timelineTooltip))
                 .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.timelineTooltip));
 
         exitSelection.remove();
     }
 
-    renderKeyEventData() {
+    renderKeyEventData(dateMap) {
         const vis = this;
         
         const updateSelection = vis.timelineDataGroup.selectAll('rect').data(vis.keyEventData);
@@ -201,7 +203,7 @@ export class TimelineFocus {
             .attr('z-index', 20)
             .merge(updateSelection)
                 .attr('x', d => vis.timeScale(d['Date']) - vis.config.radius)
-                .attr('y', vis.config.innerHeight - vis.config.radius + 10)
+                .attr('y', d => vis.config.radius + (2 * vis.config.radius * TimelineUtilities.computeYOffsetIndex(dateMap)(d)))
                 .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.timelineTooltip))
                 .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.timelineTooltip));
 
