@@ -162,7 +162,7 @@ strong {
     mix-blend-mode: multiply;
 }
 
-.timeline-svg .multiline-data .line-path:hover {
+.timeline-svg .multiline-data .line-path:hover, .timeline-svg .polling-data .line-path:hover {
     stroke-width: 8;
 }
 
