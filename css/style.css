@@ -149,12 +149,12 @@ strong {
     pointer-events: none;
 }
 
-.sentiment-axis .tick line {
+.sentiment-axis .tick line, .polling-axis .tick line{
     opacity: 0.5;
     stroke-dasharray: 5, 5;
 }
 
-.timeline-svg .multiline-data .line-path {
+.timeline-svg .line-path {
     fill: none;
     stroke-width: 2px;
     stroke-linejoin: round;
