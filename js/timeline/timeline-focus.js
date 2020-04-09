@@ -154,7 +154,8 @@ export class TimelineFocus {
     updateMultiline() {
         const vis = this;
 
-        vis.renderMultiline()
+        vis.renderSentimentMultiline();
+        vis.renderPollingMultiline();
     }
 
     renderTimeline() {
@@ -207,7 +208,7 @@ export class TimelineFocus {
         exitSelection.remove();
     }
 
-    renderMultiline() {
+    renderSentimentMultiline() {
         const vis = this;
 
         const lineGenerator = d3.line()
@@ -228,9 +229,10 @@ export class TimelineFocus {
                 .text(d => d.key);
 
         exitSelection.remove();
+    }
 
-        console.log(vis.groupedSentimentAnalysisData)
-        console.log(vis.filteredPollingData)
+    renderPollingMultiline() {
+        const vis = this;
 
         const pollingLineGenerator = d3.line()
             .x(d => vis.timeScale(d['Date']))
