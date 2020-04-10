@@ -2,17 +2,6 @@ library(tidyverse)
 
 setwd("~/Documents/CPSC436/Milestone/project_democratic-primary/data")
 
-original <- read.csv("pollNumbersFiveThirtyEight.csv")
-
-df <- original %>%
-  filter(state == "National") %>%
-  mutate(Date = lubridate::mdy(modeldate))
-
-df %>%
-  ggplot(data = ., aes(x = Date, y = pct_estimate, color = candidate_name)) +
-  geom_line()
-
-
 original <- read.csv("pres_primary_avgs_2020.csv")
 
 df <- original %>%
@@ -26,9 +15,6 @@ df <- original %>%
 
 write.table(df, file = "polling_data.csv", sep = ",",
             row.names = FALSE, col.names = c("State", "Date", "Percentage", "Candidates"))
-
-unique(df$Candidates)
-
 
 df %>%
   ggplot(data = ., aes(x = Date, y = pct_estimate, color = candidate_name)) +
