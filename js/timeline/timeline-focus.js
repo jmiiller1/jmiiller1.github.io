@@ -21,15 +21,17 @@ export class TimelineFocus {
         vis.keyEventData = keyEventData;
         vis.keyEventCopy = keyEventData;
 
+        vis.completeDomain = [new Date(2018, 10, 31), new Date(2020, 3, 1)];
+
         vis.sentimentAnalysisDataCopy = sentimentAnalysisData;
         vis.groupedSentimentAnalysisData = d3.nest()
             .key(d => d.Candidates)
-            .entries(sentimentAnalysisData);
+            .entries(vis.sentimentAnalysisDataCopy.filter(TimelineData.dateInRange(vis.completeDomain)));
 
         vis.pollingData = pollingData;
         vis.filteredPollingData = d3.nest()
             .key(d => d.Candidates)
-            .entries(pollingData);
+            .entries(vis.pollingData.filter(TimelineData.dateInRange(vis.completeDomain)));
 
         vis.config = {
             parentElement: _config.parentElement,
@@ -38,18 +40,19 @@ export class TimelineFocus {
             margin: { top: 50, right: 25, bottom: 100, left: 75 },
             dispatcher: _config.dispatcher,
             radius: _config.radius,
-            colorScale: d3.scaleOrdinal(d3.schemeDark2)
+            colorScale: d3.scaleOrdinal()
                 .domain(vis.sentimentAnalysisDataCopy.map(d => d.Candidates))
+                .range(['#59a14f', '#edc948', '#b07aa1', '#ff9da7', '#9c755f'])
         };
 
         vis.config.innerWidth = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
         vis.config.innerHeight = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
         vis.config.outerTickSize = -vis.config.innerHeight;
 
-        vis.completeDomain = [new Date(2018, 10, 31), new Date(2020, 3, 1)];
+        //vis.completeDomain = [new Date(2018, 10, 31), new Date(2020, 3, 1)];
         vis.timeScale = TimeAxis.createTimeScale(vis.completeDomain, vis.config.innerWidth);
-        vis.sentimentScale = SentimentAxis.createSentimentScale(vis.config.innerHeight/2 - 25);
-        vis.pollingScale = PollingAxis.createPollingScale(vis.config.innerHeight/2 - 25);
+        vis.sentimentScale = SentimentAxis.createSentimentScale(vis.config.innerHeight/2);
+        vis.pollingScale = PollingAxis.createPollingScale(vis.config.innerHeight/2);
 
         vis.initVis();
     }
@@ -77,8 +80,8 @@ export class TimelineFocus {
     performTimeAxisSetup() {
         const vis = this;
 
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight + 10, vis.config.innerWidth);
-        vis.timeAxisTitle = TimelineUtilities.appendText(vis.chart, 'Time', vis.config.innerHeight + 40, vis.config.innerWidth / 2, 'axis-title');
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight + 60, vis.config.innerWidth);
+        vis.timeAxisTitle = TimelineUtilities.appendText(vis.chart, 'Time', vis.config.innerHeight + 90, vis.config.innerWidth / 2, 'axis-title');
     }
 
     performTimelineSetup() {
@@ -86,7 +89,7 @@ export class TimelineFocus {
 
         vis.config.timelineEventColor = 'lightgrey';
         vis.timelineTooltip = TimelineTooltip.appendTooltip(vis.body);
-        vis.timelineDataGroup = vis.chart.append('g').attr('class', 'timeline-data').attr('transform', `translate(0, ${vis.config.innerHeight})`);
+        vis.timelineDataGroup = vis.chart.append('g').attr('class', 'timeline-data').attr('transform', `translate(0, ${vis.config.innerHeight + 50})`);
         vis.timelineLegend = TimelineLegend.appendLegend(vis.chart, 20, -20, 120, vis.config.radius);
     }
 
@@ -96,11 +99,11 @@ export class TimelineFocus {
         vis.yAxisGroup = SentimentAxis.appendYAxis(vis.chart, vis.sentimentScale, vis.config.innerWidth);
         vis.yAxisTitle = TimelineUtilities.appendTextYAxis(vis.yAxisGroup, 'Sentiment', -40, -vis.config.innerHeight/4, 'axis-title');
 
-        vis.pollingAxisGroup = PollingAxis.appendYAxis(vis.chart, vis.pollingScale, vis.config.innerWidth, vis.config.innerHeight/2 + 25);
+        vis.pollingAxisGroup = PollingAxis.appendYAxis(vis.chart, vis.pollingScale, vis.config.innerWidth, vis.config.innerHeight/2 + 50);
         vis.pollingAxisTitle = TimelineUtilities.appendTextYAxis(vis.pollingAxisGroup, 'National Polling Percentage', -40, -vis.config.innerHeight/4, 'axis-title');
 
         vis.multilineDataGroup = vis.chart.append('g').attr('class', 'multiline-data');
-        vis.pollingMultilineGroup = vis.chart.append('g').attr('class', 'polling-data').attr('transform', `translate(0, ${vis.config.innerHeight/2 + 25})`);
+        vis.pollingMultilineGroup = vis.chart.append('g').attr('class', 'polling-data').attr('transform', `translate(0, ${vis.config.innerHeight/2 + 50})`);
         vis.colorScaleLegend = MultiLineColorLegend.appendColorLegend(vis.chart, vis.config.innerWidth / 2, -20, vis.config.colorScale);
     }
 
@@ -108,7 +111,7 @@ export class TimelineFocus {
         const vis = this;
 
         vis.hoverlineContainer = TimelineHoverline.appendHoverlineContainer(vis.chart, vis.config.innerHeight, vis.config.innerWidth);
-        vis.hoverLine = TimelineHoverline.appendHoverline(vis.chart, vis.config.innerHeight);
+        vis.hoverLine = TimelineHoverline.appendHoverline(vis.chart, vis.config.innerHeight + 60);
 
         vis.hoverlineContainer.on('mousemove', TimelineHoverline.mouseMove(vis.hoverLine));
         vis.hoverlineContainer.on('mouseout', TimelineHoverline.mouseOut(vis.hoverLine));
@@ -139,7 +142,7 @@ export class TimelineFocus {
         const vis = this;
 
         vis.timeAxisGroup.remove();
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight + 10, vis.config.innerWidth);
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight + 60, vis.config.innerWidth);
 
         vis.updateTimeline();
         vis.updateMultiline();
