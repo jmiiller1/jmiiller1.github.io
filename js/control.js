@@ -1,4 +1,29 @@
 const div1 = () => {
+    d3.select('#intro').classed('hidden', false);
+    d3.select('#widget').classed('hidden', true);
+
+    d3.select('#bubble').classed('hidden', true);
+    d3.select('#timeline').classed('hidden', true);
+
+    $('input[id=politics]').prop('checked', true);
+    $('input[id=opinion]').prop('checked', true);
+    $('input[id=business]').prop('checked', true);
+    $('input[id=other]').prop('checked', true);
+    bubble.categories.add('politics');
+    bubble.categories.add('opinion');
+    bubble.categories.add('business');
+    bubble.categories.add('other');
+
+    $('input[name=category][value=all]').prop('checked', true);
+    $('input[name=category][value=separate]').prop('checked', false);
+    const radioValue = $('input[name=category]:checked').val();
+    bubble.group = radioValue;
+
+    bubble.update();
+};
+
+const div2 = () => {
+    d3.select('#intro').classed('hidden', true);
     d3.select('#widget').classed('hidden', false);
 
     d3.select('#bubble').classed('hidden', false);
@@ -21,7 +46,8 @@ const div1 = () => {
     bubble.update();
 };
 
-const div2 = () => {
+const div3 = () => {
+    d3.select('#intro').classed('hidden', true);
     d3.select('#widget').classed('hidden', false);
 
     d3.select('#bubble').classed('hidden', false);
@@ -45,7 +71,8 @@ const div2 = () => {
 };
 
 
-const div3 = () => {
+const div4 = () => {
+    d3.select('#intro').classed('hidden', true);
     d3.select('#widget').classed('hidden', false);
 
     d3.select('#bubble').classed('hidden', false);
@@ -69,7 +96,8 @@ const div3 = () => {
     bubble.update();
 };
 
-const div4 = () => {
+const div5 = () => {
+    d3.select('#intro').classed('hidden', true);
     d3.select('#widget').classed('hidden', true);
 
     d3.select('#bubble').classed('hidden', true);
@@ -90,3 +118,4 @@ const scroll = (n, offset, func1, func2) => {
 scroll('div2', '75%', div2, div1);
 scroll('div3', '75%', div3, div2);
 scroll('div4', '75%', div4, div3);
+scroll('div5', '75%', div5, div4);

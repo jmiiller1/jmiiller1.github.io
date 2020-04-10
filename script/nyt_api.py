@@ -43,7 +43,7 @@ for year, month in [(2018, 12),
         headline = articles['response']['docs'][i]['headline']['main']
         #abstract = articles['response']['docs'][i]['abstract']
         lead_paragraph = articles['response']['docs'][i].get('lead_paragraph', None)
-        keywords = [obj['value'] for obj in articles['response']['docs'][i]['keywords']]
+        #keywords = [obj['value'] for obj in articles['response']['docs'][i]['keywords']]
         section_name = articles['response']['docs'][i].get('news_desk', '').lower()
         date = articles['response']['docs'][i]['pub_date'][:10]
         snippet = articles['response']['docs'][i]['snippet']

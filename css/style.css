@@ -10,7 +10,7 @@ html, body{
     padding: 0;
     scroll-behavior: smooth;
     background: #f7f5f2;
-    color: #666;
+    color: #a0a0a0;
     font-family: 'PT Serif', serif;
     font-weight: 300;
 }
@@ -25,12 +25,13 @@ h1 {
 }
 
 h2, h3, h4, h5, p {
+    color: #303030;
     text-align: center;
     max-width: 400px;
     margin: auto;
 }
 
-h2 {
+h2, h3 {
     line-height: 1.25;
     padding-top: 45px;
     font-weight: 300;
@@ -85,16 +86,23 @@ strong {
     padding: 0 20px;
 }
 
+#logo {
+    vertical-align: middle;
+}
+
 /* for bubble chart */
 
 #tooltip {
+    opacity: 0.9;
     position: absolute;
     text-align: center;
-    padding: 5px;
-    background: #edc948;
-    border: 0;
-    border-radius: 5px;
+    padding: 10px;
+    font-size: 11px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 15px;
     pointer-events: none;
+    max-width: 300px;
 }
 
 .hidden {
