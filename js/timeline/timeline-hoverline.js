@@ -1,13 +1,13 @@
 export class TimelineHoverline {
 
-    static appendHoverline(hoverlineContainer, height) {
+    static appendHoverline(hoverlineContainer, height, timelineYOffset) {
 
         const hoverLineGroup = hoverlineContainer.append('g');
         hoverLineGroup.attr('class', 'timeline-hoverline');
 
         const hoverLine = hoverLineGroup.append('line');
         hoverLine.attr('x1', 0).attr('x2', 0);
-        hoverLine.attr('y1', 0).attr('y2', height);
+        hoverLine.attr('y1', 0).attr('y2', height + timelineYOffset);
         hoverLine.attr('opacity', 0);
 
         return hoverLine;

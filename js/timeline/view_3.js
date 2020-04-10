@@ -10,13 +10,15 @@ Promise.all(
         d3.csv('data/NYT_data_average.csv', d3.autotype),
         d3.csv('data/polling_data.csv'),
         d3.csv('data/timeline/DemocraticPrimaryDebateSchedule.csv'),
-        d3.csv('data/timeline/WikiDemPrimaryTimeline-processed.csv')
+        d3.csv('data/timeline/WikiDemPrimaryTimeline-processed.csv'),
+        d3.csv('data/timeline/NarrativeText.csv')
     ]).then((files) => {
 
         const sentimentAnalysisData = files[0];
         const pollingData = files[1];
         const demDebateData = files[2];
         const keyEventData = files[3];
+        const narrativeData = files[4];
 
         demDebateData.forEach((row) => {
             row['Date'] = TimelineData.convertStringToDate(row['Date']);
@@ -32,43 +34,35 @@ Promise.all(
         });
 
         pollingData.forEach((row) => {
-        row['Date'] = new Date (row['Date']);
-        row['Percentage'] = +row['Percentage'];
+            row['Date'] = new Date (row['Date']);
+            row['Percentage'] = +row['Percentage'];
         });
-
-
 
         keyEventData.forEach((row) => {
             row['Date'] = TimelineData.convertStringToDate(row['Date']);
             row.type = 'key-event';
         });
 
+        narrativeData.forEach((row) => {
+            row['Date'] = TimelineData.convertStringToDate(row['Date']);
+        });
+
         const timelineContext = new TimelineContext(demDebateData, keyEventData, {
             parentElement: '#timeline-context',
-            containerHeight: 100,
+            containerHeight: 60,
             containerWidth: 840,
             dispatcher: dispatcher,
             radius: 5
         });
 
-        const timelineFocus = new TimelineFocus(sentimentAnalysisData, pollingData, demDebateData, keyEventData,
+        const timelineFocus = new TimelineFocus(sentimentAnalysisData, pollingData, demDebateData, keyEventData, narrativeData,
             {
             parentElement: '#mergedMultilineTimeline',
-            containerHeight: 500,
-            containerWidth: 840,
+            containerHeight: 450,
+            containerWidth: 880,
             dispatcher: dispatcher,
             radius: 5
         });
-
-        /*
-        const timelineLegend = new TimelineLegend({
-            parentElement: '#timeline',
-            containerHeight: 600,
-            containerWidth: 1200,
-            colorScale: colorScale,
-            radius: 10
-        });
-        */
 
         timelineContext.update();
         timelineFocus.update();

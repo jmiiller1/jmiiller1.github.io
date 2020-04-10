@@ -17,7 +17,7 @@ export class TimelineContext {
             containerHeight: _config.containerHeight,
             containerWidth: _config.containerWidth,
             dispatcher: _config.dispatcher,
-            margin: { top: 20, right: 25, bottom: 50, left: 75 },
+            margin: { top: 20, right: 50, bottom: 50, left: 50 },
             radius: _config.radius
         };
 
@@ -43,7 +43,7 @@ export class TimelineContext {
         vis.timelineDataGroup = vis.chart.append('g').attr('transform', `translate(0, ${vis.config.innerHeight})`);
 
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth, vis.config.outerTickSize);
-        vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, 'Time', 40, vis.config.innerWidth/2, 'axis-title');
+        vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, 'Time', 30, vis.config.innerWidth/2, 'axis-title');
 
         vis.brush = TimelineBrush.appendBrushX(vis.chart, vis.config.innerHeight, vis.config.innerWidth, vis.timeScale, vis.config.dispatcher);
     }

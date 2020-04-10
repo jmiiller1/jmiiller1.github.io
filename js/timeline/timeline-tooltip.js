@@ -4,19 +4,8 @@ export class TimelineTooltip {
 
     static appendTooltip(body) {
 
-        const tooltip = body.append('div');
-        tooltip.attr('class', 'timeline-tooltip');
-        tooltip.style('display', 'inline-block');
-        tooltip.style('opacity', 0);
-        tooltip.style('position', 'absolute');
-        tooltip.style('text-align', 'center');
-        tooltip.style('padding', '10px');
-        tooltip.style('font-size', '11px');
-        tooltip.style('background-color', 'white');
-        tooltip.style('border', '1px solid black');
-        tooltip.style('border-radius', '15px');
-        tooltip.style('pointer-events', 'none');
-        tooltip.style('max-width', '300px');
+        const tooltip = body.append('div')
+            .attr('class', 'timeline-tooltip info-element');
 
         return tooltip;
 

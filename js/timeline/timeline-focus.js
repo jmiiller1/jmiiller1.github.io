@@ -12,7 +12,7 @@ import { MultiLineColorLegend } from './multiLineColorLegend.js';
 
 export class TimelineFocus {
 
-    constructor(sentimentAnalysisData, pollingData, demDebateData, keyEventData, _config) {
+    constructor(sentimentAnalysisData, pollingData, demDebateData, keyEventData, narrativeData, _config) {
         const vis = this;
 
         vis.demDebateData = demDebateData;
@@ -31,11 +31,14 @@ export class TimelineFocus {
             .key(d => d.Candidates)
             .entries(pollingData);
 
+        vis.narrativeData = [];
+        vis.narrativeCopy = narrativeData;
+
         vis.config = {
             parentElement: _config.parentElement,
             containerHeight: _config.containerHeight,
             containerWidth: _config.containerWidth,
-            margin: { top: 50, right: 25, bottom: 100, left: 75 },
+            margin: { top: 30, right: 25, bottom: 50, left: 75 },
             dispatcher: _config.dispatcher,
             radius: _config.radius,
             colorScale: d3.scaleOrdinal(d3.schemeDark2)
@@ -62,7 +65,7 @@ export class TimelineFocus {
         vis.performTimelineSetup();
         vis.performHoverLineSetup();
         vis.performMultilineSetup();
-        vis.performFocusListenerSetup();
+        vis.performListenerSetup();
 
     }
 
@@ -70,6 +73,7 @@ export class TimelineFocus {
         const vis = this;
 
         vis.body = TimelineUtilities.retrieveBody();
+        vis.svgContainer = d3.select('#mergedMultilineTimeline');
         vis.svg = TimelineUtilities.initializeSVG(vis.config.containerHeight, vis.config.containerWidth, vis.config.parentElement, 'timeline-svg');
         vis.chart = TimelineUtilities.appendChart(vis.config.innerHeight, vis.config.innerWidth, vis.config.margin, vis.svg, 'timeline-chart');
     }
@@ -77,7 +81,8 @@ export class TimelineFocus {
     performTimeAxisSetup() {
         const vis = this;
 
-        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight + 10, vis.config.innerWidth);
+        vis.timelineYOffset = 10;
+        vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight + vis.timelineYOffset, vis.config.innerWidth);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.chart, 'Time', vis.config.innerHeight + 40, vis.config.innerWidth / 2, 'axis-title');
     }
 
@@ -87,6 +92,7 @@ export class TimelineFocus {
         vis.config.timelineEventColor = 'lightgrey';
         vis.timelineTooltip = TimelineTooltip.appendTooltip(vis.body);
         vis.timelineDataGroup = vis.chart.append('g').attr('class', 'timeline-data').attr('transform', `translate(0, ${vis.config.innerHeight})`);
+        vis.narrativeGroup = vis.svgContainer.append('div').attr('class', 'narrative-container');
         vis.timelineLegend = TimelineLegend.appendLegend(vis.chart, 20, -20, 120, vis.config.radius);
     }
 
@@ -108,19 +114,21 @@ export class TimelineFocus {
         const vis = this;
 
         vis.hoverlineContainer = TimelineHoverline.appendHoverlineContainer(vis.chart, vis.config.innerHeight, vis.config.innerWidth);
-        vis.hoverLine = TimelineHoverline.appendHoverline(vis.chart, vis.config.innerHeight);
+        vis.hoverLine = TimelineHoverline.appendHoverline(vis.chart, vis.config.innerHeight, vis.timelineYOffset);
 
         vis.hoverlineContainer.on('mousemove', TimelineHoverline.mouseMove(vis.hoverLine));
         vis.hoverlineContainer.on('mouseout', TimelineHoverline.mouseOut(vis.hoverLine));
     }
 
-    performFocusListenerSetup() {
+    performListenerSetup() {
         const vis = this;
 
         vis.config.dispatcher.on('focus.timeline', function(extent) {
             vis.timeScale = TimeAxis.createTimeScale(extent, vis.config.innerWidth);
 
             vis.demDebateData = vis.demDebateCopy.filter(TimelineData.dateInRange(extent));
+            vis.keyEventData = vis.keyEventCopy.filter(TimelineData.dateInRange(extent));
+
             vis.groupedSentimentAnalysisData = d3.nest()
                 .key(d => d.Candidates)
                 .entries(vis.sentimentAnalysisDataCopy.filter(TimelineData.dateInRange(extent)));
@@ -129,10 +137,20 @@ export class TimelineFocus {
                 .key(d => d.Candidates)
                 .entries(vis.pollingData.filter(TimelineData.dateInRange(extent)));
 
-            vis.keyEventData = vis.keyEventCopy.filter(TimelineData.dateInRange(extent));
+            vis.narrativeData = vis.getNarrativeTextData(extent);
 
             vis.update();
         });
+    }
+
+    getNarrativeTextData(extent) {
+        const vis = this;
+
+        if (vis.shouldShowNarrativeText()) {
+            return vis.narrativeCopy.filter(TimelineData.dateInRange(extent)).slice(0, 5);
+        } else {
+            return [];
+        }
     }
 
     update() {
@@ -165,6 +183,7 @@ export class TimelineFocus {
 
         vis.renderDemDebateData(dateMap);
         vis.renderKeyEventData(dateMap);
+        vis.renderNarrativeText();
     }
 
     renderDemDebateData(dateMap) {
@@ -191,23 +210,52 @@ export class TimelineFocus {
     renderKeyEventData(dateMap) {
         const vis = this;
         
-        const updateSelection = vis.timelineDataGroup.selectAll('rect').data(vis.keyEventData);
+        const updateSelection = vis.timelineDataGroup.selectAll('g').data(vis.keyEventData);
         const enterSelection = updateSelection.enter();
         const exitSelection = updateSelection.exit();
 
-        enterSelection.append('rect')
-            .attr('class', 'event')
+        const keyEventGroups = enterSelection.append('g').attr('class', 'event');
+
+        keyEventGroups.append('rect')
             .attr('width', vis.config.radius * 2)
             .attr('height', vis.config.radius * 2)
             .attr('fill', vis.config.timelineEventColor)
             .attr('z-index', 20)
-            .merge(updateSelection)
+            .merge(updateSelection.select('rect'))
                 .attr('x', d => vis.timeScale(d['Date']) - vis.config.radius)
                 .attr('y', d => vis.config.radius + (2 * vis.config.radius * TimelineUtilities.computeYOffsetIndex(dateMap)(d)))
                 .on('mousemove.tooltip', TimelineTooltip.mouseMove(vis.timelineTooltip))
                 .on('mouseout.tooltip', TimelineTooltip.mouseOut(vis.timelineTooltip));
 
         exitSelection.remove();
+    }
+
+    renderNarrativeText() {
+        const vis = this;
+
+        const updateSelection = vis.narrativeGroup.selectAll('div.narrative-element.info-element').data(vis.narrativeData);
+        const enterSelection = updateSelection.enter();
+        const exitSelection = updateSelection.exit();
+
+        enterSelection
+            .append('div')
+            .attr('class', 'narrative-element info-element')
+            .merge(updateSelection)
+                .html(d => '<p><b>' + TimeAxis.formatTime(d['Date']) + ':</b></p>' + '<p>' + d['Description'] + '</p>');
+
+        exitSelection.remove();
+    }
+
+    shouldShowNarrativeText() {
+        const vis = this;
+
+        const extent = vis.timeScale.domain();
+        const earlyDate = extent[0];
+        const laterDate = extent[1];
+        const msInADay = 60*60*24*1000;
+        const differenceInDays = (laterDate - earlyDate) / msInADay;
+
+        return differenceInDays <= 31;
     }
 
     renderSentimentMultiline() {
