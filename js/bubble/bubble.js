@@ -97,7 +97,7 @@ class Bubble {
 
         d3.select('#tooltip').append('div')
             .style('font-weight', 'bold')
-            .text('Sentiment:');
+            .text('Sentiment score:');
 
         d3.select('#tooltip').append('div')
             .attr('class', 'sentiment')
@@ -192,6 +192,11 @@ class Bubble {
             .attr('dy', '2.5em')
             .attr('x', 10)
             .text('sentiment');
+        d3.select('.mean-legend')
+            .append('text')
+            .attr('dy', '3.25em')
+            .attr('x', 10)
+            .text('score');
 
         // create size legend
         const countLegend = vis.chart.append('g')
