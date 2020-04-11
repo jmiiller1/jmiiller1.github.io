@@ -45,7 +45,7 @@ export class TimelineContext {
         vis.timeAxisGroup = TimeAxis.appendTimeAxis(vis.chart, vis.timeScale, vis.config.innerHeight, vis.config.innerWidth, vis.config.outerTickSize);
         vis.timeAxisTitle = TimelineUtilities.appendText(vis.timeAxisGroup, 'Time', 30, vis.config.innerWidth/2, 'axis-title');
 
-        vis.brush = TimelineBrush.appendBrushX(vis.chart, vis.config.innerHeight, vis.config.innerWidth, vis.timeScale, vis.config.dispatcher);
+        vis.brush = TimelineBrush.appendBrushX(vis.chart, vis.config.innerHeight - 10, vis.config.innerWidth, vis.timeScale, vis.config.dispatcher);
     }
 
     update() {
