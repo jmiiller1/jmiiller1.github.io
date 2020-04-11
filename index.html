@@ -10,7 +10,19 @@
         <div id="graphic">
             <div class="container">
                 <div id="div1">
-                    <h3>On <strong>July 27, 2017</strong> there were <strong>20</strong> people attending the Data Visualization meetup.</h3>
+                    <h3><strong>Data</strong></h3>
+                    <p>1127 NYT articles between December 2018 and April 2020, the headline of which mentioned Joe Biden, Michael Bloomberg, Pete Buttigieg, Bernie Sanders, and Elizabeth Warren.</p>
+                    <h3><strong>Sentiment analysis</strong></h3>
+                    <p>
+                        One way to analyze a string of text is through sentiment analysis.
+                        Broadly speaking, sentiment analysis is a technique to identify affective states of text.
+                        Here, we use <a href="https://github.com/cjhutto/vaderSentiment">VADER</a>, a Python sentiment analysis library, to estimate a sentiment score based on the headline, snippet, and lead paragraph for each article.
+                        A sentiment score lies in between -1 and 1, with negative numbers for negative sentiment and positive numbers for positive one.
+                    </p>
+                    <p>
+                        Looking at the example to the left, words highlighted in <mark style="background-color: lawngreen;">green</mark> have positive sentiment while those in <mark style="background-color: palevioletred;">red</mark> have negative sentiment.
+                        The final sentiment score is the average of these word-based sentiments.
+                    </p>
                 </div>
                 <div id="div2">
                     <h2>Out of those <strong>20</strong> there were <strong>12</strong> people who attended.</h2>
